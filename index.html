@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TechEdge Internship Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+  scroll-behavior:smooth;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  color:white;
+  margin:0;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('https://www.transportation.gov/sites/dot.gov/files/images/Student%20Interns%20adobe.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+/* NAVBAR */
+nav{
+  position:sticky;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+  z-index:1000;
+}
+
+nav h2{ font-weight:600; }
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin:0 15px;
+  font-weight:500;
+  position:relative;
+  transition:0.3s;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  width:0%;
+  height:2px;
+  left:0;
+  bottom:-5px;
+  background:#00ffae;
+  transition:0.3s;
+}
+
+nav a:hover::after{ width:100%; }
+
+/* HERO */
+.hero{
+  flex:1;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:20px;
+}
+
+.hero h1{
+  font-size:48px;
+  margin-bottom:20px;
+  text-shadow: 2px 2px 10px rgba(0,0,0,0.7);
+}
+
+.hero p{
+  max-width:600px;
+  margin-bottom:30px;
+  font-size:18px;
+  text-shadow: 1px 1px 8px rgba(0,0,0,0.6);
+}
+
+.btn{
+  padding:12px 35px;
+  border:none;
+  border-radius:30px;
+  background:#00ffae;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+.btn:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 20px #00ffae;
+}
+
+/* FEATURES */
+.features{
+  display:flex;
+  justify-content:center;
+  gap:30px;
+  padding:60px 20px;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:rgba(255,255,255,0.1);
+  padding:30px;
+  border-radius:20px;
+  width:280px;
+  text-align:center;
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 15px rgba(0,0,0,0.3);
+  transition:0.4s;
+}
+
+.card:hover{
+  transform:translateY(-10px) scale(1.05);
+  background:rgba(255,255,255,0.2);
+}
+
+/* STATS */
+.stats{
+  display:flex;
+  justify-content:center;
+  gap:40px;
+  flex-wrap:wrap;
+  padding:40px;
+  text-align:center;
+}
+
+.stat-box{
+  background:rgba(255,255,255,0.1);
+  padding:25px;
+  border-radius:15px;
+  width:200px;
+  backdrop-filter:blur(10px);
+}
+
+.stat-box h2{
+  color:#00ffae;
+  font-size:36px;
+}
+
+/* FOOTER */
+footer{
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.8);
+}
+
+@media(max-width:900px){
+  .hero h1{font-size:36px;}
+  .hero p{font-size:16px;}
+  .btn{padding:12px 25px;}
+  .features{flex-direction:column;align-items:center;}
+  .stats{flex-direction:column;gap:20px;}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>TechEdge</h2>
+<div>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="internship.html">Internship</a>
+<a href="apply.html">Apply</a>
+<a href="contact.html">Contact</a>
+<a href="admin-login.html">Admin</a>
+</div>
+</nav>
+
+<section class="hero">
+<h1 id="typing"></h1>
+<p>Join our Internship Program and work on real-world projects with industry experts. Get certified, gain experience, and build your future.</p>
+<a href="apply.html"><button class="btn">Apply Now</button></a>
+</section>
+
+<section class="stats">
+<div class="stat-box">
+<h2 id="students">0</h2>
+<p>Students Applied</p>
+</div>
+<div class="stat-box">
+<h2 id="projects">0</h2>
+<p>Projects</p>
+</div>
+<div class="stat-box">
+<h2 id="mentors">0</h2>
+<p>Mentors</p>
+</div>
+<div class="stat-box">
+<h2 id="domains">0</h2>
+<p>Domains</p>
+</div>
+</section>
+
+<section class="features">
+<div class="card">
+<h3>Real Projects</h3>
+<p>Work on live projects and build practical skills.</p>
+</div>
+<div class="card">
+<h3>Certificate</h3>
+<p>Receive verified internship completion certificate.</p>
+</div>
+<div class="card">
+<h3>Career Growth</h3>
+<p>Boost your resume with industry-level experience.</p>
+</div>
+</section>
+
+<footer>
+© 2026 Tamanna Mittal | Corporate Internship Portal
+</footer>
+
+<!-- Typing Effect -->
+<script>
+const text = "Launch Your Career With Us 🚀";
+let i = 0;
+function typeEffect(){
+  if(i < text.length){
+    document.getElementById("typing").innerHTML += text.charAt(i);
+    i++;
+    setTimeout(typeEffect, 70);
+  }
+}
+typeEffect();
+</script>
+
+<!-- Firebase Stats -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadStats(){
+  const studentsSnap = await getDocs(collection(db,"applications"));
+  const projectsSnap = await getDocs(collection(db,"projects"));
+  const mentorsSnap = await getDocs(collection(db,"mentors"));
+  const domainsSnap = await getDocs(collection(db,"domains"));
+
+  document.getElementById("students").innerText = studentsSnap.size;
+  document.getElementById("projects").innerText = projectsSnap.size;
+  document.getElementById("mentors").innerText = mentorsSnap.size;
+  document.getElementById("domains").innerText = domainsSnap.size;
+}
+
+loadStats();
+</script>
+
+</body>
+</html>

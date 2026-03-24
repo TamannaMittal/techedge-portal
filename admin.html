@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Dashboard | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  font-family:Arial;
+  background:#0f2027;
+  color:white;
+  padding:20px;
+}
+
+h1{text-align:center;}
+
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+input, select, textarea{
+  padding:10px;
+  border-radius:5px;
+  border:none;
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:rgba(255,255,255,0.1);
+}
+
+th, td{
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  text-align:left;
+}
+
+button, select.status, input.message{
+  padding:6px 10px;
+  border:none;
+  border-radius:5px;
+  cursor:pointer;
+  margin:2px;
+}
+
+.delete{
+  background:red;
+  color:white;
+}
+
+.reply{
+  background:#00ffae;
+  color:black;
+}
+
+.logout{
+  background:#ff4444;
+  color:white;
+}
+
+.count{
+  font-size:18px;
+}
+
+.status, .message-input{
+  width:100%;
+}
+</style>
+</head>
+
+<body>
+
+<h1>Admin Dashboard</h1>
+
+<div class="top-bar">
+  <input type="text" id="search" placeholder="Search by name...">
+  
+  <select id="filter">
+    <option value="">All Tracks</option>
+    <option>Web Development</option>
+    <option>Python Development</option>
+    <option>Data Science</option>
+  </select>
+
+  <div class="count">Total: <span id="count">0</span></div>
+
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Email</th>
+<th>Track</th>
+<th>Message</th>
+<th>Status</th>
+<th>Admin Message</th>
+<th>Action</th>
+</tr>
+</thead>
+
+<tbody id="data"></tbody>
+</table>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { 
+  getFirestore, collection, onSnapshot, deleteDoc, doc, updateDoc 
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { 
+  getAuth, onAuthStateChanged, signOut 
+} from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+// Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+// Init Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+// EmailJS init
+window.addEventListener("load", ()=>{ emailjs.init("GD1ggle87Dhdjw21a"); });
+
+// Auth Protection
+onAuthStateChanged(auth, (user) => {
+  if (!user) window.location.href = "admin-login.html";
+});
+
+const dataEl = document.getElementById("data");
+const countEl = document.getElementById("count");
+const searchEl = document.getElementById("search");
+const filterEl = document.getElementById("filter");
+
+let allData = [];
+
+// Real-time fetch
+onSnapshot(collection(db,"applications"), snapshot => {
+  allData = [];
+  snapshot.forEach(docSnap => allData.push({id:docSnap.id,...docSnap.data()}));
+  renderData(allData);
+});
+
+// Render
+function renderData(data){
+  dataEl.innerHTML = "";
+  countEl.textContent = data.length;
+
+  data.forEach(d=>{
+    dataEl.innerHTML += `
+    <tr>
+      <td>${d.name}</td>
+      <td>${d.email}</td>
+      <td>${d.track}</td>
+      <td>${d.message || ""}</td>
+      <td>
+        <select class="status" onchange="updateStatus('${d.id}', this.value, this.parentElement.nextElementSibling.firstElementChild.value, '${d.name}', '${d.email}', '${d.track}', '${d.message || ''}')">
+          <option value="Pending" ${(d.status || "Pending")==='Pending'?'selected':''}>Pending</option>
+          <option value="Approved" ${d.status==='Approved'?'selected':''}>Approved</option>
+          <option value="Rejected" ${d.status==='Rejected'?'selected':''}>Rejected</option>
+        </select>
+      </td>
+      <td>
+        <input type="text" class="message-input" placeholder="Type message..." value="${d.adminMessage || ''}">
+      </td>
+      <td>
+        <button class="reply" onclick="reply('${d.email}')">Reply</button>
+        <button class="delete" onclick="deleteItem('${d.id}')">Delete</button>
+      </td>
+    </tr>`;
+  });
+}
+
+// Delete
+window.deleteItem = async function(id){
+  if(confirm("Delete this application?")){
+    await deleteDoc(doc(db,"applications",id));
+  }
+}
+
+// Reply
+window.reply = function(email){
+  const subject = "Regarding your Internship Application";
+  const body = "Hi,\n\nThank you for applying at TechEdge. We will review your application and get back to you soon.\n\nRegards,\nTechEdge Team";
+  window.location.href = `mailto:${email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// Logout
+window.logout = async function(){
+  await signOut(auth);
+  window.location.href = "admin-login.html";
+}
+
+// ✅ FIXED Update Status + Email
+window.updateStatus = async function(id, status, adminMessage, name, email, track, userMessage){
+
+  if(!email){
+    alert("Email missing!");
+    return;
+  }
+
+  await updateDoc(doc(db,"applications",id), { 
+    status, 
+    adminMessage 
+  });
+
+  try {
+    await emailjs.send("service_h6t02iu","template_g5ncz5e",{
+      name: name || "User",
+      email: email,
+      track: track || "",
+      status: status,
+      message: userMessage || "",
+      admin_message: adminMessage || ""
+    });
+
+    alert("Status updated & Email sent ✅");
+
+  } catch(err){
+    console.error(err);
+    alert("Email failed ❌");
+  }
+}
+
+// Search
+searchEl.addEventListener("input", ()=>{
+  const val = searchEl.value.toLowerCase();
+  renderData(allData.filter(d=>d.name.toLowerCase().includes(val)));
+});
+
+// Filter
+filterEl.addEventListener("change", ()=>{
+  const val = filterEl.value;
+  renderData(val ? allData.filter(d=>d.track === val) : allData);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Internship | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+background:linear-gradient(-45deg,#0f2027,#203a43,#2c5364,#1c92d2);
+background-size:400% 400%;
+animation:bg 12s ease infinite;
+color:white;
+}
+
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+nav{
+position:sticky;
+top:0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 8%;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin:0 12px;
+transition:0.3s;
+font-size:15px;
+}
+
+nav a:hover{
+color:#00ffae;
+}
+
+.container{
+flex:1;
+max-width:1200px;
+margin:auto;
+padding:80px 20px;
+text-align:center;
+}
+
+.container h1{
+font-size:40px;
+margin-bottom:20px;
+}
+
+.container p{
+margin-bottom:50px;
+opacity:0.9;
+}
+
+.cards{
+display:flex;
+justify-content:center;
+align-items:stretch;
+gap:30px;
+flex-wrap:wrap;
+}
+
+.card{
+background:rgba(255,255,255,0.1);
+padding:30px;
+border-radius:20px;
+width:300px;
+backdrop-filter:blur(15px);
+box-shadow:0 0 20px rgba(0,0,0,0.3);
+transition:0.4s;
+text-align:left;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,0.2);
+}
+
+.badge{
+display:inline-block;
+background:#00ffae;
+color:black;
+padding:5px 12px;
+border-radius:20px;
+font-size:13px;
+margin-bottom:15px;
+font-weight:bold;
+}
+
+.card h3{
+margin-bottom:10px;
+}
+
+.card ul{
+margin:10px 0 20px 18px;
+}
+
+.card ul li{
+margin-bottom:6px;
+}
+
+.btn{
+display:inline-block;
+padding:10px 25px;
+border-radius:25px;
+background:#00ffae;
+color:black;
+font-weight:bold;
+text-decoration:none;
+transition:0.3s;
+cursor:pointer;
+}
+
+.btn:hover{
+transform:scale(1.1);
+box-shadow:0 0 15px #00ffae;
+}
+
+footer{
+margin-top:auto;
+text-align:center;
+padding:20px;
+background:rgba(0,0,0,0.8);
+}
+
+@media(max-width:900px){
+.cards{
+flex-direction:column;
+align-items:center;
+}
+
+.container h1{
+font-size:32px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>TechEdge</h2>
+<div>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="internship.html">Internship</a>
+<a href="apply.html">Apply</a>
+<a href="contact.html">Contact</a>
+<a href="admin-login.html">Admin</a>
+</div>
+</nav>
+
+<div class="container">
+
+<h1>Internship Programs 2026 🚀</h1>
+<p>Choose from our industry-focused internship tracks and gain real-world experience.</p>
+
+<div class="cards">
+
+<div class="card">
+<span class="badge">3 Months | Online</span>
+<h3>Web Development</h3>
+<ul>
+<li>HTML, CSS, JavaScript</li>
+<li>Responsive Design</li>
+<li>Live Website Project</li>
+<li>Certificate</li>
+</ul>
+<button class="btn" onclick="applyTrack('Web Development')">Apply Now</button>
+</div>
+
+<div class="card">
+<span class="badge">3 Months | Online</span>
+<h3>Python Development</h3>
+<ul>
+<li>Python Basics to Advanced</li>
+<li>Mini Projects</li>
+<li>Automation Tasks</li>
+<li>Certificate</li>
+</ul>
+<button class="btn" onclick="applyTrack('Python Development')">Apply Now</button>
+</div>
+
+<div class="card">
+<span class="badge">3 Months | Online</span>
+<h3>Data Science</h3>
+<ul>
+<li>Data Analysis</li>
+<li>Visualization</li>
+<li>Machine Learning Basics</li>
+<li>Certificate</li>
+</ul>
+<button class="btn" onclick="applyTrack('Data Science')">Apply Now</button>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Tamanna Mittal | Internship Portal
+</footer>
+
+<script>
+function applyTrack(track){
+  // Pass the selected track via URL query
+  const url = new URL('apply.html', window.location.href);
+  url.searchParams.set('track', track);
+  window.location.href = url.toString();
+}
+</script>
+
+</body>
+</html>

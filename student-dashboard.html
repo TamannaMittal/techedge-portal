@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Dashboard | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+body{
+  font-family:'Segoe UI',sans-serif;
+  min-height:100vh;
+  padding:20px;
+  color:white;
+
+  /* 🔥 IMAGE + OVERLAY BACKGROUND */
+  background:
+    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+    url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1950&q=80')
+    no-repeat center center fixed;
+
+  background-size:cover;
+}
+
+/* Heading */
+h1{
+  text-align:center;
+  margin-bottom:20px;
+}
+
+/* Top bar */
+.top-bar{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  margin-bottom:20px;
+}
+
+.user{
+  font-size:16px;
+  opacity:0.9;
+}
+
+/* Logout button */
+button.logout{
+  padding:8px 15px;
+  background:#ff4b4b;
+  border:none;
+  border-radius:20px;
+  color:white;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button.logout:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 10px #ff4b4b;
+}
+
+/* Table */
+table{
+  width:100%;
+  border-collapse:collapse;
+  background:rgba(255,255,255,0.1);
+  backdrop-filter:blur(15px);
+  border-radius:15px;
+  overflow:hidden;
+}
+
+th, td{
+  padding:12px;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+  text-align:left;
+}
+
+th{
+  background:rgba(255,255,255,0.2);
+}
+
+/* Status */
+.status{
+  font-weight:bold;
+  padding:6px 12px;
+  border-radius:20px;
+  color:black;
+}
+
+.pending{ background:#ffaa00; }
+.approved{ background:#00ffae; }
+.rejected{ background:#ff4b4b; }
+
+/* Empty */
+.empty{
+  text-align:center;
+  margin-top:30px;
+  opacity:0.8;
+}
+</style>
+</head>
+
+<body>
+
+<h1>My Internship Applications</h1>
+
+<div class="top-bar">
+  <div class="user" id="userEmail"></div>
+  <button class="logout" onclick="logout()">Logout</button>
+</div>
+
+<table>
+<thead>
+<tr>
+<th>Track</th>
+<th>Message</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody id="data"></tbody>
+</table>
+
+<p class="empty" id="emptyMsg" style="display:none;">
+No applications found 🚫
+</p>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+const dataEl = document.getElementById("data");
+const emptyMsg = document.getElementById("emptyMsg");
+const userEmailEl = document.getElementById("userEmail");
+
+onAuthStateChanged(auth, user => {
+  if(!user){
+    window.location.href = "student-login.html";
+    return;
+  }
+
+  userEmailEl.innerText = "Logged in as: " + user.email;
+
+  const q = query(collection(db,"applications"), where("email","==",user.email));
+
+  onSnapshot(q, snapshot => {
+    dataEl.innerHTML = "";
+
+    if(snapshot.empty){
+      emptyMsg.style.display = "block";
+      return;
+    } else {
+      emptyMsg.style.display = "none";
+    }
+
+    snapshot.forEach(docSnap=>{
+      const d = docSnap.data();
+      const status = d.status || "Pending";
+
+      let statusClass = "pending";
+      if(status === "Approved") statusClass = "approved";
+      if(status === "Rejected") statusClass = "rejected";
+
+      dataEl.innerHTML += `
+        <tr>
+          <td>${d.track}</td>
+          <td>${d.message || ""}</td>
+          <td><span class="status ${statusClass}">${status}</span></td>
+        </tr>`;
+    });
+  });
+});
+
+window.logout = async function(){
+  await signOut(auth);
+  window.location.href = "student-login.html";
+}
+</script>
+
+</body>
+</html>

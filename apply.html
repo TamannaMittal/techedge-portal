@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apply | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  background: linear-gradient(-45deg,#ff416c,#ff4b2b,#1c92d2,#00c6ff);
+  background-size:400% 400%;
+  animation:bg 15s ease infinite;
+  color:white;
+  position:relative;
+  overflow:hidden;
+}
+@keyframes bg{
+0%{background-position:0% 50%;}
+50%{background-position:100% 50%;}
+100%{background-position:0% 50%;}
+}
+
+nav{
+position:sticky;top:0;
+display:flex;justify-content:space-between;align-items:center;
+padding:20px 8%;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+nav h2{font-weight:700;letter-spacing:1px;}
+nav a{color:white;text-decoration:none;margin:0 15px;transition:0.3s;font-weight:500;}
+nav a:hover{color:#00ffae;}
+
+/* Floating shapes animation */
+.shape{
+  position:absolute;
+  border-radius:50%;
+  opacity:0.15;
+  z-index:0;
+  animation-name:floatDiagonal;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+}
+
+@keyframes floatDiagonal{
+  0% { transform: translate(0px,0px) rotate(0deg);}
+  50% { transform: translate(50px,-50px) rotate(180deg);}
+  100% { transform: translate(0px,0px) rotate(360deg);}
+}
+
+.container{
+flex:1;
+max-width:1000px;
+margin:auto;
+padding:50px 20px;
+display:flex;
+gap:40px;
+align-items:center;
+justify-content:center;
+position:relative;
+z-index:1; /* above shapes */
+}
+
+.info-box{
+flex:1;
+background: rgba(255,255,255,0.1);
+padding:40px;
+border-radius:20px;
+backdrop-filter:blur(20px);
+box-shadow:0 8px 30px rgba(0,0,0,0.5);
+text-align:left;
+transition:0.5s;
+position:relative;
+}
+.info-box:hover{
+  background: rgba(255,255,255,0.2);
+  transform: translateY(-5px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+}
+.info-box h2{color:#00ffae;margin-bottom:15px;}
+.info-box p{margin-bottom:15px;line-height:1.5;}
+
+form{
+flex:1;
+background: rgba(255,255,255,0.15);
+padding:40px;
+border-radius:20px;
+backdrop-filter:blur(20px);
+box-shadow:0 8px 30px rgba(0,0,0,0.5);
+display:flex;
+flex-direction:column;
+gap:15px;
+transition:0.5s;
+}
+form:hover{
+  background: rgba(255,255,255,0.25);
+  transform: translateY(-5px);
+  box-shadow:0 12px 40px rgba(0,0,0,0.6);
+}
+
+input, select, textarea{
+width:100%;padding:12px;border:none;border-radius:10px;outline:none;background:rgba(255,255,255,0.2);color:white;
+transition:0.3s;
+}
+input:focus, select:focus, textarea:focus{background:rgba(255,255,255,0.35);}
+select option{color:black;}
+textarea{resize:none;height:120px;}
+
+button{
+padding:15px;border:none;border-radius:30px;
+background:linear-gradient(90deg,#00ffae,#00c6ff);
+color:black;font-weight:bold;cursor:pointer;transition:0.3s;
+}
+button:hover{transform:scale(1.05);box-shadow:0 0 20px #00ffae;}
+button:disabled{opacity:0.6;cursor:not-allowed;}
+
+.modal{
+position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.8);
+display:flex;justify-content:center;align-items:center;
+visibility:hidden;opacity:0;
+transition:0.4s;
+}
+.modal.show{visibility:visible;opacity:1;}
+.modal-content{
+background: rgba(255,255,255,0.1);
+padding:30px;
+border-radius:20px;
+text-align:center;
+max-width:400px;width:90%;
+backdrop-filter:blur(25px);
+box-shadow:0 10px 35px rgba(0,0,0,0.6);
+}
+.modal-content h2{color:#00ffae;margin-bottom:15px;}
+.modal-content button{margin-top:15px;}
+
+footer{
+margin-top:auto;text-align:center;padding:20px;
+background:rgba(0,0,0,0.8);
+}
+
+@media(max-width:900px){
+.container{
+  flex-direction:column;
+  padding:40px 15px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>TechEdge</h2>
+<div>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="internship.html">Internship</a>
+<a href="apply.html">Apply</a>
+<a href="contact.html">Contact</a>
+<a href="admin-login.html">Admin</a>
+</div>
+</nav>
+
+<!-- Floating shapes dynamically added by JS -->
+<div id="shapes-container"></div>
+
+<div class="container">
+
+<div class="info-box">
+<h2>Why Apply?</h2>
+<p>🚀 Gain real-world project experience</p>
+<p>💡 Learn cutting-edge technologies</p>
+<p>📈 Boost your resume and career prospects</p>
+<p>✉️ Get mentored by industry experts</p>
+</div>
+
+<form id="applyForm">
+<h1>Apply for Internship</h1>
+<p>Submit your application and kickstart your career!</p>
+<input type="text" id="name" placeholder="Your Name" required>
+<input type="email" id="email" placeholder="Your Email" required>
+<select id="track" required>
+<option value="">Select Track</option>
+<option value="Web Development">Web Development</option>
+<option value="Python Development">Python Development</option>
+<option value="Data Science">Data Science</option>
+</select>
+<textarea id="message" placeholder="Your Message / Expectations"></textarea>
+<button type="submit">Submit Application</button>
+</form>
+
+</div>
+
+<div class="modal" id="successModal">
+<div class="modal-content">
+<h2>Application Submitted!</h2>
+<p>Thank you for applying. We'll get back to you soon.</p>
+<button onclick="closeModal()">Close</button>
+</div>
+</div>
+
+<footer>
+© 2026 Tamanna Mittal | Internship Portal
+</footer>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+// ✅ EmailJS init
+emailjs.init("GD1ggle87Dhdjw21a");
+
+// ✅ Floating shapes
+const shapesContainer = document.getElementById("shapes-container");
+const colors = ["#00ffae","#ff4b2b","#1c92d2","#ff416c"];
+
+for(let i=0;i<10;i++){
+  const shape = document.createElement("div");
+  shape.classList.add("shape");
+
+  const size = Math.random()*100 + 30;
+  shape.style.width = size + "px";
+  shape.style.height = size + "px";
+
+  shape.style.background = colors[Math.floor(Math.random()*colors.length)];
+  shape.style.top = Math.random()*100 + "%";
+  shape.style.left = Math.random()*100 + "%";
+
+  shape.style.animationDuration = (Math.random()*20 + 10) + "s";
+
+  shapesContainer.appendChild(shape);
+}
+
+// Track auto-fill
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const track = params.get('track');
+  if(track) document.getElementById('track').value = track;
+});
+
+// Form submit
+const form = document.getElementById("applyForm");
+const modal = document.getElementById("successModal");
+const submitBtn = form.querySelector("button");
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const track = document.getElementById("track").value;
+  const message = document.getElementById("message").value.trim();
+
+  if(!name || !email || !track){
+    alert("Name, Email & Track are required!");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  try {
+    await addDoc(collection(db, "applications"), {
+      name, email, track, message, createdAt: serverTimestamp(), status: "Pending"
+    });
+
+    await emailjs.send("service_h6t02iu","template_g5ncz5e",{
+      name, email, track, message
+    });
+
+    modal.classList.add("show");
+    form.reset();
+
+  } catch(err) {
+    alert("Error: " + err.message);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Application";
+  }
+});
+
+// Close modal
+window.closeModal = function(){
+  modal.classList.remove("show");
+};
+</script>
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const track = params.get('track');
+  if(track) document.getElementById('track').value = track;
+});
+
+const form = document.getElementById("applyForm");
+const modal = document.getElementById("successModal");
+const submitBtn = form.querySelector("button");
+
+form.addEventListener("submit", async e => {
+  e.preventDefault();
+
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const track = document.getElementById("track").value;
+  const message = document.getElementById("message").value.trim();
+
+  if(!name || !email || !track){
+    alert("Name, Email & Track are required!");
+    return;
+  }
+
+  submitBtn.disabled = true;
+  submitBtn.textContent = "Submitting...";
+
+  try {
+    await addDoc(collection(db, "applications"), {
+      name, email, track, message, createdAt: serverTimestamp()
+    });
+
+    await emailjs.send(
+  "service_h6t02iu",
+  "template_g5ncz5e",
+  {
+    name: name,
+    email: email,
+    track: track,
+    message: message
+  }
+);
+    modal.classList.add("show");
+    form.reset();
+
+  } catch(err) {
+    alert("Error: " + err.message);
+  } finally {
+    submitBtn.disabled = false;
+    submitBtn.textContent = "Submit Application";
+  }
+});
+
+function closeModal(){
+  modal.classList.remove("show");
+}
+window.closeModal = closeModal;
+</script>
+
+</body>
+</html>

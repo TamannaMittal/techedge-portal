@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Contact | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  color:white;
+
+  /* Sliding Background Image + Dark Overlay */
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+              url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1950&q=80') no-repeat center center fixed;
+  background-size: cover;
+  animation:bg 12s ease infinite;
+}
+
+/* Sliding animation */
+@keyframes bg{
+  0%{background-position:0% 50%;}
+  50%{background-position:100% 50%;}
+  100%{background-position:0% 50%;}
+}
+
+nav{
+  position:sticky;
+  top:0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 60px;
+  background:rgba(0,0,0,0.7);
+  backdrop-filter:blur(10px);
+}
+
+nav h2{
+  font-weight:600;
+}
+
+nav a{
+  color:white;
+  text-decoration:none;
+  margin:0 15px;
+  transition:0.3s;
+}
+
+nav a:hover{
+  color:#00ffae;
+}
+
+/* Container */
+.container{
+  flex:1;
+  padding:80px 10%;
+}
+
+.hero{
+  text-align:center;
+  margin-bottom:50px;
+}
+
+.hero h1{
+  font-size:40px;
+  margin-bottom:15px;
+}
+
+.hero p{
+  opacity:0.9;
+}
+
+/* Grid layout */
+.grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+  justify-items:center;
+}
+
+/* Form Box */
+.form-box{
+  background:rgba(255,255,255,0.1);
+  padding:35px;
+  border-radius:20px;
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+  width:90%;
+  max-width:400px;
+}
+
+input, textarea{
+  width:100%;
+  padding:12px;
+  margin:12px 0;
+  border:none;
+  border-radius:8px;
+  outline:none;
+}
+
+textarea{
+  height:100px;
+  resize:none;
+}
+
+button{
+  width:100%;
+  padding:12px;
+  border:none;
+  border-radius:30px;
+  background:#00ffae;
+  color:black;
+  font-weight:bold;
+  cursor:pointer;
+  transition:0.3s;
+}
+
+button:hover{
+  transform:scale(1.05);
+  box-shadow:0 0 15px #00ffae;
+}
+
+/* Info Box */
+.info-box{
+  background:rgba(255,255,255,0.1);
+  padding:35px;
+  border-radius:20px;
+  backdrop-filter:blur(15px);
+  box-shadow:0 0 20px rgba(0,0,0,0.3);
+  width:90%;
+  max-width:400px;
+}
+
+.info-item{
+  margin-bottom:20px;
+}
+
+.info-item h3{
+  color:#00ffae;
+  margin-bottom:5px;
+}
+
+/* Footer */
+footer{
+  margin-top:auto;
+  text-align:center;
+  padding:20px;
+  background:rgba(0,0,0,0.8);
+}
+
+/* Responsive */
+@media(max-width:900px){
+  .grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<nav>
+<h2>TechEdge</h2>
+<div>
+  <a href="index.html">Home</a>
+  <a href="about.html">About</a>
+  <a href="internship.html">Internship</a>
+  <a href="apply.html">Apply</a>
+  <a href="contact.html">Contact</a>
+  <a href="admin-login.html">Admin</a>
+</div>
+</nav>
+
+<div class="container">
+
+<div class="hero">
+<h1>Get In Touch</h1>
+<p>Have questions about our internship programs? We'd love to hear from you.</p>
+</div>
+
+<div class="grid">
+
+  <div class="form-box">
+    <form id="contactForm">
+      <input type="text" id="name" placeholder="Your Name" required>
+      <input type="email" id="email" placeholder="Your Email" required>
+      <textarea id="message" placeholder="Your Message" required></textarea>
+      <button type="submit">Send Message</button>
+    </form>
+  </div>
+
+  <div class="info-box">
+    <div class="info-item">
+      <h3>Email</h3>
+      <p>support@techedge.com</p>
+    </div>
+
+    <div class="info-item">
+      <h3>Phone</h3>
+      <p>+91 98765 43210</p>
+    </div>
+
+    <div class="info-item">
+      <h3>Location</h3>
+      <p>India | Online Internship Platform</p>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer>
+© 2026 Tamanna Mittal | Internship Portal
+</footer>
+
+<!-- Firebase Integration -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+// 🔥 Firebase Config
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+document.getElementById("contactForm").addEventListener("submit", async function(e){
+    e.preventDefault();
+
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
+
+    if(!name || !email || !message){
+        alert("All fields are required!");
+        return;
+    }
+
+    try{
+        await addDoc(collection(db, "contactMessages"), {
+            name,
+            email,
+            message,
+            createdAt: serverTimestamp()
+        });
+
+        alert("Message Sent Successfully ✅");
+        this.reset();
+    } catch(error){
+        alert("Error sending message: " + error.message);
+    }
+});
+</script>
+
+</body>
+</html>

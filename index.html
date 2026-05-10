@@ -6,6 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 *{
@@ -19,12 +20,16 @@ scroll-behavior:smooth;
 body{
 min-height:100vh;
 color:white;
+
 background:
 radial-gradient(circle at 15% 20%, rgba(168,85,247,0.35), transparent 28%),
 radial-gradient(circle at 85% 10%, rgba(34,211,238,0.25), transparent 30%),
 linear-gradient(135deg,#07070f,#120a24,#08111f);
+
 overflow-x:hidden;
 }
+
+/* LOADER */
 
 #loader{
 position:fixed;
@@ -81,6 +86,8 @@ letter-spacing:1px;
 100%{width:100%;}
 }
 
+/* PAGE */
+
 .page{
 width:92%;
 margin:28px auto;
@@ -107,6 +114,8 @@ linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
 background-size:48px 48px;
 pointer-events:none;
 }
+
+/* NAVBAR */
 
 nav{
 position:relative;
@@ -150,6 +159,8 @@ border-radius:999px;
 background:linear-gradient(135deg,#7c3aed,#d946ef);
 }
 
+/* HERO */
+
 .hero{
 position:relative;
 z-index:2;
@@ -160,8 +171,88 @@ justify-content:center;
 align-items:center;
 text-align:center;
 padding:60px 20px;
-background:rgba(255,255,255,0.05);
-backdrop-filter:blur(14px);
+overflow:hidden;
+background-size:cover;
+background-position:center;
+animation:heroSlide 18s infinite;
+}
+
+@keyframes heroSlide{
+
+0%{
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d');
+background-size:cover;
+background-position:center;
+}
+
+33%{
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3');
+background-size:cover;
+background-position:center;
+}
+
+66%{
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f');
+background-size:cover;
+background-position:center;
+}
+
+100%{
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d');
+background-size:cover;
+background-position:center;
+}
+
+}
+
+/* FLOATING EFFECTS */
+
+.floating{
+position:absolute;
+border-radius:50%;
+filter:blur(10px);
+opacity:0.5;
+animation:float 6s ease-in-out infinite;
+}
+
+.floating1{
+width:180px;
+height:180px;
+background:#7c3aed;
+top:40px;
+left:10%;
+}
+
+.floating2{
+width:120px;
+height:120px;
+background:#22d3ee;
+bottom:40px;
+right:12%;
+animation-delay:2s;
+}
+
+.floating3{
+width:90px;
+height:90px;
+background:#00ffaa;
+top:50%;
+left:50%;
+animation-delay:4s;
+}
+
+@keyframes float{
+0%{transform:translateY(0px);}
+50%{transform:translateY(-30px);}
+100%{transform:translateY(0px);}
 }
 
 .badge{
@@ -223,6 +314,8 @@ background:rgba(255,255,255,0.12);
 border:1px solid rgba(255,255,255,0.2);
 }
 
+/* STATS */
+
 .stats{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -255,6 +348,8 @@ color:#22d3ee;
 .stat-box p{
 color:rgba(255,255,255,0.82);
 }
+
+/* FEATURES */
 
 .features{
 display:grid;
@@ -292,50 +387,139 @@ color:rgba(255,255,255,0.78);
 line-height:1.6;
 }
 
-.steps{
-width:82%;
-margin:0 auto 70px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-gap:25px;
-}
+/* CHATBOT */
 
-.step-card{
-padding:30px;
-border-radius:28px;
-background:rgba(255,255,255,0.08);
-border:1px solid rgba(255,255,255,0.18);
-backdrop-filter:blur(18px);
-text-align:center;
-transition:0.4s;
-}
-
-.step-card:hover{
-transform:translateY(-10px) scale(1.03);
-}
-
-.step-number{
-width:70px;
-height:70px;
+.chatbot-button{
+position:fixed;
+right:25px;
+bottom:25px;
+width:65px;
+height:65px;
 border-radius:50%;
-display:flex;
-align-items:center;
-justify-content:center;
-margin:0 auto 18px;
+border:none;
+background:linear-gradient(135deg,#7c3aed,#22d3ee,#00ffaa);
+color:white;
 font-size:28px;
-font-weight:800;
+cursor:pointer;
+z-index:9999;
+box-shadow:0 0 25px rgba(34,211,238,0.55);
+transition:0.3s;
+}
+
+.chatbot-button:hover{
+transform:scale(1.1);
+}
+
+.chatbot-box{
+position:fixed;
+right:25px;
+bottom:100px;
+width:340px;
+height:460px;
+background:rgba(8,12,25,0.95);
+border:1px solid rgba(255,255,255,0.18);
+border-radius:25px;
+backdrop-filter:blur(18px);
+box-shadow:0 25px 70px rgba(0,0,0,0.5);
+z-index:9999;
+display:none;
+flex-direction:column;
+overflow:hidden;
+}
+
+.chatbot-header{
+padding:18px;
 background:linear-gradient(135deg,#7c3aed,#22d3ee);
+display:flex;
+justify-content:space-between;
+align-items:center;
+font-weight:700;
 }
 
-.step-card h3{
-margin-bottom:12px;
-font-size:24px;
+.chatbot-header button{
+background:transparent;
+border:none;
+color:white;
+font-size:22px;
+cursor:pointer;
 }
 
-.step-card p{
-color:rgba(255,255,255,0.78);
-line-height:1.6;
+.chatbot-messages{
+flex:1;
+padding:15px;
+overflow-y:auto;
+display:flex;
+flex-direction:column;
+gap:12px;
 }
+
+.bot-message,
+.user-message{
+padding:12px 14px;
+border-radius:16px;
+font-size:14px;
+line-height:1.5;
+max-width:85%;
+}
+
+.bot-message{
+background:rgba(255,255,255,0.12);
+align-self:flex-start;
+}
+
+.user-message{
+background:linear-gradient(135deg,#7c3aed,#22d3ee);
+align-self:flex-end;
+}
+
+.chatbot-input{
+display:flex;
+gap:8px;
+padding:12px;
+border-top:1px solid rgba(255,255,255,0.14);
+}
+
+.chatbot-input input{
+flex:1;
+padding:12px;
+border:none;
+outline:none;
+border-radius:20px;
+background:rgba(255,255,255,0.12);
+color:white;
+}
+
+.chatbot-input input::placeholder{
+color:rgba(255,255,255,0.55);
+}
+
+.chatbot-input button{
+padding:10px 16px;
+border:none;
+border-radius:20px;
+background:#00ffaa;
+font-weight:700;
+cursor:pointer;
+}
+
+.quick-questions{
+display:flex;
+flex-wrap:wrap;
+gap:8px;
+padding:0 12px 12px;
+}
+
+.quick-questions button{
+border:none;
+border-radius:20px;
+padding:8px 10px;
+background:rgba(255,255,255,0.12);
+color:white;
+font-size:12px;
+cursor:pointer;
+}
+
+/* FOOTER */
 
 footer{
 text-align:center;
@@ -346,6 +530,7 @@ border-top:1px solid rgba(255,255,255,0.12);
 }
 
 @media(max-width:900px){
+
 nav{
 padding:20px;
 flex-direction:column;
@@ -366,15 +551,23 @@ font-size:16px;
 }
 
 .stats,
-.features,
-.steps{
+.features{
 width:90%;
 }
+
+.chatbot-box{
+width:90%;
+right:5%;
+height:430px;
+}
+
 }
 </style>
 </head>
 
 <body>
+
+<!-- LOADER -->
 
 <div id="loader">
 <div class="loader-content">
@@ -387,6 +580,8 @@ width:90%;
 </div>
 
 <div class="page">
+
+<!-- NAVBAR -->
 
 <nav>
 <div class="logo">Tech<span>Edge</span></div>
@@ -401,7 +596,14 @@ width:90%;
 </div>
 </nav>
 
+<!-- HERO -->
+
 <section class="hero">
+
+<div class="floating floating1"></div>
+<div class="floating floating2"></div>
+<div class="floating floating3"></div>
+
 <div class="badge">🚀 Internship Portal for Future Professionals</div>
 
 <h1 id="typing"></h1>
@@ -415,7 +617,10 @@ get certified, gain experience, and build your future with confidence.
 <a href="apply.html" class="btn">Apply Now</a>
 <a href="internship.html" class="btn btn-outline">Explore Internships</a>
 </div>
+
 </section>
+
+<!-- STATS -->
 
 <section class="stats">
 <div class="stat-box">
@@ -439,6 +644,8 @@ get certified, gain experience, and build your future with confidence.
 </div>
 </section>
 
+<!-- FEATURES -->
+
 <section class="features">
 <div class="card">
 <div class="icon">💻</div>
@@ -459,171 +666,277 @@ get certified, gain experience, and build your future with confidence.
 </div>
 </section>
 
-<section class="steps">
-<div class="step-card">
-<div class="step-number">1</div>
-<h3>Apply Online</h3>
-<p>Fill out the internship application form and submit your resume easily through TechEdge.</p>
-</div>
-
-<div class="step-card">
-<div class="step-number">2</div>
-<h3>Get Shortlisted</h3>
-<p>Our team reviews applications and shortlists talented candidates.</p>
-</div>
-
-<div class="step-card">
-<div class="step-number">3</div>
-<h3>Start Internship</h3>
-<p>Work on real-world projects, gain mentorship, and earn your certificate.</p>
-</div>
-</section>
-
-<section class="features">
-<div class="card">
-<div class="icon">⚡</div>
-<h3>Industry Level Training</h3>
-<p>Learn practical skills through industry-oriented projects and workflows.</p>
-</div>
-
-<div class="card">
-<div class="icon">🌍</div>
-<h3>Remote Opportunities</h3>
-<p>Work from anywhere and collaborate with teams using modern tools.</p>
-</div>
-
-<div class="card">
-<div class="icon">🎯</div>
-<h3>Career Focused</h3>
-<p>Improve your resume and interview confidence with guided mentorship.</p>
-</div>
-</section>
-
-<section class="steps">
-<div class="step-card">
-<div class="step-number">⭐</div>
-<h3>Rahul Sharma</h3>
-<p>“TechEdge helped me improve my frontend skills and confidence.”</p>
-</div>
-
-<div class="step-card">
-<div class="step-number">⭐</div>
-<h3>Priya Mehta</h3>
-<p>“The internship experience felt professional and practical.”</p>
-</div>
-
-<div class="step-card">
-<div class="step-number">⭐</div>
-<h3>Arjun Verma</h3>
-<p>“Amazing UI, real tasks, and great learning environment.”</p>
-</div>
-</section>
-
-<section class="features">
-<div class="card">
-<h3>Do I get a certificate?</h3>
-<p>Yes, every selected intern receives a verified internship certificate.</p>
-</div>
-
-<div class="card">
-<h3>Is this internship remote?</h3>
-<p>Yes, TechEdge internships are fully remote and flexible for students.</p>
-</div>
-
-<div class="card">
-<h3>Who can apply?</h3>
-<p>Students interested in development, marketing, design, or technology can apply.</p>
-</div>
-</section>
-
 <footer>
 © 2026 Tamanna Mittal | TechEdge Internship Portal
 </footer>
 
 </div>
 
+<!-- CHATBOT -->
+
+<button class="chatbot-button" onclick="toggleChatbot()">🤖</button>
+
+<div class="chatbot-box" id="chatbotBox">
+
+<div class="chatbot-header">
+<span>TechEdge AI Assistant</span>
+<button onclick="toggleChatbot()">×</button>
+</div>
+
+<div class="chatbot-messages" id="chatMessages">
+<div class="bot-message">
+Hi! I am TechEdge AI Assistant 🤖<br>
+Ask me about internships, application process, certificate, resume, or contact.
+</div>
+</div>
+
+<div class="quick-questions">
+<button onclick="quickAsk('How to apply?')">How to apply?</button>
+<button onclick="quickAsk('Do I get certificate?')">Certificate?</button>
+<button onclick="quickAsk('What internships are available?')">Internships?</button>
+<button onclick="quickAsk('How to contact?')">Contact?</button>
+</div>
+
+<div class="chatbot-input">
+<input type="text" id="userInput" placeholder="Type your question..." onkeydown="handleEnter(event)">
+<button onclick="sendMessage()">Send</button>
+</div>
+
+</div>
+
 <script>
+
+/* LOADER */
+
 window.addEventListener("load",()=>{
+
 setTimeout(()=>{
+
 document.getElementById("loader").style.opacity="0";
 document.getElementById("loader").style.visibility="hidden";
+
 },2600);
+
 });
+
+/* TYPING EFFECT */
 
 const text = "Launch Your Career With TechEdge";
 let i = 0;
 
 function typeEffect(){
+
 if(i < text.length){
+
 document.getElementById("typing").innerHTML += text.charAt(i);
 i++;
 setTimeout(typeEffect,65);
+
 }else{
+
 document.getElementById("typing").innerHTML =
 "Launch Your Career With <span>TechEdge</span>";
+
 }
+
 }
 
 typeEffect();
 
+/* COUNTERS */
+
 function animateCounters(){
+
 const counters = document.querySelectorAll(".counter");
 
 counters.forEach(counter => {
+
 counter.innerText = "0";
 
 const updateCounter = () => {
+
 const target = +counter.getAttribute("data-target");
 const current = +counter.innerText;
 const increment = target / 80;
 
 if(current < target){
+
 counter.innerText = `${Math.ceil(current + increment)}`;
 setTimeout(updateCounter,20);
+
 }else{
+
 counter.innerText = target;
+
 }
+
 };
 
 updateCounter();
+
 });
+
 }
 
 animateCounters();
+
+/* CHATBOT */
+
+function toggleChatbot(){
+
+const box = document.getElementById("chatbotBox");
+
+if(box.style.display === "flex"){
+box.style.display = "none";
+}else{
+box.style.display = "flex";
+}
+
+}
+
+function quickAsk(question){
+
+document.getElementById("userInput").value = question;
+sendMessage();
+
+}
+
+function handleEnter(event){
+
+if(event.key === "Enter"){
+sendMessage();
+}
+
+}
+
+function sendMessage(){
+
+const input = document.getElementById("userInput");
+const message = input.value.trim();
+
+if(message === ""){
+return;
+}
+
+addMessage(message,"user-message");
+
+input.value = "";
+
+setTimeout(()=>{
+
+const reply = getBotReply(message);
+addMessage(reply,"bot-message");
+
+},500);
+
+}
+
+function addMessage(text,className){
+
+const chatMessages = document.getElementById("chatMessages");
+
+const div = document.createElement("div");
+div.className = className;
+div.innerHTML = text;
+
+chatMessages.appendChild(div);
+chatMessages.scrollTop = chatMessages.scrollHeight;
+
+}
+
+function getBotReply(message){
+
+const msg = message.toLowerCase();
+
+if(msg.includes("apply") || msg.includes("application") || msg.includes("form")){
+return "You can apply by clicking the <b>Apply Now</b> button and filling the internship application form.";
+}
+
+if(msg.includes("internship") || msg.includes("available") || msg.includes("track")){
+return "TechEdge offers internships in Web Development, Python Development, Data Science, UI/UX Design, Digital Marketing, and Java Development.";
+}
+
+if(msg.includes("certificate") || msg.includes("certification")){
+return "Yes ✅ Selected interns receive a verified internship completion certificate after successful completion.";
+}
+
+if(msg.includes("resume") || msg.includes("cv")){
+return "You can upload or paste your resume link in the application form. PDF resume is preferred.";
+}
+
+if(msg.includes("contact") || msg.includes("email") || msg.includes("support")){
+return "You can contact TechEdge through the Contact page. Our team will respond as soon as possible.";
+}
+
+if(msg.includes("admin") || msg.includes("dashboard")){
+return "Admin dashboard is only for authorized TechEdge team members to manage applications.";
+}
+
+if(msg.includes("shortlist") || msg.includes("selected") || msg.includes("status")){
+return "Applications are reviewed by the admin team. If shortlisted, your status will be updated in the system.";
+}
+
+if(msg.includes("hello") || msg.includes("hi") || msg.includes("hey")){
+return "Hello! 👋 How can I help you with TechEdge internships?";
+}
+
+return "I can help you with internships, apply process, certificates, resume upload, contact, and application status. Please ask about any of these.";
+}
+
 </script>
 
 <script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
-authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
-projectId: "internship-portal-pro-7cbb1",
-storageBucket: "internship-portal-pro-7cbb1.appspot.com",
-messagingSenderId: "149057403895",
-appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+authDomain:"internship-portal-pro-7cbb1.firebaseapp.com",
+projectId:"internship-portal-pro-7cbb1",
+storageBucket:"internship-portal-pro-7cbb1.appspot.com",
+messagingSenderId:"149057403895",
+appId:"1:149057403895:web:8b9bdd770e7475c2a38cf2"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function loadStats(){
-try{
-const studentsSnap = await getDocs(collection(db,"applications"));
-const total = studentsSnap.size;
 
-const studentCounter = document.getElementById("students");
+try{
+
+const studentsSnap =
+await getDocs(collection(db,"applications"));
+
+const total =
+studentsSnap.size;
+
+const studentCounter =
+document.getElementById("students");
+
 studentCounter.setAttribute("data-target", total);
 studentCounter.innerText = "0";
 
 animateCounters();
+
 }catch(error){
+
 console.log(error);
+
 }
+
 }
 
 loadStats();
+
 </script>
 
 </body>

@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -135,7 +135,7 @@ input{
 table{
   width:100%;
   border-collapse:collapse;
-  min-width:850px;
+  min-width:980px;
 }
 
 th,td{
@@ -146,6 +146,16 @@ th,td{
 
 th{
   color:#00ffae;
+}
+
+.resume-link{
+  color:#00ffae;
+  text-decoration:none;
+  font-weight:bold;
+}
+
+.resume-link:hover{
+  text-decoration:underline;
 }
 
 button{
@@ -265,6 +275,7 @@ button{
         <th>Email</th>
         <th>Track</th>
         <th>Message</th>
+        <th>Resume</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>
@@ -423,7 +434,7 @@ function render(data){
   if(data.length === 0){
     html = `
       <tr>
-        <td colspan="6" class="empty">No applications found</td>
+        <td colspan="7" class="empty">No applications found</td>
       </tr>
     `;
   }
@@ -433,7 +444,12 @@ function render(data){
     const email = d.email || "N/A";
     const track = d.track || "N/A";
     const message = d.message || "N/A";
+    const resume = d.resume || "";
     const status = d.status || "Pending";
+
+    const resumeButton = resume
+      ? `<a class="resume-link" href="${resume}" target="_blank">View Resume</a>`
+      : "N/A";
 
     html += `
       <tr>
@@ -441,6 +457,7 @@ function render(data){
         <td>${email}</td>
         <td>${track}</td>
         <td>${message}</td>
+        <td>${resumeButton}</td>
         <td>${status}</td>
         <td>
           <button class="accept" onclick="accept('${d.id}')">Accept</button>
@@ -479,7 +496,8 @@ window.accept = async function(id){
       name: student?.name || "",
       email: student?.email || "",
       track: student?.track || "",
-      message: student?.message || ""
+      message: student?.message || "",
+      resume: student?.resume || ""
     });
   }catch(e){
     console.log("EmailJS error:", e);
@@ -501,7 +519,8 @@ window.reject = async function(id){
       name: student?.name || "",
       email: student?.email || "",
       track: student?.track || "",
-      message: student?.message || ""
+      message: student?.message || "",
+      resume: student?.resume || ""
     });
   }catch(e){
     console.log("EmailJS error:", e);
@@ -520,10 +539,10 @@ window.deleteApp = async function(id){
 };
 
 window.download = function(){
-  let csv = "Name,Email,Track,Message,Status\n";
+  let csv = "Name,Email,Track,Message,Resume,Status\n";
 
   allData.forEach(d=>{
-    csv += `"${d.name || "N/A"}","${d.email || "N/A"}","${d.track || "N/A"}","${d.message || "N/A"}","${d.status || "Pending"}"\n`;
+    csv += `"${d.name || "N/A"}","${d.email || "N/A"}","${d.track || "N/A"}","${d.message || "N/A"}","${d.resume || "N/A"}","${d.status || "Pending"}"\n`;
   });
 
   const blob = new Blob([csv], {type:"text/csv"});

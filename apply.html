@@ -5,8 +5,9 @@
 <title>Apply | TechEdge</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<style>
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
 
+<style>
 *{
 margin:0;
 padding:0;
@@ -19,16 +20,12 @@ min-height:100vh;
 display:flex;
 flex-direction:column;
 color:white;
-
 background:
 linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
 url('https://images.unsplash.com/photo-1521791136064-7986c2920216')
 no-repeat center center fixed;
-
 background-size:cover;
 }
-
-/* Navbar */
 
 nav{
 position:sticky;
@@ -47,8 +44,6 @@ text-decoration:none;
 margin-left:20px;
 }
 
-/* Container */
-
 .container{
 flex:1;
 display:flex;
@@ -56,8 +51,6 @@ justify-content:center;
 align-items:center;
 padding:40px;
 }
-
-/* Form */
 
 .form-box{
 width:400px;
@@ -96,8 +89,6 @@ button:hover{
 transform:scale(1.05);
 }
 
-/* Popup */
-
 .popup{
 position:fixed;
 top:20px;
@@ -111,41 +102,32 @@ font-weight:bold;
 box-shadow:0 0 10px rgba(0,0,0,0.3);
 }
 
-/* Footer */
-
 footer{
 text-align:center;
 padding:20px;
 background:rgba(0,0,0,0.8);
 }
-
 </style>
-
 </head>
 
 <body>
 
 <nav>
-
 <h2>TechEdge</h2>
-
 <div>
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="internship.html">Internships</a>
 <a href="contact.html">Contact</a>
 </div>
-
 </nav>
 
 <div class="container">
-
 <div class="form-box">
 
 <h2>Apply for Internship</h2>
 
 <input type="text" id="name" placeholder="Full Name">
-
 <input type="email" id="email" placeholder="Email">
 
 <select id="track">
@@ -163,23 +145,21 @@ background:rgba(0,0,0,0.8);
 <button onclick="apply()" id="btn">Submit Application</button>
 
 </div>
-
 </div>
-
-<!-- Popup -->
 
 <div id="popup" class="popup">
 Application Submitted Successfully 🎉
 </div>
 
 <footer>
-
 © 2026 TechEdge | Internship Portal
-
 </footer>
 
-<script type="module">
+<script>
+emailjs.init("jACWU8xqWmYKLKkvi");
+</script>
 
+<script type="module">
 import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
 import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
@@ -197,19 +177,19 @@ const db = getFirestore(app);
 
 window.apply = async function(){
 
-const name=document.getElementById("name").value.trim();
-const email=document.getElementById("email").value.trim();
-const track=document.getElementById("track").value;
-const message=document.getElementById("message").value;
+const name = document.getElementById("name").value.trim();
+const email = document.getElementById("email").value.trim();
+const track = document.getElementById("track").value;
+const message = document.getElementById("message").value.trim();
 
-if(!name || !email || !track){
+if(!name || !email || !track || !message){
 alert("Please fill all fields");
 return;
 }
 
-const btn=document.getElementById("btn");
-btn.innerText="Submitting...";
-btn.disabled=true;
+const btn = document.getElementById("btn");
+btn.innerText = "Submitting...";
+btn.disabled = true;
 
 try{
 
@@ -222,33 +202,36 @@ status:"Pending",
 date:new Date()
 });
 
-btn.innerText="Submitted ✅";
+await emailjs.send("service_h6t02iu", "template_g5ncz5e", {
+name: name,
+email: email,
+track: track,
+message: message
+});
 
-document.getElementById("popup").style.display="block";
+btn.innerText = "Submitted ✅";
+document.getElementById("popup").style.display = "block";
 
-/* reset form */
-
-document.getElementById("name").value="";
-document.getElementById("email").value="";
-document.getElementById("track").value="";
-document.getElementById("message").value="";
+document.getElementById("name").value = "";
+document.getElementById("email").value = "";
+document.getElementById("track").value = "";
+document.getElementById("message").value = "";
 
 setTimeout(()=>{
-btn.innerText="Submit Application";
-btn.disabled=false;
-document.getElementById("popup").style.display="none";
+btn.innerText = "Submit Application";
+btn.disabled = false;
+document.getElementById("popup").style.display = "none";
 },2000);
 
 }catch(error){
 
-alert("Error: "+error.message);
-btn.innerText="Submit Application";
-btn.disabled=false;
+alert("Error: " + error.message);
+btn.innerText = "Submit Application";
+btn.disabled = false;
 
 }
 
 }
-
 </script>
 
 </body>

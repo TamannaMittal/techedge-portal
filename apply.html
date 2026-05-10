@@ -74,6 +74,12 @@ border-radius:10px;
 outline:none;
 }
 
+.file-note{
+font-size:13px;
+opacity:0.85;
+margin-top:4px;
+}
+
 button{
 width:100%;
 padding:12px;
@@ -140,6 +146,9 @@ background:rgba(0,0,0,0.8);
 <option>Java Development</option>
 </select>
 
+<input type="file" id="resume" accept=".pdf">
+<p class="file-note">Upload resume in PDF format</p>
+
 <textarea id="message" placeholder="Why should we select you?" rows="4"></textarea>
 
 <button onclick="apply()" id="btn">Submit Application</button>
@@ -181,9 +190,20 @@ const name = document.getElementById("name").value.trim();
 const email = document.getElementById("email").value.trim();
 const track = document.getElementById("track").value;
 const message = document.getElementById("message").value.trim();
+const resume = document.getElementById("resume").files[0];
 
 if(!name || !email || !track || !message){
 alert("Please fill all fields");
+return;
+}
+
+if(!resume){
+alert("Please upload your resume PDF");
+return;
+}
+
+if(resume.type !== "application/pdf"){
+alert("Only PDF file is allowed");
 return;
 }
 
@@ -193,11 +213,34 @@ btn.disabled = true;
 
 try{
 
+let resumeURL = "";
+
+const data = new FormData();
+data.append("file", resume);
+data.append("upload_preset", "resume_upload");
+
+const response = await fetch(
+"https://api.cloudinary.com/v1_1/dqdtl3gsn/raw/upload",
+{
+method:"POST",
+body:data
+}
+);
+
+const result = await response.json();
+
+if(!result.secure_url){
+throw new Error("Resume upload failed");
+}
+
+resumeURL = result.secure_url;
+
 await addDoc(collection(db,"applications"),{
 name,
 email,
 track,
 message,
+resume: resumeURL,
 status:"Pending",
 date:new Date()
 });
@@ -206,7 +249,8 @@ await emailjs.send("service_h6t02iu", "template_g5ncz5e", {
 name: name,
 email: email,
 track: track,
-message: message
+message: message,
+resume: resumeURL
 });
 
 btn.innerText = "Submitted ✅";
@@ -216,6 +260,7 @@ document.getElementById("name").value = "";
 document.getElementById("email").value = "";
 document.getElementById("track").value = "";
 document.getElementById("message").value = "";
+document.getElementById("resume").value = "";
 
 setTimeout(()=>{
 btn.innerText = "Submit Application";

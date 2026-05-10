@@ -53,6 +53,7 @@ body{
 }
 
 /* NAVBAR */
+
 nav{
   position:relative;
   z-index:5;
@@ -68,7 +69,6 @@ nav{
 .logo{
   font-size:26px;
   font-weight:800;
-  letter-spacing:0.4px;
 }
 
 .logo span{
@@ -83,12 +83,10 @@ nav a{
   margin-left:28px;
   font-size:15px;
   font-weight:600;
-  opacity:0.9;
   transition:0.3s;
 }
 
 nav a:hover{
-  opacity:1;
   color:#22d3ee;
 }
 
@@ -96,10 +94,10 @@ nav a:hover{
   padding:10px 22px;
   border-radius:999px;
   background:linear-gradient(135deg,#7c3aed,#d946ef);
-  box-shadow:0 8px 25px rgba(124,58,237,0.45);
 }
 
 /* HERO */
+
 .hero{
   position:relative;
   z-index:2;
@@ -112,15 +110,12 @@ nav a:hover{
   padding:60px 20px;
   background:rgba(255,255,255,0.05);
   backdrop-filter:blur(14px);
-  border-bottom:1px solid rgba(255,255,255,0.12);
 }
 
 .badge{
   padding:9px 18px;
   border-radius:999px;
   background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.18);
-  backdrop-filter:blur(14px);
   color:#c4b5fd;
   margin-bottom:22px;
   font-size:14px;
@@ -129,7 +124,6 @@ nav a:hover{
 .hero h1{
   font-size:44px;
   font-weight:800;
-  line-height:1.2;
   margin-bottom:18px;
   background:linear-gradient(90deg,#a855f7,#60a5fa,#22d3ee);
   -webkit-background-clip:text;
@@ -164,32 +158,29 @@ nav a:hover{
   background:linear-gradient(135deg,#7c3aed,#d946ef,#22d3ee);
   color:white;
   font-weight:700;
-  cursor:pointer;
   text-decoration:none;
   transition:0.4s;
-  box-shadow:0 15px 35px rgba(124,58,237,0.35);
 }
 
 .btn:hover{
   transform:translateY(-5px) scale(1.05);
-  box-shadow:0 20px 45px rgba(168,85,247,0.6);
 }
 
 .btn-outline{
   background:rgba(255,255,255,0.12);
   border:1px solid rgba(255,255,255,0.2);
-  box-shadow:none;
 }
 
 /* STATS */
+
 .stats{
-  position:relative;
-  z-index:2;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
   gap:22px;
   width:82%;
   margin:-45px auto 35px;
+  position:relative;
+  z-index:2;
 }
 
 .stat-box{
@@ -199,13 +190,11 @@ nav a:hover{
   border:1px solid rgba(255,255,255,0.18);
   backdrop-filter:blur(18px);
   text-align:center;
-  box-shadow:0 18px 40px rgba(0,0,0,0.25);
   transition:0.4s;
 }
 
 .stat-box:hover{
   transform:translateY(-8px);
-  box-shadow:0 20px 50px rgba(34,211,238,0.3);
 }
 
 .stat-box h2{
@@ -215,19 +204,16 @@ nav a:hover{
 
 .stat-box p{
   color:rgba(255,255,255,0.82);
-  margin-top:6px;
-  font-weight:500;
 }
 
 /* FEATURES */
+
 .features{
-  position:relative;
-  z-index:2;
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
   gap:25px;
   width:82%;
-  margin:-10px auto 70px;
+  margin:20px auto 70px;
 }
 
 .card{
@@ -236,14 +222,11 @@ nav a:hover{
   background:rgba(255,255,255,0.10);
   border:1px solid rgba(255,255,255,0.18);
   backdrop-filter:blur(18px);
-  box-shadow:0 20px 50px rgba(0,0,0,0.25);
   transition:0.35s;
 }
 
 .card:hover{
   transform:translateY(-12px) scale(1.03);
-  background:rgba(255,255,255,0.16);
-  box-shadow:0 25px 60px rgba(168,85,247,0.3);
 }
 
 .card .icon{
@@ -261,7 +244,8 @@ nav a:hover{
   line-height:1.6;
 }
 
-/* HOW IT WORKS */
+/* STEPS */
+
 .steps{
   width:82%;
   margin:0 auto 70px;
@@ -278,28 +262,10 @@ nav a:hover{
   backdrop-filter:blur(18px);
   text-align:center;
   transition:0.4s;
-  position:relative;
-  overflow:hidden;
-}
-
-.step-card::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background:linear-gradient(135deg,
-  rgba(168,85,247,0.18),
-  rgba(34,211,238,0.12));
-  opacity:0;
-  transition:0.4s;
-}
-
-.step-card:hover::before{
-  opacity:1;
 }
 
 .step-card:hover{
   transform:translateY(-10px) scale(1.03);
-  box-shadow:0 25px 60px rgba(34,211,238,0.22);
 }
 
 .step-number{
@@ -326,22 +292,16 @@ nav a:hover{
 }
 
 /* FOOTER */
+
 footer{
-  position:relative;
-  z-index:2;
   text-align:center;
   padding:30px;
-  margin-top:40px;
   background:rgba(255,255,255,0.06);
   color:rgba(255,255,255,0.75);
   border-top:1px solid rgba(255,255,255,0.12);
 }
 
 @media(max-width:900px){
-  .page{
-    width:96%;
-    margin:15px auto;
-  }
 
   nav{
     padding:20px;
@@ -389,7 +349,10 @@ footer{
 </nav>
 
 <section class="hero">
-  <div class="badge">🚀 Internship Portal for Future Professionals</div>
+
+  <div class="badge">
+    🚀 Internship Portal for Future Professionals
+  </div>
 
   <h1 id="typing"></h1>
 
@@ -402,48 +365,59 @@ footer{
     <a href="apply.html" class="btn">Apply Now</a>
     <a href="internship.html" class="btn btn-outline">Explore Internships</a>
   </div>
+
 </section>
 
 <section class="stats">
+
   <div class="stat-box">
     <h2 id="students">0</h2>
     <p>Students Applied</p>
   </div>
 
   <div class="stat-box">
-    <h2 id="projects">12</h2>
+    <h2>6</h2>
     <p>Live Projects</p>
   </div>
 
   <div class="stat-box">
-    <h2 id="mentors">8</h2>
+    <h2>4</h2>
     <p>Expert Mentors</p>
   </div>
 
   <div class="stat-box">
-    <h2 id="domains">6</h2>
+    <h2>6</h2>
     <p>Career Domains</p>
   </div>
+
 </section>
 
 <section class="features">
+
   <div class="card">
     <div class="icon">💻</div>
     <h3>Real Projects</h3>
-    <p>Work on live projects and build practical skills that help you grow professionally.</p>
+    <p>
+      Work on live projects and build practical skills that help you grow professionally.
+    </p>
   </div>
 
   <div class="card">
     <div class="icon">🏆</div>
     <h3>Verified Certificate</h3>
-    <p>Receive a verified internship completion certificate to strengthen your resume.</p>
+    <p>
+      Receive a verified internship completion certificate to strengthen your resume.
+    </p>
   </div>
 
   <div class="card">
     <div class="icon">📈</div>
     <h3>Career Growth</h3>
-    <p>Boost your confidence with industry-level mentorship and hands-on experience.</p>
+    <p>
+      Boost your confidence with industry-level mentorship and hands-on experience.
+    </p>
   </div>
+
 </section>
 
 <section class="steps">
@@ -460,7 +434,7 @@ footer{
     <div class="step-number">2</div>
     <h3>Get Shortlisted</h3>
     <p>
-      Our team reviews applications and shortlists talented candidates for the internship program.
+      Our team reviews applications and shortlists talented candidates.
     </p>
   </div>
 
@@ -468,7 +442,94 @@ footer{
     <div class="step-number">3</div>
     <h3>Start Internship</h3>
     <p>
-      Work on real-world projects, gain mentorship, and earn your internship certificate.
+      Work on real-world projects, gain mentorship, and earn your certificate.
+    </p>
+  </div>
+
+</section>
+
+<!-- WHY CHOOSE US -->
+
+<section class="features">
+
+  <div class="card">
+    <div class="icon">⚡</div>
+    <h3>Industry Level Training</h3>
+    <p>
+      Learn practical skills through industry-oriented projects and workflows.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="icon">🌍</div>
+    <h3>Remote Opportunities</h3>
+    <p>
+      Work from anywhere and collaborate with teams using modern tools.
+    </p>
+  </div>
+
+  <div class="card">
+    <div class="icon">🎯</div>
+    <h3>Career Focused</h3>
+    <p>
+      Improve your resume and interview confidence with guided mentorship.
+    </p>
+  </div>
+
+</section>
+
+<!-- TESTIMONIALS -->
+
+<section class="steps">
+
+  <div class="step-card">
+    <div class="step-number">⭐</div>
+    <h3>Rahul Sharma</h3>
+    <p>
+      “TechEdge helped me improve my frontend skills and confidence.”
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">⭐</div>
+    <h3>Priya Mehta</h3>
+    <p>
+      “The internship experience felt professional and very practical.”
+    </p>
+  </div>
+
+  <div class="step-card">
+    <div class="step-number">⭐</div>
+    <h3>Arjun Verma</h3>
+    <p>
+      “Amazing UI, real tasks, and great learning environment.”
+    </p>
+  </div>
+
+</section>
+
+<!-- FAQ -->
+
+<section class="features">
+
+  <div class="card">
+    <h3>Do I get a certificate?</h3>
+    <p>
+      Yes, every selected intern receives a verified internship certificate.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Is this internship remote?</h3>
+    <p>
+      Yes, TechEdge internships are fully remote and flexible for students.
+    </p>
+  </div>
+
+  <div class="card">
+    <h3>Who can apply?</h3>
+    <p>
+      Students interested in development, marketing, design, or technology can apply.
     </p>
   </div>
 
@@ -494,7 +555,37 @@ function typeEffect(){
       "Launch Your Career With <span>TechEdge</span>";
   }
 }
+
 typeEffect();
+</script>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+async function loadStats(){
+  try{
+    const studentsSnap = await getDocs(collection(db,"applications"));
+    document.getElementById("students").innerText = studentsSnap.size;
+  }
+  catch(error){
+    console.log(error);
+  }
+}
+
+loadStats();
 </script>
 
 </body>

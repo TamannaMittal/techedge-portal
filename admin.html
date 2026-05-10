@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script>
+(function(){
+  emailjs.init("jACWU8xqWmYKLKkvi");
+})();
+</script>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI',sans-serif;
+}
+
+body{
+  min-height:100vh;
+  color:white;
+  padding:20px;
+  background:
+  linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)),
+  url('https://images.unsplash.com/photo-1555066931-4365d14bab8c')
+  no-repeat center center fixed;
+  background-size:cover;
+}
+
+.logout{
+  position:absolute;
+  top:20px;
+  right:20px;
+  padding:9px 22px;
+  background:#ff4d4d;
+  color:white;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+h1{
+  text-align:center;
+  margin:25px 0;
+}
+
+.stats{
+  display:flex;
+  gap:20px;
+  margin-bottom:25px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.card{
+  background:rgba(255,255,255,0.12);
+  padding:22px;
+  border-radius:18px;
+  text-align:center;
+  width:210px;
+  backdrop-filter:blur(12px);
+  border:1px solid rgba(255,255,255,0.18);
+}
+
+.card h2{
+  color:#00ffae;
+  margin-top:8px;
+}
+
+.controls{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:15px;
+  margin-bottom:20px;
+  flex-wrap:wrap;
+}
+
+input{
+  padding:12px 15px;
+  border-radius:25px;
+  border:none;
+  outline:none;
+  width:280px;
+}
+
+.download{
+  padding:12px 22px;
+  background:#00ffae;
+  border:none;
+  border-radius:25px;
+  cursor:pointer;
+  font-weight:bold;
+}
+
+.table-box{
+  background:rgba(255,255,255,0.12);
+  padding:20px;
+  border-radius:22px;
+  backdrop-filter:blur(12px);
+  overflow-x:auto;
+  border:1px solid rgba(255,255,255,0.18);
+}
+
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:850px;
+}
+
+th,td{
+  padding:13px;
+  text-align:center;
+  border-bottom:1px solid rgba(255,255,255,0.2);
+}
+
+th{
+  color:#00ffae;
+}
+
+button{
+  padding:7px 14px;
+  border:none;
+  border-radius:20px;
+  cursor:pointer;
+  margin:3px;
+  font-weight:600;
+}
+
+.accept{
+  background:#00ffae;
+  color:black;
+}
+
+.reject{
+  background:#ff4d4d;
+  color:white;
+}
+
+.delete{
+  background:#555;
+  color:white;
+}
+
+.certificate{
+  background:#4dabff;
+  color:white;
+}
+
+.loader{
+  text-align:center;
+  display:none;
+  margin-top:20px;
+  font-weight:bold;
+}
+
+.empty{
+  text-align:center;
+  padding:25px;
+  color:#ddd;
+}
+
+@media(max-width:700px){
+  .logout{
+    position:static;
+    display:block;
+    margin-left:auto;
+  }
+
+  h1{
+    font-size:26px;
+  }
+
+  input{
+    width:100%;
+  }
+
+  .download{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<button class="logout" onclick="logout()">Logout</button>
+
+<h1>Admin Dashboard</h1>
+
+<div class="stats">
+  <div class="card">
+    <h3>Total Applications</h3>
+    <h2 id="total">0</h2>
+  </div>
+
+  <div class="card">
+    <h3>Accepted</h3>
+    <h2 id="accepted">0</h2>
+  </div>
+
+  <div class="card">
+    <h3>Rejected</h3>
+    <h2 id="rejected">0</h2>
+  </div>
+
+  <div class="card">
+    <h3>Pending</h3>
+    <h2 id="pending">0</h2>
+  </div>
+</div>
+
+<div class="controls">
+  <input type="text" id="search" placeholder="Search by name, email or track..." onkeyup="search()">
+  <button class="download" onclick="download()">Download CSV</button>
+</div>
+
+<div class="table-box">
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Track</th>
+        <th>Message</th>
+        <th>Status</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+
+    <tbody id="data"></tbody>
+  </table>
+
+  <div class="loader" id="loader">Loading applications...</div>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs, updateDoc, deleteDoc, doc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+let allData = [];
+
+async function loadData(){
+  const loader = document.getElementById("loader");
+  loader.style.display = "block";
+
+  try{
+    const querySnapshot = await getDocs(collection(db, "applications"));
+    allData = [];
+
+    querySnapshot.forEach((docData)=>{
+      allData.push({
+        id: docData.id,
+        ...docData.data()
+      });
+    });
+
+    render(allData);
+    updateStats();
+  }
+  catch(error){
+    alert("Error loading applications: " + error.message);
+    console.log(error);
+  }
+
+  loader.style.display = "none";
+}
+
+function updateStats(){
+  document.getElementById("total").innerText = allData.length;
+
+  document.getElementById("accepted").innerText =
+    allData.filter(d => (d.status || "Pending") === "Accepted").length;
+
+  document.getElementById("rejected").innerText =
+    allData.filter(d => (d.status || "Pending") === "Rejected").length;
+
+  document.getElementById("pending").innerText =
+    allData.filter(d => (d.status || "Pending") === "Pending").length;
+}
+
+function render(data){
+  let html = "";
+
+  if(data.length === 0){
+    html = `
+      <tr>
+        <td colspan="6" class="empty">No applications found</td>
+      </tr>
+    `;
+  }
+
+  data.forEach((d)=>{
+    const name = d.name || "N/A";
+    const email = d.email || "N/A";
+    const track = d.track || "N/A";
+    const message = d.message || "N/A";
+    const status = d.status || "Pending";
+
+    html += `
+      <tr>
+        <td>${name}</td>
+        <td>${email}</td>
+        <td>${track}</td>
+        <td>${message}</td>
+        <td>${status}</td>
+        <td>
+          <button class="accept" onclick="accept('${d.id}')">Accept</button>
+          <button class="reject" onclick="reject('${d.id}')">Reject</button>
+          <button class="delete" onclick="deleteApp('${d.id}')">Delete</button>
+          <button class="certificate" onclick="generateCertificate('${name}','${track}')">Certificate</button>
+        </td>
+      </tr>
+    `;
+  });
+
+  document.getElementById("data").innerHTML = html;
+}
+
+window.search = function(){
+  const val = document.getElementById("search").value.toLowerCase();
+
+  const filtered = allData.filter(d =>
+    (d.name || "").toLowerCase().includes(val) ||
+    (d.email || "").toLowerCase().includes(val) ||
+    (d.track || "").toLowerCase().includes(val)
+  );
+
+  render(filtered);
+};
+
+window.accept = async function(id){
+  const student = allData.find(s => s.id === id);
+
+  await updateDoc(doc(db, "applications", id), {
+    status: "Accepted"
+  });
+
+  try{
+    emailjs.send("service_h6t02iu", "template_g5ncz5e", {
+      name: student?.name || "",
+      email: student?.email || "",
+      track: student?.track || ""
+    });
+  }catch(e){
+    console.log("EmailJS error:", e);
+  }
+
+  alert("Student Accepted ✅");
+  loadData();
+};
+
+window.reject = async function(id){
+  const student = allData.find(s => s.id === id);
+
+  await updateDoc(doc(db, "applications", id), {
+    status: "Rejected"
+  });
+
+  try{
+    emailjs.send("service_h6t02iu", "template_vu82xuo", {
+      name: student?.name || "",
+      email: student?.email || "",
+      track: student?.track || ""
+    });
+  }catch(e){
+    console.log("EmailJS error:", e);
+  }
+
+  alert("Student Rejected ❌");
+  loadData();
+};
+
+window.deleteApp = async function(id){
+  if(confirm("Are you sure you want to delete this application?")){
+    await deleteDoc(doc(db, "applications", id));
+    alert("Application Deleted");
+    loadData();
+  }
+};
+
+window.download = function(){
+  let csv = "Name,Email,Track,Message,Status\n";
+
+  allData.forEach(d=>{
+    csv += `"${d.name || "N/A"}","${d.email || "N/A"}","${d.track || "N/A"}","${d.message || "N/A"}","${d.status || "Pending"}"\n`;
+  });
+
+  const blob = new Blob([csv], {type:"text/csv"});
+  const url = window.URL.createObjectURL(blob);
+
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "applications.csv";
+  a.click();
+};
+
+window.generateCertificate = function(name, track){
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF("landscape");
+
+  pdf.setFontSize(30);
+  pdf.text("Certificate of Completion", 148, 45, null, null, "center");
+
+  pdf.setFontSize(18);
+  pdf.text("This is to certify that", 148, 75, null, null, "center");
+
+  pdf.setFontSize(26);
+  pdf.text(name, 148, 100, null, null, "center");
+
+  pdf.setFontSize(18);
+  pdf.text(`has successfully completed ${track} Internship`, 148, 125, null, null, "center");
+
+  pdf.setFontSize(16);
+  pdf.text("TechEdge Internship Program", 148, 150, null, null, "center");
+
+  pdf.save(name + "_certificate.pdf");
+};
+
+window.logout = function(){
+  window.location.href = "admin-login.html";
+};
+
+loadData();
+</script>
+
+</body>
+</html>

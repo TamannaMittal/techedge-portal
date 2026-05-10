@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Dashboard | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+color:white;
+padding:20px;
+
+background:
+linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')
+no-repeat center center fixed;
+
+background-size:cover;
+}
+
+h1{
+text-align:center;
+margin-bottom:30px;
+}
+
+/* Card */
+
+.card{
+max-width:600px;
+margin:auto;
+background:rgba(255,255,255,0.1);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+text-align:center;
+}
+
+.status{
+margin-top:20px;
+padding:15px;
+border-radius:10px;
+font-weight:bold;
+}
+
+.pending{
+background:#ffaa00;
+}
+
+.accepted{
+background:#00ffae;
+color:black;
+}
+
+.rejected{
+background:#00ff95;
+color:black;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<h1>Student Dashboard</h1>
+
+<div class="card">
+
+<h2>Application Status</h2>
+
+<p id="name"></p>
+<p id="track"></p>
+
+<div id="status" class="status">Loading...</div>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const auth = getAuth(app);
+
+onAuthStateChanged(auth, async(user)=>{
+
+if(user){
+
+const querySnapshot = await getDocs(collection(db,"applications"));
+
+querySnapshot.forEach((doc)=>{
+
+const data=doc.data();
+
+if(data.email===user.email){
+
+document.getElementById("name").innerText="Name: "+data.name;
+document.getElementById("track").innerText="Track: "+data.track;
+
+const status=document.getElementById("status");
+
+status.innerText=data.status;
+
+if(data.status==="Accepted"){
+status.classList.add("accepted");
+}
+else if(data.status==="Rejected"){
+status.classList.add("rejected");
+}
+else{
+status.classList.add("pending");
+}
+
+}
+
+});
+
+}else{
+
+window.location.href="student-login.html";
+
+}
+
+});
+
+</script>
+
+</body>
+</html>

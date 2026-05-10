@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Apply | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+color:white;
+
+background:
+linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1521791136064-7986c2920216')
+no-repeat center center fixed;
+
+background-size:cover;
+}
+
+/* Navbar */
+
+nav{
+position:sticky;
+top:0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+}
+
+/* Container */
+
+.container{
+flex:1;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:40px;
+}
+
+/* Form */
+
+.form-box{
+width:400px;
+background:rgba(255,255,255,0.1);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+}
+
+.form-box h2{
+text-align:center;
+margin-bottom:20px;
+}
+
+input,select,textarea{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:10px;
+outline:none;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+border-radius:30px;
+background:#00ffae;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+}
+
+/* Popup */
+
+.popup{
+position:fixed;
+top:20px;
+right:20px;
+background:#00ffae;
+color:black;
+padding:15px 20px;
+border-radius:10px;
+display:none;
+font-weight:bold;
+box-shadow:0 0 10px rgba(0,0,0,0.3);
+}
+
+/* Footer */
+
+footer{
+text-align:center;
+padding:20px;
+background:rgba(0,0,0,0.8);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>TechEdge</h2>
+
+<div>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="internship.html">Internships</a>
+<a href="contact.html">Contact</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<div class="form-box">
+
+<h2>Apply for Internship</h2>
+
+<input type="text" id="name" placeholder="Full Name">
+
+<input type="email" id="email" placeholder="Email">
+
+<select id="track">
+<option value="">Select Track</option>
+<option>Web Development</option>
+<option>Python Development</option>
+<option>Data Science</option>
+<option>UI/UX Design</option>
+<option>Digital Marketing</option>
+<option>Java Development</option>
+</select>
+
+<textarea id="message" placeholder="Why should we select you?" rows="4"></textarea>
+
+<button onclick="apply()" id="btn">Submit Application</button>
+
+</div>
+
+</div>
+
+<!-- Popup -->
+
+<div id="popup" class="popup">
+Application Submitted Successfully 🎉
+</div>
+
+<footer>
+
+© 2026 TechEdge | Internship Portal
+
+</footer>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, addDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.apply = async function(){
+
+const name=document.getElementById("name").value.trim();
+const email=document.getElementById("email").value.trim();
+const track=document.getElementById("track").value;
+const message=document.getElementById("message").value;
+
+if(!name || !email || !track){
+alert("Please fill all fields");
+return;
+}
+
+const btn=document.getElementById("btn");
+btn.innerText="Submitting...";
+btn.disabled=true;
+
+try{
+
+await addDoc(collection(db,"applications"),{
+name,
+email,
+track,
+message,
+status:"Pending",
+date:new Date()
+});
+
+btn.innerText="Submitted ✅";
+
+document.getElementById("popup").style.display="block";
+
+/* reset form */
+
+document.getElementById("name").value="";
+document.getElementById("email").value="";
+document.getElementById("track").value="";
+document.getElementById("message").value="";
+
+setTimeout(()=>{
+btn.innerText="Submit Application";
+btn.disabled=false;
+document.getElementById("popup").style.display="none";
+},2000);
+
+}catch(error){
+
+alert("Error: "+error.message);
+btn.innerText="Submit Application";
+btn.disabled=false;
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

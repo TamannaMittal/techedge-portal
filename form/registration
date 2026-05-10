@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tamanna Mittal</title>
+
+    <style>
+        body {
+            background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+            font-family: Calibri, sans-serif;
+        }
+
+        form {
+            background-color: white;
+            width: 400px;
+            margin: 80px auto;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        table {
+            width: 100%;
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        td {
+            padding: 8px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 8px;
+            border-radius: 5px;
+            border: 1px solid gray;
+        }
+
+        input[type="radio"] {
+            width: auto;
+        }
+
+        input[type="submit"] {
+            background-color: #6a5acd;
+            color: white;
+            border: none;
+            cursor: pointer;
+            padding: 10px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #483d8b;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <form>
+        <h1>Registration Form</h1>
+
+        <table border="0">
+            <tr>
+                <td>First Name</td>
+                <td><input type="text" id="T1"></td>
+            </tr>
+
+            <tr>
+                <td>Last Name</td>
+                <td><input type="text" id="T2"></td>
+            </tr>
+
+            <tr>
+                <td>Gender</td>
+                <td>
+                    <input type="radio" name="gender" value="Male"> Male
+                    <input type="radio" name="gender" value="Female"> Female
+                </td>
+            </tr>
+
+            <tr>
+                <td>Qualification</td>
+                <td>
+                    <select name="Course">
+                        <option>BCA</option>
+                        <option>BTech</option>
+                        <option>BBA</option>
+                        <option>MTech</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td>City</td>
+                <td>
+                    <select>
+                        <option>Malerkotla</option>
+                        <option>Chandigarh</option>
+                        <option>Patiala</option>
+                    </select>
+                </td>
+            </tr>
+
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" value="Submit">
+                </td>
+            </tr>
+
+        </table>
+    </form>
+
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Signup | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+body{display:flex;justify-content:center;align-items:center;height:100vh;background:#0f2027;color:white;font-family:Arial;}
+.signup-box{background:rgba(255,255,255,0.1);padding:30px;border-radius:10px;width:300px;text-align:center;}
+input{width:100%;padding:10px;margin:10px 0;border:none;border-radius:5px;}
+button{padding:10px;width:100%;border:none;border-radius:5px;background:#00ffae;color:black;font-weight:bold;cursor:pointer;}
+</style>
+</head>
+<body>
+
+<div class="signup-box">
+<h2>Student Signup</h2>
+<input type="text" id="name" placeholder="Full Name" required>
+<input type="email" id="email" placeholder="Email" required>
+<input type="password" id="password" placeholder="Password" required>
+<button onclick="signup()">Sign Up</button>
+<p style="margin-top:10px;">Already have an account? <a href="student-login.html" style="color:#00ffae;">Login</a></p>
+</div>
+
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+  projectId: "internship-portal-pro-7cbb1",
+  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+  messagingSenderId: "149057403895",
+  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+const db = getFirestore(app);
+
+window.signup = async function() {
+  const name = document.getElementById("name").value.trim();
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
+
+  if(!name || !email || !password){
+    alert("All fields are required!");
+    return;
+  }
+
+  try {
+    const userCred = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(userCred.user, { displayName: name });
+
+    // Save additional info in Firestore
+    await setDoc(doc(db, "students", userCred.user.uid), {
+      name,
+      email,
+      createdAt: new Date()
+    });
+
+    alert("Signup successful! Please login.");
+    window.location.href = "student-login.html";
+  } catch(err) {
+    alert("Error: " + err.message);
+  }
+};
+</script>
+
+</body>
+</html>

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Internships | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Explore TechEdge internships and apply for real-world projects.">
+
+<link rel="icon" href="logo.png">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+color:white;
+
+background:
+linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')
+no-repeat center center fixed;
+
+background-size:cover;
+}
+
+/* Navbar */
+
+nav{
+position:sticky;
+top:0;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:20px 60px;
+background:rgba(0,0,0,0.7);
+backdrop-filter:blur(10px);
+z-index:1000;
+}
+
+nav a{
+color:white;
+text-decoration:none;
+margin-left:20px;
+transition:0.3s;
+}
+
+nav a:hover{
+color:#00ffae;
+}
+
+/* Container */
+
+.container{
+padding:60px 10%;
+}
+
+.container h1{
+text-align:center;
+margin-bottom:40px;
+font-size:40px;
+}
+
+/* Grid */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+gap:30px;
+}
+
+/* Cards */
+
+.card{
+background:rgba(255,255,255,0.1);
+padding:30px;
+border-radius:20px;
+backdrop-filter:blur(10px);
+transition:0.3s;
+}
+
+.card:hover{
+transform:translateY(-10px);
+background:rgba(255,255,255,0.2);
+box-shadow:0 0 20px rgba(0,255,174,0.4);
+}
+
+.card h2{
+margin-bottom:15px;
+color:#00ffae;
+}
+
+.card p{
+opacity:0.9;
+margin-bottom:20px;
+}
+
+/* Button */
+
+.btn{
+display:inline-block;
+padding:10px 25px;
+background:#00ffae;
+color:black;
+border-radius:30px;
+text-decoration:none;
+font-weight:bold;
+transition:0.3s;
+}
+
+.btn:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #00ffae;
+}
+
+/* Footer */
+
+footer{
+text-align:center;
+padding:20px;
+margin-top:40px;
+background:rgba(0,0,0,0.8);
+}
+
+</style>
+
+</head>
+
+<body>
+
+<nav>
+
+<h2>TechEdge</h2>
+
+<div>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="internship.html">Internships</a>
+<a href="apply.html">Apply</a>
+<a href="contact.html">Contact</a>
+</div>
+
+</nav>
+
+<div class="container">
+
+<h1>Available Internships</h1>
+
+<div class="grid">
+
+<div class="card">
+<h2>Web Development</h2>
+<p>Work on real-world websites and improve your frontend & backend skills.</p>
+<a href="apply.html" class="btn">Apply Now</a>
+</div>
+
+<div class="card">
+<h2>Python Development</h2>
+<p>Build automation tools, data analysis projects and learn Python practically.</p>
+<a href="apply.html" class="btn">Apply Now</a>
+</div>
+
+<div class="card">
+<h2>Data Science</h2>
+<p>Learn data analysis, visualization and machine learning fundamentals.</p>
+<a href="apply.html" class="btn">Apply Now</a>
+</div>
+
+<div class="card">
+<h2>UI/UX Design</h2>
+<p>Design modern interfaces and work on real user experience projects.</p>
+<a href="apply.html" class="btn">Apply Now</a>
+</div>
+
+<div class="card">
+<h2>Digital Marketing</h2>
+<p>Learn SEO, social media marketing and brand promotion strategies.</p>
+<a href="apply.html" class="btn">Apply Now</a>
+</div>
+
+<div class="card">
+<h2>Java Development</h2>
+<p>Build Java applications and strengthen backend development skills.</p>
+<a href="apply.html" class="btn">Apply Now</a>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+
+© 2026 TechEdge | Internship Portal
+
+</footer>
+
+</body>
+</html>

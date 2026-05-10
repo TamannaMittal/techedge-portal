@@ -9,554 +9,587 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 *{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Poppins',sans-serif;
-  scroll-behavior:smooth;
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+scroll-behavior:smooth;
 }
 
 body{
-  min-height:100vh;
-  color:white;
-  background:
-    radial-gradient(circle at 15% 20%, rgba(168,85,247,0.35), transparent 28%),
-    radial-gradient(circle at 85% 10%, rgba(34,211,238,0.25), transparent 30%),
-    linear-gradient(135deg,#07070f,#120a24,#08111f);
-  overflow-x:hidden;
+min-height:100vh;
+color:white;
+background:
+radial-gradient(circle at 15% 20%, rgba(168,85,247,0.35), transparent 28%),
+radial-gradient(circle at 85% 10%, rgba(34,211,238,0.25), transparent 30%),
+linear-gradient(135deg,#07070f,#120a24,#08111f);
+overflow-x:hidden;
+}
+
+#loader{
+position:fixed;
+inset:0;
+background:linear-gradient(135deg,#050510,#120a24,#08111f);
+display:flex;
+justify-content:center;
+align-items:center;
+z-index:99999;
+transition:1s;
+}
+
+.loader-content{
+text-align:center;
+}
+
+.loader-logo{
+font-size:58px;
+font-weight:800;
+margin-bottom:30px;
+color:white;
+}
+
+.loader-logo span{
+background:linear-gradient(135deg,#a855f7,#22d3ee,#00ffaa);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+.loader-bar{
+width:280px;
+height:10px;
+background:rgba(255,255,255,0.1);
+border-radius:999px;
+overflow:hidden;
+margin:auto auto 18px;
+}
+
+.loader-fill{
+width:0%;
+height:100%;
+background:linear-gradient(90deg,#7c3aed,#22d3ee,#00ffaa);
+animation:loadbar 2.5s linear forwards;
+}
+
+.loader-content p{
+color:rgba(255,255,255,0.7);
+font-size:15px;
+letter-spacing:1px;
+}
+
+@keyframes loadbar{
+0%{width:0%;}
+100%{width:100%;}
 }
 
 .page{
-  width:92%;
-  margin:28px auto;
-  min-height:100vh;
-  border-radius:34px;
-  background:
-    linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-    url('https://www.transportation.gov/sites/dot.gov/files/images/Student%20Interns%20adobe.jpg') no-repeat center center;
-  background-size:cover;
-  border:1px solid rgba(255,255,255,0.16);
-  box-shadow:0 30px 90px rgba(0,0,0,0.45);
-  overflow:hidden;
-  position:relative;
+width:92%;
+margin:28px auto;
+min-height:100vh;
+border-radius:34px;
+background:
+linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
+url('https://www.transportation.gov/sites/dot.gov/files/images/Student%20Interns%20adobe.jpg')
+no-repeat center center;
+background-size:cover;
+border:1px solid rgba(255,255,255,0.16);
+box-shadow:0 30px 90px rgba(0,0,0,0.45);
+overflow:hidden;
+position:relative;
 }
 
 .page::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  background-image:
-    linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-  background-size:48px 48px;
-  pointer-events:none;
+content:"";
+position:absolute;
+inset:0;
+background-image:
+linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
+linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
+background-size:48px 48px;
+pointer-events:none;
 }
 
-/* NAVBAR */
-
 nav{
-  position:relative;
-  z-index:5;
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  padding:18px 45px;
-  background:rgba(255,255,255,0.07);
-  backdrop-filter:blur(18px);
-  border-bottom:1px solid rgba(255,255,255,0.12);
+position:relative;
+z-index:5;
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 45px;
+background:rgba(255,255,255,0.07);
+backdrop-filter:blur(18px);
+border-bottom:1px solid rgba(255,255,255,0.12);
 }
 
 .logo{
-  font-size:26px;
-  font-weight:800;
+font-size:26px;
+font-weight:800;
 }
 
 .logo span{
-  background:linear-gradient(135deg,#a855f7,#22d3ee,#00ffaa);
-  -webkit-background-clip:text;
-  color:transparent;
+background:linear-gradient(135deg,#a855f7,#22d3ee,#00ffaa);
+-webkit-background-clip:text;
+color:transparent;
 }
 
 nav a{
-  color:white;
-  text-decoration:none;
-  margin-left:28px;
-  font-size:15px;
-  font-weight:600;
-  transition:0.3s;
+color:white;
+text-decoration:none;
+margin-left:28px;
+font-size:15px;
+font-weight:600;
+transition:0.3s;
 }
 
 nav a:hover{
-  color:#22d3ee;
+color:#22d3ee;
 }
 
 .nav-btn{
-  padding:10px 22px;
-  border-radius:999px;
-  background:linear-gradient(135deg,#7c3aed,#d946ef);
+padding:10px 22px;
+border-radius:999px;
+background:linear-gradient(135deg,#7c3aed,#d946ef);
 }
 
-/* HERO */
-
 .hero{
-  position:relative;
-  z-index:2;
-  min-height:420px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  align-items:center;
-  text-align:center;
-  padding:60px 20px;
-  background:rgba(255,255,255,0.05);
-  backdrop-filter:blur(14px);
+position:relative;
+z-index:2;
+min-height:420px;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:60px 20px;
+background:rgba(255,255,255,0.05);
+backdrop-filter:blur(14px);
 }
 
 .badge{
-  padding:9px 18px;
-  border-radius:999px;
-  background:rgba(255,255,255,0.12);
-  color:#c4b5fd;
-  margin-bottom:22px;
-  font-size:14px;
+padding:9px 18px;
+border-radius:999px;
+background:rgba(255,255,255,0.12);
+color:#c4b5fd;
+margin-bottom:22px;
+font-size:14px;
 }
 
 .hero h1{
-  font-size:44px;
-  font-weight:800;
-  margin-bottom:18px;
-  background:linear-gradient(90deg,#a855f7,#60a5fa,#22d3ee);
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
+font-size:44px;
+font-weight:800;
+margin-bottom:18px;
+background:linear-gradient(90deg,#a855f7,#60a5fa,#22d3ee);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
 .hero h1 span{
-  background:linear-gradient(135deg,#ffffff,#c084fc,#22d3ee);
-  -webkit-background-clip:text;
-  color:transparent;
+background:linear-gradient(135deg,#ffffff,#c084fc,#22d3ee);
+-webkit-background-clip:text;
+color:transparent;
 }
 
 .hero p{
-  max-width:720px;
-  color:rgba(255,255,255,0.82);
-  font-size:18px;
-  line-height:1.7;
-  margin-bottom:32px;
+max-width:720px;
+color:rgba(255,255,255,0.82);
+font-size:18px;
+line-height:1.7;
+margin-bottom:32px;
 }
 
 .buttons{
-  display:flex;
-  gap:16px;
-  flex-wrap:wrap;
-  justify-content:center;
+display:flex;
+gap:16px;
+flex-wrap:wrap;
+justify-content:center;
 }
 
 .btn{
-  padding:14px 34px;
-  border:none;
-  border-radius:999px;
-  background:linear-gradient(135deg,#7c3aed,#d946ef,#22d3ee);
-  color:white;
-  font-weight:700;
-  text-decoration:none;
-  transition:0.4s;
+padding:14px 34px;
+border:none;
+border-radius:999px;
+background:linear-gradient(135deg,#7c3aed,#d946ef,#22d3ee);
+color:white;
+font-weight:700;
+text-decoration:none;
+transition:0.4s;
 }
 
 .btn:hover{
-  transform:translateY(-5px) scale(1.05);
+transform:translateY(-5px) scale(1.05);
 }
 
 .btn-outline{
-  background:rgba(255,255,255,0.12);
-  border:1px solid rgba(255,255,255,0.2);
+background:rgba(255,255,255,0.12);
+border:1px solid rgba(255,255,255,0.2);
 }
 
-/* STATS */
-
 .stats{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:22px;
-  width:82%;
-  margin:-45px auto 35px;
-  position:relative;
-  z-index:2;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:22px;
+width:82%;
+margin:-45px auto 35px;
+position:relative;
+z-index:2;
 }
 
 .stat-box{
-  padding:28px;
-  border-radius:24px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.18);
-  backdrop-filter:blur(18px);
-  text-align:center;
-  transition:0.4s;
+padding:28px;
+border-radius:24px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.18);
+backdrop-filter:blur(18px);
+text-align:center;
+transition:0.4s;
 }
 
 .stat-box:hover{
-  transform:translateY(-8px);
+transform:translateY(-8px) scale(1.03);
 }
 
 .stat-box h2{
-  font-size:42px;
-  color:#22d3ee;
+font-size:42px;
+color:#22d3ee;
 }
 
 .stat-box p{
-  color:rgba(255,255,255,0.82);
+color:rgba(255,255,255,0.82);
 }
 
-/* FEATURES */
-
 .features{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-  gap:25px;
-  width:82%;
-  margin:20px auto 70px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+gap:25px;
+width:82%;
+margin:20px auto 70px;
 }
 
 .card{
-  padding:32px;
-  border-radius:28px;
-  background:rgba(255,255,255,0.10);
-  border:1px solid rgba(255,255,255,0.18);
-  backdrop-filter:blur(18px);
-  transition:0.35s;
+padding:32px;
+border-radius:28px;
+background:rgba(255,255,255,0.10);
+border:1px solid rgba(255,255,255,0.18);
+backdrop-filter:blur(18px);
+transition:0.35s;
 }
 
 .card:hover{
-  transform:translateY(-12px) scale(1.03);
+transform:translateY(-12px) scale(1.03);
 }
 
 .card .icon{
-  font-size:34px;
-  margin-bottom:18px;
+font-size:34px;
+margin-bottom:18px;
 }
 
 .card h3{
-  font-size:22px;
-  margin-bottom:10px;
+font-size:22px;
+margin-bottom:10px;
 }
 
 .card p{
-  color:rgba(255,255,255,0.78);
-  line-height:1.6;
+color:rgba(255,255,255,0.78);
+line-height:1.6;
 }
 
-/* STEPS */
-
 .steps{
-  width:82%;
-  margin:0 auto 70px;
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
-  gap:25px;
+width:82%;
+margin:0 auto 70px;
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+gap:25px;
 }
 
 .step-card{
-  padding:30px;
-  border-radius:28px;
-  background:rgba(255,255,255,0.08);
-  border:1px solid rgba(255,255,255,0.18);
-  backdrop-filter:blur(18px);
-  text-align:center;
-  transition:0.4s;
+padding:30px;
+border-radius:28px;
+background:rgba(255,255,255,0.08);
+border:1px solid rgba(255,255,255,0.18);
+backdrop-filter:blur(18px);
+text-align:center;
+transition:0.4s;
 }
 
 .step-card:hover{
-  transform:translateY(-10px) scale(1.03);
+transform:translateY(-10px) scale(1.03);
 }
 
 .step-number{
-  width:70px;
-  height:70px;
-  border-radius:50%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  margin:0 auto 18px;
-  font-size:28px;
-  font-weight:800;
-  background:linear-gradient(135deg,#7c3aed,#22d3ee);
+width:70px;
+height:70px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+margin:0 auto 18px;
+font-size:28px;
+font-weight:800;
+background:linear-gradient(135deg,#7c3aed,#22d3ee);
 }
 
 .step-card h3{
-  margin-bottom:12px;
-  font-size:24px;
+margin-bottom:12px;
+font-size:24px;
 }
 
 .step-card p{
-  color:rgba(255,255,255,0.78);
-  line-height:1.6;
+color:rgba(255,255,255,0.78);
+line-height:1.6;
 }
 
-/* FOOTER */
-
 footer{
-  text-align:center;
-  padding:30px;
-  background:rgba(255,255,255,0.06);
-  color:rgba(255,255,255,0.75);
-  border-top:1px solid rgba(255,255,255,0.12);
+text-align:center;
+padding:30px;
+background:rgba(255,255,255,0.06);
+color:rgba(255,255,255,0.75);
+border-top:1px solid rgba(255,255,255,0.12);
 }
 
 @media(max-width:900px){
+nav{
+padding:20px;
+flex-direction:column;
+gap:18px;
+}
 
-  nav{
-    padding:20px;
-    flex-direction:column;
-    gap:18px;
-  }
+nav a{
+margin:8px;
+display:inline-block;
+}
 
-  nav a{
-    margin:8px;
-    display:inline-block;
-  }
+.hero h1{
+font-size:36px;
+}
 
-  .hero h1{
-    font-size:36px;
-  }
+.hero p{
+font-size:16px;
+}
 
-  .hero p{
-    font-size:16px;
-  }
-
-  .stats,
-  .features,
-  .steps{
-    width:90%;
-  }
+.stats,
+.features,
+.steps{
+width:90%;
+}
 }
 </style>
 </head>
 
 <body>
 
+<div id="loader">
+<div class="loader-content">
+<h1 class="loader-logo">Tech<span>Edge</span></h1>
+<div class="loader-bar">
+<div class="loader-fill"></div>
+</div>
+<p>Launching Future Careers...</p>
+</div>
+</div>
+
 <div class="page">
 
 <nav>
-  <div class="logo">Tech<span>Edge</span></div>
+<div class="logo">Tech<span>Edge</span></div>
 
-  <div>
-    <a href="index.html">Home</a>
-    <a href="about.html">About</a>
-    <a href="internship.html">Internship</a>
-    <a href="apply.html">Apply</a>
-    <a href="contact.html">Contact</a>
-    <a href="admin-login.html" class="nav-btn">Admin</a>
-  </div>
+<div>
+<a href="index.html">Home</a>
+<a href="about.html">About</a>
+<a href="internship.html">Internship</a>
+<a href="apply.html">Apply</a>
+<a href="contact.html">Contact</a>
+<a href="admin-login.html" class="nav-btn">Admin</a>
+</div>
 </nav>
 
 <section class="hero">
+<div class="badge">🚀 Internship Portal for Future Professionals</div>
 
-  <div class="badge">
-    🚀 Internship Portal for Future Professionals
-  </div>
+<h1 id="typing"></h1>
 
-  <h1 id="typing"></h1>
+<p>
+Join our Internship Program, work on real-world projects with industry experts,
+get certified, gain experience, and build your future with confidence.
+</p>
 
-  <p>
-    Join our Internship Program, work on real-world projects with industry experts,
-    get certified, gain experience, and build your future with confidence.
-  </p>
-
-  <div class="buttons">
-    <a href="apply.html" class="btn">Apply Now</a>
-    <a href="internship.html" class="btn btn-outline">Explore Internships</a>
-  </div>
-
+<div class="buttons">
+<a href="apply.html" class="btn">Apply Now</a>
+<a href="internship.html" class="btn btn-outline">Explore Internships</a>
+</div>
 </section>
 
 <section class="stats">
+<div class="stat-box">
+<h2 class="counter" id="students" data-target="13">0</h2>
+<p>Students Applied</p>
+</div>
 
-  <div class="stat-box">
-    <h2 id="students">0</h2>
-    <p>Students Applied</p>
-  </div>
+<div class="stat-box">
+<h2 class="counter" data-target="6">0</h2>
+<p>Live Projects</p>
+</div>
 
-  <div class="stat-box">
-    <h2>6</h2>
-    <p>Live Projects</p>
-  </div>
+<div class="stat-box">
+<h2 class="counter" data-target="4">0</h2>
+<p>Expert Mentors</p>
+</div>
 
-  <div class="stat-box">
-    <h2>4</h2>
-    <p>Expert Mentors</p>
-  </div>
-
-  <div class="stat-box">
-    <h2>6</h2>
-    <p>Career Domains</p>
-  </div>
-
+<div class="stat-box">
+<h2 class="counter" data-target="6">0</h2>
+<p>Career Domains</p>
+</div>
 </section>
 
 <section class="features">
+<div class="card">
+<div class="icon">💻</div>
+<h3>Real Projects</h3>
+<p>Work on live projects and build practical skills that help you grow professionally.</p>
+</div>
 
-  <div class="card">
-    <div class="icon">💻</div>
-    <h3>Real Projects</h3>
-    <p>
-      Work on live projects and build practical skills that help you grow professionally.
-    </p>
-  </div>
+<div class="card">
+<div class="icon">🏆</div>
+<h3>Verified Certificate</h3>
+<p>Receive a verified internship completion certificate to strengthen your resume.</p>
+</div>
 
-  <div class="card">
-    <div class="icon">🏆</div>
-    <h3>Verified Certificate</h3>
-    <p>
-      Receive a verified internship completion certificate to strengthen your resume.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="icon">📈</div>
-    <h3>Career Growth</h3>
-    <p>
-      Boost your confidence with industry-level mentorship and hands-on experience.
-    </p>
-  </div>
-
+<div class="card">
+<div class="icon">📈</div>
+<h3>Career Growth</h3>
+<p>Boost your confidence with industry-level mentorship and hands-on experience.</p>
+</div>
 </section>
 
 <section class="steps">
+<div class="step-card">
+<div class="step-number">1</div>
+<h3>Apply Online</h3>
+<p>Fill out the internship application form and submit your resume easily through TechEdge.</p>
+</div>
 
-  <div class="step-card">
-    <div class="step-number">1</div>
-    <h3>Apply Online</h3>
-    <p>
-      Fill out the internship application form and submit your resume easily through TechEdge.
-    </p>
-  </div>
+<div class="step-card">
+<div class="step-number">2</div>
+<h3>Get Shortlisted</h3>
+<p>Our team reviews applications and shortlists talented candidates.</p>
+</div>
 
-  <div class="step-card">
-    <div class="step-number">2</div>
-    <h3>Get Shortlisted</h3>
-    <p>
-      Our team reviews applications and shortlists talented candidates.
-    </p>
-  </div>
-
-  <div class="step-card">
-    <div class="step-number">3</div>
-    <h3>Start Internship</h3>
-    <p>
-      Work on real-world projects, gain mentorship, and earn your certificate.
-    </p>
-  </div>
-
+<div class="step-card">
+<div class="step-number">3</div>
+<h3>Start Internship</h3>
+<p>Work on real-world projects, gain mentorship, and earn your certificate.</p>
+</div>
 </section>
-
-<!-- WHY CHOOSE US -->
 
 <section class="features">
+<div class="card">
+<div class="icon">⚡</div>
+<h3>Industry Level Training</h3>
+<p>Learn practical skills through industry-oriented projects and workflows.</p>
+</div>
 
-  <div class="card">
-    <div class="icon">⚡</div>
-    <h3>Industry Level Training</h3>
-    <p>
-      Learn practical skills through industry-oriented projects and workflows.
-    </p>
-  </div>
+<div class="card">
+<div class="icon">🌍</div>
+<h3>Remote Opportunities</h3>
+<p>Work from anywhere and collaborate with teams using modern tools.</p>
+</div>
 
-  <div class="card">
-    <div class="icon">🌍</div>
-    <h3>Remote Opportunities</h3>
-    <p>
-      Work from anywhere and collaborate with teams using modern tools.
-    </p>
-  </div>
-
-  <div class="card">
-    <div class="icon">🎯</div>
-    <h3>Career Focused</h3>
-    <p>
-      Improve your resume and interview confidence with guided mentorship.
-    </p>
-  </div>
-
+<div class="card">
+<div class="icon">🎯</div>
+<h3>Career Focused</h3>
+<p>Improve your resume and interview confidence with guided mentorship.</p>
+</div>
 </section>
-
-<!-- TESTIMONIALS -->
 
 <section class="steps">
+<div class="step-card">
+<div class="step-number">⭐</div>
+<h3>Rahul Sharma</h3>
+<p>“TechEdge helped me improve my frontend skills and confidence.”</p>
+</div>
 
-  <div class="step-card">
-    <div class="step-number">⭐</div>
-    <h3>Rahul Sharma</h3>
-    <p>
-      “TechEdge helped me improve my frontend skills and confidence.”
-    </p>
-  </div>
+<div class="step-card">
+<div class="step-number">⭐</div>
+<h3>Priya Mehta</h3>
+<p>“The internship experience felt professional and practical.”</p>
+</div>
 
-  <div class="step-card">
-    <div class="step-number">⭐</div>
-    <h3>Priya Mehta</h3>
-    <p>
-      “The internship experience felt professional and very practical.”
-    </p>
-  </div>
-
-  <div class="step-card">
-    <div class="step-number">⭐</div>
-    <h3>Arjun Verma</h3>
-    <p>
-      “Amazing UI, real tasks, and great learning environment.”
-    </p>
-  </div>
-
+<div class="step-card">
+<div class="step-number">⭐</div>
+<h3>Arjun Verma</h3>
+<p>“Amazing UI, real tasks, and great learning environment.”</p>
+</div>
 </section>
 
-<!-- FAQ -->
-
 <section class="features">
+<div class="card">
+<h3>Do I get a certificate?</h3>
+<p>Yes, every selected intern receives a verified internship certificate.</p>
+</div>
 
-  <div class="card">
-    <h3>Do I get a certificate?</h3>
-    <p>
-      Yes, every selected intern receives a verified internship certificate.
-    </p>
-  </div>
+<div class="card">
+<h3>Is this internship remote?</h3>
+<p>Yes, TechEdge internships are fully remote and flexible for students.</p>
+</div>
 
-  <div class="card">
-    <h3>Is this internship remote?</h3>
-    <p>
-      Yes, TechEdge internships are fully remote and flexible for students.
-    </p>
-  </div>
-
-  <div class="card">
-    <h3>Who can apply?</h3>
-    <p>
-      Students interested in development, marketing, design, or technology can apply.
-    </p>
-  </div>
-
+<div class="card">
+<h3>Who can apply?</h3>
+<p>Students interested in development, marketing, design, or technology can apply.</p>
+</div>
 </section>
 
 <footer>
-  © 2026 Tamanna Mittal | TechEdge Internship Portal
+© 2026 Tamanna Mittal | TechEdge Internship Portal
 </footer>
 
 </div>
 
 <script>
+window.addEventListener("load",()=>{
+setTimeout(()=>{
+document.getElementById("loader").style.opacity="0";
+document.getElementById("loader").style.visibility="hidden";
+},2600);
+});
+
 const text = "Launch Your Career With TechEdge";
 let i = 0;
 
 function typeEffect(){
-  if(i < text.length){
-    document.getElementById("typing").innerHTML += text.charAt(i);
-    i++;
-    setTimeout(typeEffect, 65);
-  }else{
-    document.getElementById("typing").innerHTML =
-      "Launch Your Career With <span>TechEdge</span>";
-  }
+if(i < text.length){
+document.getElementById("typing").innerHTML += text.charAt(i);
+i++;
+setTimeout(typeEffect,65);
+}else{
+document.getElementById("typing").innerHTML =
+"Launch Your Career With <span>TechEdge</span>";
+}
 }
 
 typeEffect();
+
+function animateCounters(){
+const counters = document.querySelectorAll(".counter");
+
+counters.forEach(counter => {
+counter.innerText = "0";
+
+const updateCounter = () => {
+const target = +counter.getAttribute("data-target");
+const current = +counter.innerText;
+const increment = target / 80;
+
+if(current < target){
+counter.innerText = `${Math.ceil(current + increment)}`;
+setTimeout(updateCounter,20);
+}else{
+counter.innerText = target;
+}
+};
+
+updateCounter();
+});
+}
+
+animateCounters();
 </script>
 
 <script type="module">
@@ -564,25 +597,30 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/fireba
 import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
-  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
-  projectId: "internship-portal-pro-7cbb1",
-  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
-  messagingSenderId: "149057403895",
-  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+projectId: "internship-portal-pro-7cbb1",
+storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+messagingSenderId: "149057403895",
+appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
 };
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 async function loadStats(){
-  try{
-    const studentsSnap = await getDocs(collection(db,"applications"));
-    document.getElementById("students").innerText = studentsSnap.size;
-  }
-  catch(error){
-    console.log(error);
-  }
+try{
+const studentsSnap = await getDocs(collection(db,"applications"));
+const total = studentsSnap.size;
+
+const studentCounter = document.getElementById("students");
+studentCounter.setAttribute("data-target", total);
+studentCounter.innerText = "0";
+
+animateCounters();
+}catch(error){
+console.log(error);
+}
 }
 
 loadStats();

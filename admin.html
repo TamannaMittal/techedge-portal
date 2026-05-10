@@ -1,4 +1,4 @@
-<<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -58,7 +58,7 @@ input{padding:12px 15px;border-radius:25px;border:none;outline:none;width:280px;
 .download{padding:12px 22px;background:#00ffae;border:none;border-radius:25px;cursor:pointer;font-weight:bold;}
 
 .table-box{background:rgba(255,255,255,0.12);padding:20px;border-radius:22px;backdrop-filter:blur(12px);overflow-x:auto;border:1px solid rgba(255,255,255,0.18);}
-table{width:100%;border-collapse:collapse;min-width:980px;}
+table{width:100%;border-collapse:collapse;min-width:1050px;}
 th,td{padding:13px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.2);}
 th{color:#00ffae;}
 
@@ -66,6 +66,7 @@ th{color:#00ffae;}
 .resume-link:hover{text-decoration:underline;}
 
 button{padding:7px 14px;border:none;border-radius:20px;cursor:pointer;margin:3px;font-weight:600;}
+.shortlist{background:#ffd43b;color:black;}
 .accept{background:#00ffae;color:black;}
 .reject{background:#ff4d4d;color:white;}
 .delete{background:#555;color:white;}
@@ -96,6 +97,7 @@ button{padding:7px 14px;border:none;border-radius:20px;cursor:pointer;margin:3px
   <div class="card"><h3>Accepted</h3><h2 id="accepted">0</h2></div>
   <div class="card"><h3>Rejected</h3><h2 id="rejected">0</h2></div>
   <div class="card"><h3>Pending</h3><h2 id="pending">0</h2></div>
+  <div class="card"><h3>Shortlisted</h3><h2 id="shortlisted">0</h2></div>
 </div>
 
 <div class="charts">
@@ -198,12 +200,14 @@ function updateStats(){
   document.getElementById("accepted").innerText = allData.filter(d => (d.status || "Pending") === "Accepted").length;
   document.getElementById("rejected").innerText = allData.filter(d => (d.status || "Pending") === "Rejected").length;
   document.getElementById("pending").innerText = allData.filter(d => (d.status || "Pending") === "Pending").length;
+  document.getElementById("shortlisted").innerText = allData.filter(d => (d.status || "Pending") === "Shortlisted").length;
 }
 
 function updateCharts(){
   const accepted = allData.filter(d => (d.status || "Pending") === "Accepted").length;
   const rejected = allData.filter(d => (d.status || "Pending") === "Rejected").length;
   const pending = allData.filter(d => (d.status || "Pending") === "Pending").length;
+  const shortlisted = allData.filter(d => (d.status || "Pending") === "Shortlisted").length;
 
   const trackCounts = {};
   allData.forEach(d => {
@@ -218,10 +222,10 @@ function updateCharts(){
   statusChart = new Chart(statusCtx, {
     type: "doughnut",
     data: {
-      labels: ["Accepted", "Rejected", "Pending"],
+      labels: ["Accepted", "Rejected", "Pending", "Shortlisted"],
       datasets: [{
-        data: [accepted, rejected, pending],
-        backgroundColor: ["#00ffae", "#ff4d4d", "#ffaa00"],
+        data: [accepted, rejected, pending, shortlisted],
+        backgroundColor: ["#00ffae", "#ff4d4d", "#ffaa00", "#ffd43b"],
         borderColor: "#ffffff",
         borderWidth: 2
       }]
@@ -298,6 +302,7 @@ function render(data){
         <td>${resumeButton}</td>
         <td>${status}</td>
         <td>
+          <button class="shortlist" onclick="shortlist('${d.id}')">Shortlist</button>
           <button class="accept" onclick="accept('${d.id}')">Accept</button>
           <button class="reject" onclick="reject('${d.id}')">Reject</button>
           <button class="delete" onclick="deleteApp('${d.id}')">Delete</button>
@@ -320,6 +325,15 @@ window.search = function(){
   );
 
   render(filtered);
+};
+
+window.shortlist = async function(id){
+  await updateDoc(doc(db, "applications", id), {
+    status: "Shortlisted"
+  });
+
+  alert("Student Shortlisted ⭐");
+  loadData();
 };
 
 window.accept = async function(id){

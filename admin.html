@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -16,238 +16,86 @@
 </script>
 
 <style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family:'Segoe UI',sans-serif;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Segoe UI',sans-serif;}
 
 body{
   min-height:100vh;
   color:white;
   padding:20px;
-  background:
-  linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)),
-  url('https://images.unsplash.com/photo-1555066931-4365d14bab8c')
-  no-repeat center center fixed;
+  background:linear-gradient(rgba(0,0,0,0.72), rgba(0,0,0,0.72)),
+  url('https://images.unsplash.com/photo-1555066931-4365d14bab8c') no-repeat center center fixed;
   background-size:cover;
 }
 
-.logout{
-  position:absolute;
+.notification{
+  position:fixed;
   top:20px;
-  right:20px;
-  padding:9px 22px;
-  background:#ff4d4d;
-  color:white;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-h1{
-  text-align:center;
-  margin:25px 0;
-}
-
-.stats{
-  display:flex;
-  gap:20px;
-  margin-bottom:25px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.card{
-  background:rgba(255,255,255,0.12);
-  padding:22px;
-  border-radius:18px;
-  text-align:center;
-  width:210px;
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.18);
-}
-
-.card h2{
-  color:#00ffae;
-  margin-top:8px;
-}
-
-.charts{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-  gap:20px;
-  margin:25px 0;
-}
-
-.chart-box{
-  background:rgba(255,255,255,0.12);
-  padding:20px;
-  border-radius:22px;
-  backdrop-filter:blur(12px);
-  border:1px solid rgba(255,255,255,0.18);
-  height:360px;
-}
-
-.chart-box h3{
-  text-align:center;
-  margin-bottom:15px;
-  color:#00ffae;
-}
-
-.controls{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  gap:15px;
-  margin-bottom:20px;
-  flex-wrap:wrap;
-}
-
-input{
-  padding:12px 15px;
-  border-radius:25px;
-  border:none;
-  outline:none;
-  width:280px;
-}
-
-.download{
-  padding:12px 22px;
-  background:#00ffae;
-  border:none;
-  border-radius:25px;
-  cursor:pointer;
-  font-weight:bold;
-}
-
-.table-box{
-  background:rgba(255,255,255,0.12);
-  padding:20px;
-  border-radius:22px;
-  backdrop-filter:blur(12px);
-  overflow-x:auto;
-  border:1px solid rgba(255,255,255,0.18);
-}
-
-table{
-  width:100%;
-  border-collapse:collapse;
-  min-width:980px;
-}
-
-th,td{
-  padding:13px;
-  text-align:center;
-  border-bottom:1px solid rgba(255,255,255,0.2);
-}
-
-th{
-  color:#00ffae;
-}
-
-.resume-link{
-  color:#00ffae;
-  text-decoration:none;
-  font-weight:bold;
-}
-
-.resume-link:hover{
-  text-decoration:underline;
-}
-
-button{
-  padding:7px 14px;
-  border:none;
-  border-radius:20px;
-  cursor:pointer;
-  margin:3px;
-  font-weight:600;
-}
-
-.accept{
+  left:50%;
+  transform:translateX(-50%);
   background:#00ffae;
   color:black;
-}
-
-.reject{
-  background:#ff4d4d;
-  color:white;
-}
-
-.delete{
-  background:#555;
-  color:white;
-}
-
-.certificate{
-  background:#4dabff;
-  color:white;
-}
-
-.loader{
-  text-align:center;
-  display:none;
-  margin-top:20px;
+  padding:14px 25px;
+  border-radius:30px;
   font-weight:bold;
+  display:none;
+  z-index:9999;
+  box-shadow:0 0 20px rgba(0,255,174,0.4);
 }
 
-.empty{
-  text-align:center;
-  padding:25px;
-  color:#ddd;
-}
+.logout{position:absolute;top:20px;right:20px;padding:9px 22px;background:#ff4d4d;color:white;border:none;border-radius:20px;cursor:pointer;font-weight:bold;}
+h1{text-align:center;margin:25px 0;}
+
+.stats{display:flex;gap:20px;margin-bottom:25px;justify-content:center;flex-wrap:wrap;}
+.card{background:rgba(255,255,255,0.12);padding:22px;border-radius:18px;text-align:center;width:210px;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.18);}
+.card h2{color:#00ffae;margin-top:8px;}
+
+.charts{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:25px 0;}
+.chart-box{background:rgba(255,255,255,0.12);padding:20px;border-radius:22px;backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,0.18);height:360px;}
+.chart-box h3{text-align:center;margin-bottom:15px;color:#00ffae;}
+
+.controls{display:flex;justify-content:space-between;align-items:center;gap:15px;margin-bottom:20px;flex-wrap:wrap;}
+input{padding:12px 15px;border-radius:25px;border:none;outline:none;width:280px;}
+.download{padding:12px 22px;background:#00ffae;border:none;border-radius:25px;cursor:pointer;font-weight:bold;}
+
+.table-box{background:rgba(255,255,255,0.12);padding:20px;border-radius:22px;backdrop-filter:blur(12px);overflow-x:auto;border:1px solid rgba(255,255,255,0.18);}
+table{width:100%;border-collapse:collapse;min-width:980px;}
+th,td{padding:13px;text-align:center;border-bottom:1px solid rgba(255,255,255,0.2);}
+th{color:#00ffae;}
+
+.resume-link{color:#00ffae;text-decoration:none;font-weight:bold;}
+.resume-link:hover{text-decoration:underline;}
+
+button{padding:7px 14px;border:none;border-radius:20px;cursor:pointer;margin:3px;font-weight:600;}
+.accept{background:#00ffae;color:black;}
+.reject{background:#ff4d4d;color:white;}
+.delete{background:#555;color:white;}
+.certificate{background:#4dabff;color:white;}
+
+.loader{text-align:center;display:none;margin-top:20px;font-weight:bold;}
+.empty{text-align:center;padding:25px;color:#ddd;}
 
 @media(max-width:700px){
-  .logout{
-    position:static;
-    display:block;
-    margin-left:auto;
-  }
-
-  h1{
-    font-size:26px;
-  }
-
-  input{
-    width:100%;
-  }
-
-  .download{
-    width:100%;
-  }
+  .logout{position:static;display:block;margin-left:auto;}
+  h1{font-size:26px;}
+  input{width:100%;}
+  .download{width:100%;}
 }
 </style>
 </head>
 
 <body>
 
+<div id="notification" class="notification">New Internship Application Received 🎉</div>
+
 <button class="logout" onclick="logout()">Logout</button>
 
 <h1>Admin Dashboard</h1>
 
 <div class="stats">
-  <div class="card">
-    <h3>Total Applications</h3>
-    <h2 id="total">0</h2>
-  </div>
-
-  <div class="card">
-    <h3>Accepted</h3>
-    <h2 id="accepted">0</h2>
-  </div>
-
-  <div class="card">
-    <h3>Rejected</h3>
-    <h2 id="rejected">0</h2>
-  </div>
-
-  <div class="card">
-    <h3>Pending</h3>
-    <h2 id="pending">0</h2>
-  </div>
+  <div class="card"><h3>Total Applications</h3><h2 id="total">0</h2></div>
+  <div class="card"><h3>Accepted</h3><h2 id="accepted">0</h2></div>
+  <div class="card"><h3>Rejected</h3><h2 id="rejected">0</h2></div>
+  <div class="card"><h3>Pending</h3><h2 id="pending">0</h2></div>
 </div>
 
 <div class="charts">
@@ -280,7 +128,6 @@ button{
         <th>Actions</th>
       </tr>
     </thead>
-
     <tbody id="data"></tbody>
   </table>
 
@@ -304,6 +151,7 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
 let allData = [];
+let previousCount = 0;
 let statusChart;
 let trackChart;
 
@@ -322,6 +170,17 @@ async function loadData(){
       });
     });
 
+    if(previousCount !== 0 && allData.length > previousCount){
+      const notify = document.getElementById("notification");
+      notify.style.display = "block";
+
+      setTimeout(()=>{
+        notify.style.display = "none";
+      },3000);
+    }
+
+    previousCount = allData.length;
+
     render(allData);
     updateStats();
     updateCharts();
@@ -336,15 +195,9 @@ async function loadData(){
 
 function updateStats(){
   document.getElementById("total").innerText = allData.length;
-
-  document.getElementById("accepted").innerText =
-    allData.filter(d => (d.status || "Pending") === "Accepted").length;
-
-  document.getElementById("rejected").innerText =
-    allData.filter(d => (d.status || "Pending") === "Rejected").length;
-
-  document.getElementById("pending").innerText =
-    allData.filter(d => (d.status || "Pending") === "Pending").length;
+  document.getElementById("accepted").innerText = allData.filter(d => (d.status || "Pending") === "Accepted").length;
+  document.getElementById("rejected").innerText = allData.filter(d => (d.status || "Pending") === "Rejected").length;
+  document.getElementById("pending").innerText = allData.filter(d => (d.status || "Pending") === "Pending").length;
 }
 
 function updateCharts(){
@@ -358,13 +211,8 @@ function updateCharts(){
     trackCounts[track] = (trackCounts[track] || 0) + 1;
   });
 
-  if(statusChart){
-    statusChart.destroy();
-  }
-
-  if(trackChart){
-    trackChart.destroy();
-  }
+  if(statusChart) statusChart.destroy();
+  if(trackChart) trackChart.destroy();
 
   const statusCtx = document.getElementById("statusChart").getContext("2d");
   statusChart = new Chart(statusCtx, {
@@ -381,13 +229,7 @@ function updateCharts(){
     options: {
       responsive:true,
       maintainAspectRatio:false,
-      plugins:{
-        legend:{
-          labels:{
-            color:"white"
-          }
-        }
-      }
+      plugins:{legend:{labels:{color:"white"}}}
     }
   });
 
@@ -408,22 +250,22 @@ function updateCharts(){
       maintainAspectRatio:false,
       scales:{
         x:{
-          ticks:{ color:"white" },
-          grid:{ color:"rgba(255,255,255,0.1)" }
+          ticks:{
+            color:"white",
+            maxRotation:0,
+            minRotation:0,
+            autoSkip:false,
+            font:{size:11}
+          },
+          grid:{color:"rgba(255,255,255,0.1)"}
         },
         y:{
           beginAtZero:true,
-          ticks:{ color:"white", precision:0 },
-          grid:{ color:"rgba(255,255,255,0.1)" }
+          ticks:{color:"white", precision:0},
+          grid:{color:"rgba(255,255,255,0.1)"}
         }
       },
-      plugins:{
-        legend:{
-          labels:{
-            color:"white"
-          }
-        }
-      }
+      plugins:{legend:{labels:{color:"white"}}}
     }
   });
 }
@@ -432,11 +274,7 @@ function render(data){
   let html = "";
 
   if(data.length === 0){
-    html = `
-      <tr>
-        <td colspan="7" class="empty">No applications found</td>
-      </tr>
-    `;
+    html = `<tr><td colspan="7" class="empty">No applications found</td></tr>`;
   }
 
   data.forEach((d)=>{
@@ -581,6 +419,10 @@ window.logout = function(){
 };
 
 loadData();
+
+setInterval(()=>{
+  loadData();
+},5000);
 </script>
 
 </body>

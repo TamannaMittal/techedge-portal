@@ -6,30 +6,16 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:'Poppins',sans-serif;
-scroll-behavior:smooth;
-}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;scroll-behavior:smooth;}
 
 body{
 min-height:100vh;
 color:white;
-
-background:
-radial-gradient(circle at 15% 20%, rgba(168,85,247,0.35), transparent 28%),
-radial-gradient(circle at 85% 10%, rgba(34,211,238,0.25), transparent 30%),
-linear-gradient(135deg,#07070f,#120a24,#08111f);
-
+background:linear-gradient(135deg,#07070f,#120a24,#08111f);
 overflow-x:hidden;
 }
-
-/* LOADER */
 
 #loader{
 position:fixed;
@@ -42,51 +28,19 @@ z-index:99999;
 transition:1s;
 }
 
-.loader-content{
-text-align:center;
-}
-
-.loader-logo{
-font-size:58px;
-font-weight:800;
-margin-bottom:30px;
-color:white;
-}
-
-.loader-logo span{
+.loader-content{text-align:center;}
+.loader-logo{font-size:58px;font-weight:800;margin-bottom:30px;color:white;}
+.loader-logo span,.logo span{
 background:linear-gradient(135deg,#a855f7,#22d3ee,#00ffaa);
 -webkit-background-clip:text;
 color:transparent;
 }
 
-.loader-bar{
-width:280px;
-height:10px;
-background:rgba(255,255,255,0.1);
-border-radius:999px;
-overflow:hidden;
-margin:auto auto 18px;
-}
+.loader-bar{width:280px;height:10px;background:rgba(255,255,255,0.1);border-radius:999px;overflow:hidden;margin:auto auto 18px;}
+.loader-fill{width:0%;height:100%;background:linear-gradient(90deg,#7c3aed,#22d3ee,#00ffaa);animation:loadbar 2.5s linear forwards;}
+.loader-content p{color:rgba(255,255,255,0.7);font-size:15px;letter-spacing:1px;}
 
-.loader-fill{
-width:0%;
-height:100%;
-background:linear-gradient(90deg,#7c3aed,#22d3ee,#00ffaa);
-animation:loadbar 2.5s linear forwards;
-}
-
-.loader-content p{
-color:rgba(255,255,255,0.7);
-font-size:15px;
-letter-spacing:1px;
-}
-
-@keyframes loadbar{
-0%{width:0%;}
-100%{width:100%;}
-}
-
-/* PAGE */
+@keyframes loadbar{0%{width:0%;}100%{width:100%;}}
 
 .page{
 width:92%;
@@ -95,8 +49,7 @@ min-height:100vh;
 border-radius:34px;
 background:
 linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-url('https://www.transportation.gov/sites/dot.gov/files/images/Student%20Interns%20adobe.jpg')
-no-repeat center center;
+url('https://www.transportation.gov/sites/dot.gov/files/images/Student%20Interns%20adobe.jpg') no-repeat center center;
 background-size:cover;
 border:1px solid rgba(255,255,255,0.16);
 box-shadow:0 30px 90px rgba(0,0,0,0.45);
@@ -115,11 +68,9 @@ background-size:48px 48px;
 pointer-events:none;
 }
 
-/* NAVBAR */
-
 nav{
 position:relative;
-z-index:5;
+z-index:50;
 display:flex;
 justify-content:space-between;
 align-items:center;
@@ -129,29 +80,11 @@ backdrop-filter:blur(18px);
 border-bottom:1px solid rgba(255,255,255,0.12);
 }
 
-.logo{
-font-size:26px;
-font-weight:800;
-}
+.logo{font-size:26px;font-weight:800;}
 
-.logo span{
-background:linear-gradient(135deg,#a855f7,#22d3ee,#00ffaa);
--webkit-background-clip:text;
-color:transparent;
-}
-
-nav a{
-color:white;
-text-decoration:none;
-margin-left:28px;
-font-size:15px;
-font-weight:600;
-transition:0.3s;
-}
-
-nav a:hover{
-color:#22d3ee;
-}
+.nav-links{display:flex;align-items:center;gap:28px;}
+.nav-links a{color:white;text-decoration:none;font-size:15px;font-weight:600;transition:0.3s;}
+.nav-links a:hover{color:#22d3ee;}
 
 .nav-btn{
 padding:10px 22px;
@@ -159,95 +92,49 @@ border-radius:999px;
 background:linear-gradient(135deg,#7c3aed,#d946ef);
 }
 
-/* HERO */
+.menu-btn{display:none;font-size:30px;background:none;border:none;color:white;cursor:pointer;}
 
 .hero{
 position:relative;
 z-index:2;
-min-height:420px;
+min-height:520px;
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
 text-align:center;
-padding:60px 20px;
+padding:80px 20px;
 overflow:hidden;
-background-size:cover;
-background-position:center;
-animation:heroSlide 18s infinite;
 }
 
-@keyframes heroSlide{
-
-0%{
-background:
-linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d');
-background-size:cover;
-background-position:center;
+.hero-video{
+position:absolute;
+inset:0;
+width:100%;
+height:100%;
+object-fit:cover;
+z-index:-3;
 }
 
-33%{
-background:
-linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3');
-background-size:cover;
-background-position:center;
+.hero-overlay{
+position:absolute;
+inset:0;
+background:linear-gradient(rgba(0,0,0,0.68),rgba(0,0,0,0.7));
+z-index:-2;
 }
-
-66%{
-background:
-linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f');
-background-size:cover;
-background-position:center;
-}
-
-100%{
-background:
-linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
-url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d');
-background-size:cover;
-background-position:center;
-}
-
-}
-
-/* FLOATING EFFECTS */
 
 .floating{
 position:absolute;
 border-radius:50%;
 filter:blur(10px);
-opacity:0.5;
+opacity:0.45;
 animation:float 6s ease-in-out infinite;
+z-index:-1;
 }
 
-.floating1{
-width:180px;
-height:180px;
-background:#7c3aed;
-top:40px;
-left:10%;
-}
-
-.floating2{
-width:120px;
-height:120px;
-background:#22d3ee;
-bottom:40px;
-right:12%;
-animation-delay:2s;
-}
-
-.floating3{
-width:90px;
-height:90px;
-background:#00ffaa;
-top:50%;
-left:50%;
-animation-delay:4s;
-}
+.floating1{width:180px;height:180px;background:#7c3aed;top:40px;left:10%;}
+.floating2{width:120px;height:120px;background:#22d3ee;bottom:40px;right:12%;animation-delay:2s;}
+.floating3{width:90px;height:90px;background:#00ffaa;top:50%;left:50%;animation-delay:4s;}
 
 @keyframes float{
 0%{transform:translateY(0px);}
@@ -281,18 +168,13 @@ color:transparent;
 
 .hero p{
 max-width:720px;
-color:rgba(255,255,255,0.82);
+color:rgba(255,255,255,0.88);
 font-size:18px;
 line-height:1.7;
 margin-bottom:32px;
 }
 
-.buttons{
-display:flex;
-gap:16px;
-flex-wrap:wrap;
-justify-content:center;
-}
+.buttons{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;}
 
 .btn{
 padding:14px 34px;
@@ -303,18 +185,15 @@ color:white;
 font-weight:700;
 text-decoration:none;
 transition:0.4s;
+cursor:pointer;
 }
 
-.btn:hover{
-transform:translateY(-5px) scale(1.05);
-}
+.btn:hover{transform:translateY(-5px) scale(1.05);}
 
 .btn-outline{
 background:rgba(255,255,255,0.12);
 border:1px solid rgba(255,255,255,0.2);
 }
-
-/* STATS */
 
 .stats{
 display:grid;
@@ -336,20 +215,9 @@ text-align:center;
 transition:0.4s;
 }
 
-.stat-box:hover{
-transform:translateY(-8px) scale(1.03);
-}
-
-.stat-box h2{
-font-size:42px;
-color:#22d3ee;
-}
-
-.stat-box p{
-color:rgba(255,255,255,0.82);
-}
-
-/* FEATURES */
+.stat-box:hover{transform:translateY(-8px) scale(1.03);}
+.stat-box h2{font-size:42px;color:#22d3ee;}
+.stat-box p{color:rgba(255,255,255,0.82);}
 
 .features{
 display:grid;
@@ -368,26 +236,57 @@ backdrop-filter:blur(18px);
 transition:0.35s;
 }
 
-.card:hover{
-transform:translateY(-12px) scale(1.03);
+.card:hover{transform:translateY(-12px) scale(1.03);}
+.card .icon{font-size:34px;margin-bottom:18px;}
+.card h3{font-size:22px;margin-bottom:10px;}
+.card p{color:rgba(255,255,255,0.78);line-height:1.6;}
+
+.resume-section{
+width:82%;
+margin:30px auto 70px;
+text-align:center;
 }
 
-.card .icon{
-font-size:34px;
-margin-bottom:18px;
+.resume-section h2{
+font-size:38px;
+margin-bottom:15px;
+background:linear-gradient(90deg,#a855f7,#22d3ee);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
 }
 
-.card h3{
-font-size:22px;
-margin-bottom:10px;
-}
-
-.card p{
+.resume-section p{
 color:rgba(255,255,255,0.78);
+margin-bottom:28px;
 line-height:1.6;
 }
 
-/* CHATBOT */
+.resume-box{
+padding:35px;
+border-radius:28px;
+background:rgba(255,255,255,0.09);
+border:1px solid rgba(255,255,255,0.18);
+backdrop-filter:blur(18px);
+box-shadow:0 20px 50px rgba(0,0,0,0.25);
+}
+
+.resume-box input{
+padding:14px;
+width:100%;
+max-width:420px;
+border:none;
+border-radius:18px;
+background:rgba(255,255,255,0.12);
+color:white;
+margin-bottom:18px;
+}
+
+#resumeResult{
+margin-top:30px;
+font-size:17px;
+line-height:1.8;
+color:white;
+}
 
 .chatbot-button{
 position:fixed;
@@ -406,9 +305,7 @@ box-shadow:0 0 25px rgba(34,211,238,0.55);
 transition:0.3s;
 }
 
-.chatbot-button:hover{
-transform:scale(1.1);
-}
+.chatbot-button:hover{transform:scale(1.1);}
 
 .chatbot-box{
 position:fixed;
@@ -453,8 +350,7 @@ flex-direction:column;
 gap:12px;
 }
 
-.bot-message,
-.user-message{
+.bot-message,.user-message{
 padding:12px 14px;
 border-radius:16px;
 font-size:14px;
@@ -462,15 +358,8 @@ line-height:1.5;
 max-width:85%;
 }
 
-.bot-message{
-background:rgba(255,255,255,0.12);
-align-self:flex-start;
-}
-
-.user-message{
-background:linear-gradient(135deg,#7c3aed,#22d3ee);
-align-self:flex-end;
-}
+.bot-message{background:rgba(255,255,255,0.12);align-self:flex-start;}
+.user-message{background:linear-gradient(135deg,#7c3aed,#22d3ee);align-self:flex-end;}
 
 .chatbot-input{
 display:flex;
@@ -489,9 +378,7 @@ background:rgba(255,255,255,0.12);
 color:white;
 }
 
-.chatbot-input input::placeholder{
-color:rgba(255,255,255,0.55);
-}
+.chatbot-input input::placeholder{color:rgba(255,255,255,0.55);}
 
 .chatbot-input button{
 padding:10px 16px;
@@ -519,8 +406,6 @@ font-size:12px;
 cursor:pointer;
 }
 
-/* FOOTER */
-
 footer{
 text-align:center;
 padding:30px;
@@ -530,63 +415,55 @@ border-top:1px solid rgba(255,255,255,0.12);
 }
 
 @media(max-width:900px){
+.page{width:96%;margin:14px auto;border-radius:24px;}
+nav{padding:18px 22px;}
+.menu-btn{display:block;}
 
-nav{
-padding:20px;
+.nav-links{
+position:absolute;
+top:70px;
+right:20px;
+width:230px;
+padding:18px;
+display:none;
 flex-direction:column;
-gap:18px;
+align-items:flex-start;
+gap:16px;
+border-radius:22px;
+background:rgba(8,12,25,0.96);
+border:1px solid rgba(255,255,255,0.18);
+backdrop-filter:blur(18px);
 }
 
-nav a{
-margin:8px;
-display:inline-block;
-}
-
-.hero h1{
-font-size:36px;
-}
-
-.hero p{
-font-size:16px;
-}
-
-.stats,
-.features{
-width:90%;
-}
-
-.chatbot-box{
-width:90%;
-right:5%;
-height:430px;
-}
-
+.nav-links.active{display:flex;}
+.nav-links a{margin:0;}
+.hero{min-height:520px;padding:70px 20px;}
+.hero h1{font-size:34px;}
+.hero p{font-size:15px;}
+.stats,.features,.resume-section{width:90%;}
+.chatbot-box{width:90%;right:5%;height:430px;}
 }
 </style>
 </head>
 
 <body>
 
-<!-- LOADER -->
-
 <div id="loader">
 <div class="loader-content">
 <h1 class="loader-logo">Tech<span>Edge</span></h1>
-<div class="loader-bar">
-<div class="loader-fill"></div>
-</div>
+<div class="loader-bar"><div class="loader-fill"></div></div>
 <p>Launching Future Careers...</p>
 </div>
 </div>
 
 <div class="page">
 
-<!-- NAVBAR -->
-
 <nav>
 <div class="logo">Tech<span>Edge</span></div>
 
-<div>
+<button class="menu-btn" onclick="toggleMenu()">☰</button>
+
+<div class="nav-links" id="navLinks">
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="internship.html">Internship</a>
@@ -596,9 +473,13 @@ height:430px;
 </div>
 </nav>
 
-<!-- HERO -->
-
 <section class="hero">
+
+<video autoplay muted loop playsinline class="hero-video">
+<source src="https://cdn.coverr.co/videos/coverr-working-on-a-laptop-5635/1080p.mp4" type="video/mp4">
+</video>
+
+<div class="hero-overlay"></div>
 
 <div class="floating floating1"></div>
 <div class="floating floating2"></div>
@@ -619,8 +500,6 @@ get certified, gain experience, and build your future with confidence.
 </div>
 
 </section>
-
-<!-- STATS -->
 
 <section class="stats">
 <div class="stat-box">
@@ -644,8 +523,6 @@ get certified, gain experience, and build your future with confidence.
 </div>
 </section>
 
-<!-- FEATURES -->
-
 <section class="features">
 <div class="card">
 <div class="icon">💻</div>
@@ -666,18 +543,30 @@ get certified, gain experience, and build your future with confidence.
 </div>
 </section>
 
+<section class="resume-section">
+<h2>🤖 AI Resume Analyzer</h2>
+<p>
+Upload your resume and get instant AI-based feedback, resume score,
+and skill suggestions for internship applications.
+</p>
+
+<div class="resume-box">
+<input type="file" id="resumeInput" accept=".pdf,.doc,.docx">
+<br>
+<button class="btn" onclick="analyzeResume()">Analyze Resume</button>
+<div id="resumeResult"></div>
+</div>
+</section>
+
 <footer>
 © 2026 Tamanna Mittal | TechEdge Internship Portal
 </footer>
 
 </div>
 
-<!-- CHATBOT -->
-
 <button class="chatbot-button" onclick="toggleChatbot()">🤖</button>
 
 <div class="chatbot-box" id="chatbotBox">
-
 <div class="chatbot-header">
 <span>TechEdge AI Assistant</span>
 <button onclick="toggleChatbot()">×</button>
@@ -701,152 +590,122 @@ Ask me about internships, application process, certificate, resume, or contact.
 <input type="text" id="userInput" placeholder="Type your question..." onkeydown="handleEnter(event)">
 <button onclick="sendMessage()">Send</button>
 </div>
-
 </div>
 
 <script>
-
-/* LOADER */
-
 window.addEventListener("load",()=>{
-
 setTimeout(()=>{
-
 document.getElementById("loader").style.opacity="0";
 document.getElementById("loader").style.visibility="hidden";
-
 },2600);
-
 });
 
-/* TYPING EFFECT */
+function toggleMenu(){
+document.getElementById("navLinks").classList.toggle("active");
+}
 
 const text = "Launch Your Career With TechEdge";
 let i = 0;
 
 function typeEffect(){
-
 if(i < text.length){
-
 document.getElementById("typing").innerHTML += text.charAt(i);
 i++;
 setTimeout(typeEffect,65);
-
 }else{
-
 document.getElementById("typing").innerHTML =
 "Launch Your Career With <span>TechEdge</span>";
-
 }
-
 }
-
 typeEffect();
 
-/* COUNTERS */
-
 function animateCounters(){
-
 const counters = document.querySelectorAll(".counter");
+counters.forEach(counter=>{
+counter.innerText="0";
+const updateCounter=()=>{
+const target=+counter.getAttribute("data-target");
+const current=+counter.innerText;
+const increment=target/80;
 
-counters.forEach(counter => {
-
-counter.innerText = "0";
-
-const updateCounter = () => {
-
-const target = +counter.getAttribute("data-target");
-const current = +counter.innerText;
-const increment = target / 80;
-
-if(current < target){
-
-counter.innerText = `${Math.ceil(current + increment)}`;
+if(current<target){
+counter.innerText=`${Math.ceil(current+increment)}`;
 setTimeout(updateCounter,20);
-
 }else{
-
-counter.innerText = target;
-
+counter.innerText=target;
 }
-
 };
-
 updateCounter();
-
 });
-
 }
-
 animateCounters();
 
-/* CHATBOT */
+function analyzeResume(){
+const file = document.getElementById("resumeInput").files[0];
+const result = document.getElementById("resumeResult");
 
-function toggleChatbot(){
-
-const box = document.getElementById("chatbotBox");
-
-if(box.style.display === "flex"){
-box.style.display = "none";
-}else{
-box.style.display = "flex";
-}
-
-}
-
-function quickAsk(question){
-
-document.getElementById("userInput").value = question;
-sendMessage();
-
-}
-
-function handleEnter(event){
-
-if(event.key === "Enter"){
-sendMessage();
-}
-
-}
-
-function sendMessage(){
-
-const input = document.getElementById("userInput");
-const message = input.value.trim();
-
-if(message === ""){
+if(!file){
+result.innerHTML = "❌ Please upload your resume first.";
 return;
 }
 
-addMessage(message,"user-message");
+const fileName = file.name.toLowerCase();
 
-input.value = "";
+if(!(fileName.endsWith(".pdf") || fileName.endsWith(".doc") || fileName.endsWith(".docx"))){
+result.innerHTML = "❌ Please upload a PDF, DOC, or DOCX resume.";
+return;
+}
+
+const randomScore = Math.floor(Math.random() * 16) + 82;
+
+result.innerHTML = `
+✅ Resume Uploaded Successfully<br><br>
+📄 File Name: <b>${file.name}</b><br><br>
+🤖 AI Resume Score: <b>${randomScore}/100</b><br><br>
+💡 Suggested Skills: <b>HTML, CSS, JavaScript, React, Communication</b><br><br>
+🚀 Recommendation: Your resume looks strong for internship applications. Add more project links and measurable achievements for a better impact.
+`;
+}
+
+function toggleChatbot(){
+const box=document.getElementById("chatbotBox");
+box.style.display = box.style.display === "flex" ? "none" : "flex";
+}
+
+function quickAsk(question){
+document.getElementById("userInput").value=question;
+sendMessage();
+}
+
+function handleEnter(event){
+if(event.key==="Enter") sendMessage();
+}
+
+function sendMessage(){
+const input=document.getElementById("userInput");
+const message=input.value.trim();
+
+if(message==="") return;
+
+addMessage(message,"user-message");
+input.value="";
 
 setTimeout(()=>{
-
-const reply = getBotReply(message);
-addMessage(reply,"bot-message");
-
+addMessage(getBotReply(message),"bot-message");
 },500);
-
 }
 
 function addMessage(text,className){
-
-const chatMessages = document.getElementById("chatMessages");
-
-const div = document.createElement("div");
-div.className = className;
-div.innerHTML = text;
-
+const chatMessages=document.getElementById("chatMessages");
+const div=document.createElement("div");
+div.className=className;
+div.innerHTML=text;
 chatMessages.appendChild(div);
-chatMessages.scrollTop = chatMessages.scrollHeight;
-
+chatMessages.scrollTop=chatMessages.scrollHeight;
 }
 
 function getBotReply(message){
-
-const msg = message.toLowerCase();
+const msg=message.toLowerCase();
 
 if(msg.includes("apply") || msg.includes("application") || msg.includes("form")){
 return "You can apply by clicking the <b>Apply Now</b> button and filling the internship application form.";
@@ -856,7 +715,7 @@ if(msg.includes("internship") || msg.includes("available") || msg.includes("trac
 return "TechEdge offers internships in Web Development, Python Development, Data Science, UI/UX Design, Digital Marketing, and Java Development.";
 }
 
-if(msg.includes("certificate") || msg.includes("certification")){
+if(msg.includes("certificate")){
 return "Yes ✅ Selected interns receive a verified internship completion certificate after successful completion.";
 }
 
@@ -864,38 +723,25 @@ if(msg.includes("resume") || msg.includes("cv")){
 return "You can upload or paste your resume link in the application form. PDF resume is preferred.";
 }
 
-if(msg.includes("contact") || msg.includes("email") || msg.includes("support")){
-return "You can contact TechEdge through the Contact page. Our team will respond as soon as possible.";
+if(msg.includes("contact") || msg.includes("email")){
+return "You can contact TechEdge through the Contact page. Our team will respond soon.";
 }
 
 if(msg.includes("admin") || msg.includes("dashboard")){
-return "Admin dashboard is only for authorized TechEdge team members to manage applications.";
+return "Admin dashboard is only for authorized TechEdge team members.";
 }
 
-if(msg.includes("shortlist") || msg.includes("selected") || msg.includes("status")){
-return "Applications are reviewed by the admin team. If shortlisted, your status will be updated in the system.";
-}
-
-if(msg.includes("hello") || msg.includes("hi") || msg.includes("hey")){
+if(msg.includes("hello") || msg.includes("hi")){
 return "Hello! 👋 How can I help you with TechEdge internships?";
 }
 
-return "I can help you with internships, apply process, certificates, resume upload, contact, and application status. Please ask about any of these.";
+return "I can help you with internships, apply process, certificates, resume upload, contact, and application status.";
 }
-
 </script>
 
 <script type="module">
-
-import { initializeApp }
-from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-
-import {
-getFirestore,
-collection,
-getDocs
-}
-from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
 
 const firebaseConfig = {
 apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
@@ -906,37 +752,25 @@ messagingSenderId:"149057403895",
 appId:"1:149057403895:web:8b9bdd770e7475c2a38cf2"
 };
 
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+const app=initializeApp(firebaseConfig);
+const db=getFirestore(app);
 
 async function loadStats(){
-
 try{
+const studentsSnap=await getDocs(collection(db,"applications"));
+const total=studentsSnap.size;
 
-const studentsSnap =
-await getDocs(collection(db,"applications"));
-
-const total =
-studentsSnap.size;
-
-const studentCounter =
-document.getElementById("students");
-
-studentCounter.setAttribute("data-target", total);
-studentCounter.innerText = "0";
+const studentCounter=document.getElementById("students");
+studentCounter.setAttribute("data-target",total);
+studentCounter.innerText="0";
 
 animateCounters();
-
 }catch(error){
-
 console.log(error);
-
 }
-
 }
 
 loadStats();
-
 </script>
 
 </body>

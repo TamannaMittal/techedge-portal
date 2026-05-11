@@ -408,24 +408,124 @@ window.download = function(){
 
 window.generateCertificate = function(name, track){
   const { jsPDF } = window.jspdf;
-  const pdf = new jsPDF("landscape");
+  const pdf = new jsPDF("landscape", "mm", "a4");
 
+  const pageWidth = 297;
+  const pageHeight = 210;
+
+  const issueDate = new Date().toLocaleDateString("en-IN");
+  const certId = "TE-" + new Date().getFullYear() + "-" + Math.floor(100000 + Math.random() * 900000);
+
+  // Background
+  pdf.setFillColor(8, 18, 38);
+  pdf.rect(0, 0, pageWidth, pageHeight, "F");
+
+  // Decorative gradient-like panels
+  pdf.setFillColor(10, 40, 75);
+  pdf.roundedRect(12, 12, pageWidth - 24, pageHeight - 24, 8, 8, "F");
+
+  pdf.setFillColor(255, 255, 255);
+  pdf.setDrawColor(212, 175, 55);
+  pdf.setLineWidth(1.2);
+  pdf.roundedRect(18, 18, pageWidth - 36, pageHeight - 36, 6, 6, "S");
+
+  pdf.setDrawColor(0, 255, 174);
+  pdf.setLineWidth(0.5);
+  pdf.roundedRect(23, 23, pageWidth - 46, pageHeight - 46, 5, 5, "S");
+
+  // Watermark
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFont("helvetica", "bold");
+  pdf.setFontSize(58);
+  pdf.setGState(new pdf.GState({ opacity: 0.08 }));
+  pdf.text("TechEdge", pageWidth / 2, 112, { align: "center", angle: 0 });
+  pdf.setGState(new pdf.GState({ opacity: 1 }));
+
+  // Logo
+  pdf.setFillColor(0, 255, 174);
+  pdf.circle(pageWidth / 2, 34, 13, "F");
+  pdf.setTextColor(8, 18, 38);
+  pdf.setFontSize(15);
+  pdf.setFont("helvetica", "bold");
+  pdf.text("TE", pageWidth / 2, 39, { align: "center" });
+
+  // Company name
+  pdf.setTextColor(0, 255, 174);
+  pdf.setFontSize(18);
+  pdf.setFont("helvetica", "bold");
+  pdf.text("TechEdge Internship Portal", pageWidth / 2, 55, { align: "center" });
+
+  // Title
+  pdf.setTextColor(212, 175, 55);
+  pdf.setFontSize(34);
+  pdf.setFont("times", "bold");
+  pdf.text("Certificate of Completion", pageWidth / 2, 78, { align: "center" });
+
+  // Subtitle
+  pdf.setTextColor(235, 240, 255);
+  pdf.setFontSize(15);
+  pdf.setFont("helvetica", "normal");
+  pdf.text("This certificate is proudly presented to", pageWidth / 2, 96, { align: "center" });
+
+  // Student name
+  pdf.setTextColor(255, 255, 255);
   pdf.setFontSize(30);
-  pdf.text("Certificate of Completion", 148, 45, null, null, "center");
+  pdf.setFont("times", "bold");
+  pdf.text(name.toUpperCase(), pageWidth / 2, 116, { align: "center" });
 
-  pdf.setFontSize(18);
-  pdf.text("This is to certify that", 148, 75, null, null, "center");
+  // Underline
+  pdf.setDrawColor(0, 255, 174);
+  pdf.setLineWidth(0.8);
+  pdf.line(92, 122, 205, 122);
 
-  pdf.setFontSize(26);
-  pdf.text(name, 148, 100, null, null, "center");
+  // Completion text
+  pdf.setTextColor(235, 240, 255);
+  pdf.setFontSize(15);
+  pdf.setFont("helvetica", "normal");
+  pdf.text("for successfully completing the", pageWidth / 2, 138, { align: "center" });
 
-  pdf.setFontSize(18);
-  pdf.text(`has successfully completed ${track} Internship`, 148, 125, null, null, "center");
+  pdf.setTextColor(0, 255, 174);
+  pdf.setFontSize(21);
+  pdf.setFont("helvetica", "bold");
+  pdf.text(`${track} Internship`, pageWidth / 2, 151, { align: "center" });
 
+  pdf.setTextColor(235, 240, 255);
+  pdf.setFontSize(13);
+  pdf.setFont("helvetica", "normal");
+  pdf.text("with dedication, active participation, and successful completion of assigned learning tasks.", pageWidth / 2, 163, { align: "center" });
+
+  // Details
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFontSize(11);
+  pdf.text(`Certificate ID: ${certId}`, 32, 181);
+  pdf.text(`Issue Date: ${issueDate}`, 32, 189);
+
+  // Signature section
+  pdf.setDrawColor(212, 175, 55);
+  pdf.line(205, 181, 263, 181);
+
+  pdf.setTextColor(255, 255, 255);
+  pdf.setFont("times", "italic");
   pdf.setFontSize(16);
-  pdf.text("TechEdge Internship Program", 148, 150, null, null, "center");
+  pdf.text("Tamanna Mittal", 234, 176, { align: "center" });
 
-  pdf.save(name + "_certificate.pdf");
+  pdf.setFont("helvetica", "normal");
+  pdf.setFontSize(11);
+  pdf.text("Authorized Signature", 234, 188, { align: "center" });
+  pdf.text("TechEdge Internship Portal", 234, 195, { align: "center" });
+
+  // QR-like verification box
+  pdf.setDrawColor(255, 255, 255);
+  pdf.setLineWidth(0.4);
+  pdf.rect(140, 174, 22, 22, "S");
+  pdf.setFontSize(6);
+  pdf.setTextColor(255, 255, 255);
+  pdf.text("VERIFY", 151, 187, { align: "center" });
+
+  pdf.setFontSize(8);
+  pdf.text("Verified Digital Certificate", pageWidth / 2, 201, { align: "center" });
+
+  pdf.save(name + "_Professional_Certificate.pdf");
 };
 
 window.logout = function(){

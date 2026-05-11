@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Certificate Verification | TechEdge</title>
+
+<style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Segoe UI',sans-serif;
+}
+
+body{
+min-height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+padding:20px;
+background:
+linear-gradient(rgba(0,0,0,0.75),rgba(0,0,0,0.75)),
+url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f') no-repeat center center/cover;
+color:white;
+}
+
+.verify-box{
+width:100%;
+max-width:650px;
+background:rgba(255,255,255,0.08);
+backdrop-filter:blur(14px);
+padding:40px;
+border-radius:25px;
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0 0 35px rgba(0,255,174,0.15);
+text-align:center;
+}
+
+.logo{
+width:90px;
+height:90px;
+margin:auto;
+margin-bottom:20px;
+border-radius:50%;
+background:#00ffae;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:32px;
+font-weight:bold;
+color:#071224;
+border:4px solid white;
+}
+
+h1{
+font-size:34px;
+margin-bottom:10px;
+color:#00ffae;
+}
+
+.status{
+display:inline-block;
+padding:10px 22px;
+border-radius:30px;
+background:#00ffae;
+color:#071224;
+font-weight:bold;
+margin:20px 0;
+font-size:18px;
+}
+
+.details{
+margin-top:25px;
+text-align:left;
+background:rgba(255,255,255,0.05);
+padding:25px;
+border-radius:18px;
+}
+
+.details p{
+margin:14px 0;
+font-size:17px;
+line-height:1.7;
+border-bottom:1px solid rgba(255,255,255,0.08);
+padding-bottom:10px;
+}
+
+.details span{
+color:#00ffae;
+font-weight:bold;
+}
+
+.footer{
+margin-top:30px;
+font-size:14px;
+color:#ccc;
+}
+
+@media(max-width:600px){
+
+.verify-box{
+padding:25px;
+}
+
+h1{
+font-size:28px;
+}
+
+.details p{
+font-size:15px;
+}
+
+.logo{
+width:75px;
+height:75px;
+font-size:26px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="verify-box">
+
+<div class="logo">TE</div>
+
+<h1>Certificate Verified</h1>
+
+<div class="status">
+✅ Official TechEdge Certificate
+</div>
+
+<div class="details">
+
+<p>
+<span>Student Name:</span>
+<span id="studentName">Loading...</span>
+</p>
+
+<p>
+<span>Internship:</span>
+<span id="internship">Loading...</span>
+</p>
+
+<p>
+<span>Certificate ID:</span>
+<span id="certificateId">Loading...</span>
+</p>
+
+<p>
+<span>Issue Date:</span>
+<span id="issueDate">Loading...</span>
+</p>
+
+<p>
+<span>Status:</span>
+<span style="color:#00ffae;">Verified & Authentic</span>
+</p>
+
+</div>
+
+<div class="footer">
+© 2026 TechEdge Internship Portal • All Rights Reserved
+</div>
+
+</div>
+
+<script>
+
+// URL parameters
+const params = new URLSearchParams(window.location.search);
+
+const certificate =
+params.get("certificate");
+
+const student =
+params.get("student");
+
+const track =
+params.get("track");
+
+const date =
+params.get("date");
+
+// Show values
+document.getElementById("certificateId").innerText =
+certificate || "TE-UNKNOWN";
+
+document.getElementById("studentName").innerText =
+student || "Student";
+
+document.getElementById("internship").innerText =
+track || "Internship Program";
+
+document.getElementById("issueDate").innerText =
+date || new Date().toLocaleDateString();
+
+</script>
+
+</body>
+</html>

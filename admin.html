@@ -12,7 +12,7 @@
 
 <script>
 (function(){
-  emailjs.init("jACWU8xqWmYKLKkvi");
+emailjs.init("jACWU8xqWmYKLKkvi");
 })();
 </script>
 
@@ -408,6 +408,7 @@ a.click();
 };
 
 window.generateCertificate = function(id){
+
 const student = allData.find(s => s.id === id);
 
 if(!student){
@@ -415,8 +416,19 @@ alert("Student data not found");
 return;
 }
 
-const name = student.name || "Student";
-const track = student.track || "Internship";
+const cleanText = (text, fallback) => {
+let value = String(text || fallback)
+.replace(/[^\w\s\-\/&().+]/g, "")
+.replace(/\s+/g, " ")
+.trim();
+
+if(value.length < 2) value = fallback;
+if(value.length > 45) value = value.substring(0,45) + "...";
+return value;
+};
+
+const name = cleanText(student.name, "Student");
+const track = cleanText(student.track, "Internship");
 
 const { jsPDF } = window.jspdf;
 const pdf = new jsPDF("landscape", "mm", "a4");
@@ -426,109 +438,115 @@ const pageHeight = 210;
 
 const issueDate = new Date().toLocaleDateString("en-IN");
 const certId = "TE-" + new Date().getFullYear() + "-" + Math.floor(100000 + Math.random() * 900000);
-const verifyLink = `https://tamannamittal.github.io/techedge-portal/?certificate=${certId}&student=${encodeURIComponent(name)}`;
+const verifyLink =
+`https://tamannamittal.github.io/techedge-portal/verify.html?certificate=${certId}&student=${encodeURIComponent(name)}&track=${encodeURIComponent(track)}&date=${encodeURIComponent(issueDate)}`;
 
-pdf.setFillColor(8, 18, 38);
-pdf.rect(0, 0, pageWidth, pageHeight, "F");
+pdf.setFillColor(4,14,34);
+pdf.rect(0,0,pageWidth,pageHeight,"F");
 
-pdf.setFillColor(10, 40, 75);
-pdf.roundedRect(12, 12, pageWidth - 24, pageHeight - 24, 8, 8, "F");
+pdf.setFillColor(10,42,75);
+pdf.roundedRect(14,14,pageWidth-28,pageHeight-28,9,9,"F");
 
-pdf.setDrawColor(212, 175, 55);
-pdf.setLineWidth(1.5);
-pdf.roundedRect(18, 18, pageWidth - 36, pageHeight - 36, 6, 6, "S");
+pdf.setDrawColor(212,175,55);
+pdf.setLineWidth(1.8);
+pdf.roundedRect(20,20,pageWidth-40,pageHeight-40,6,6,"S");
 
-pdf.setDrawColor(0, 255, 174);
-pdf.setLineWidth(0.6);
-pdf.roundedRect(23, 23, pageWidth - 46, pageHeight - 46, 5, 5, "S");
+pdf.setDrawColor(0,255,174);
+pdf.setLineWidth(0.7);
+pdf.roundedRect(26,26,pageWidth-52,pageHeight-52,5,5,"S");
 
-pdf.setTextColor(255, 255, 255);
-pdf.setFont("helvetica", "bold");
-pdf.setFontSize(58);
-pdf.setGState(new pdf.GState({ opacity: 0.08 }));
-pdf.text("TechEdge", pageWidth / 2, 112, { align: "center" });
-pdf.setGState(new pdf.GState({ opacity: 1 }));
+pdf.setTextColor(255,255,255);
+pdf.setFont("helvetica","bold");
+pdf.setFontSize(55);
+pdf.setGState(new pdf.GState({opacity:0.06}));
+pdf.text("TechEdge",pageWidth/2,110,{align:"center"});
+pdf.setGState(new pdf.GState({opacity:1}));
 
-pdf.setFillColor(0, 255, 174);
-pdf.circle(pageWidth / 2, 34, 13, "F");
-pdf.setTextColor(8, 18, 38);
-pdf.setFontSize(15);
-pdf.setFont("helvetica", "bold");
-pdf.text("TE", pageWidth / 2, 39, { align: "center" });
+pdf.setFillColor(0,255,174);
+pdf.circle(pageWidth/2,35,13,"F");
 
-pdf.setTextColor(0, 255, 174);
-pdf.setFontSize(18);
-pdf.setFont("helvetica", "bold");
-pdf.text("TechEdge Internship Portal", pageWidth / 2, 55, { align: "center" });
+pdf.setDrawColor(255,255,255);
+pdf.setLineWidth(1.2);
+pdf.circle(pageWidth/2,35,10,"S");
 
-pdf.setTextColor(212, 175, 55);
-pdf.setFontSize(34);
-pdf.setFont("times", "bold");
-pdf.text("Certificate of Completion", pageWidth / 2, 78, { align: "center" });
-
-pdf.setTextColor(235, 240, 255);
-pdf.setFontSize(15);
-pdf.setFont("helvetica", "normal");
-pdf.text("This certificate is proudly presented to", pageWidth / 2, 96, { align: "center" });
-
-pdf.setTextColor(255, 255, 255);
-pdf.setFontSize(30);
-pdf.setFont("times", "bold");
-pdf.text(name.toUpperCase(), pageWidth / 2, 116, { align: "center" });
-
-pdf.setDrawColor(0, 255, 174);
-pdf.setLineWidth(0.8);
-pdf.line(92, 122, 205, 122);
-
-pdf.setTextColor(235, 240, 255);
-pdf.setFontSize(15);
-pdf.setFont("helvetica", "normal");
-pdf.text("for successfully completing the", pageWidth / 2, 138, { align: "center" });
-
-pdf.setTextColor(0, 255, 174);
-pdf.setFontSize(21);
-pdf.setFont("helvetica", "bold");
-pdf.text(`${track} Internship`, pageWidth / 2, 151, { align: "center" });
-
-pdf.setTextColor(235, 240, 255);
-pdf.setFontSize(13);
-pdf.setFont("helvetica", "normal");
-pdf.text("with dedication, active participation, and successful completion of assigned learning tasks.", pageWidth / 2, 163, { align: "center" });
-
-pdf.setTextColor(255, 255, 255);
-pdf.setFontSize(11);
-pdf.text(`Certificate ID: ${certId}`, 32, 181);
-pdf.text(`Issue Date: ${issueDate}`, 32, 189);
-
-pdf.setFillColor(212, 175, 55);
-pdf.circle(52, 52, 16, "F");
-pdf.setTextColor(8, 18, 38);
-pdf.setFont("helvetica", "bold");
-pdf.setFontSize(8);
-pdf.text("OFFICIAL", 52, 50, { align: "center" });
-pdf.text("SEAL", 52, 57, { align: "center" });
-
-pdf.setDrawColor(212, 175, 55);
-pdf.line(205, 181, 263, 181);
-
-pdf.setTextColor(255, 255, 255);
-pdf.setFont("times", "italic");
+pdf.setTextColor(255,255,255);
+pdf.setFont("times","bold");
 pdf.setFontSize(16);
-pdf.text("Tamanna Mittal", 234, 176, { align: "center" });
+pdf.text("TE",pageWidth/2,37,{align:"center"});
 
-pdf.setFont("helvetica", "normal");
-pdf.setFontSize(11);
-pdf.text("Authorized Signature", 234, 188, { align: "center" });
-pdf.text("TechEdge Internship Portal", 234, 195, { align: "center" });
+pdf.setTextColor(0,255,174);
+pdf.setFont("times","bold");
+pdf.setFontSize(17);
+pdf.text("TechEdge Internship Portal",pageWidth/2,57,{align:"center"});
+
+pdf.setTextColor(212,175,55);
+pdf.setFont("times","bold");
+pdf.setFontSize(33);
+pdf.text("Certificate of Completion",pageWidth/2,79,{align:"center"});
+
+pdf.setTextColor(240,240,240);
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(15);
+pdf.text("This certificate is proudly presented to",pageWidth/2,97,{align:"center"});
+
+pdf.setTextColor(255,255,255);
+pdf.setFont("times","bold");
+pdf.setFontSize(28);
+pdf.text(name.toUpperCase(),pageWidth/2,116,{align:"center"});
+
+pdf.setDrawColor(0,255,174);
+pdf.setLineWidth(0.8);
+pdf.line(92,122,205,122);
+
+pdf.setTextColor(240,240,240);
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(15);
+pdf.text("for successfully completing the",pageWidth/2,136,{align:"center"});
+
+pdf.setTextColor(0,255,174);
+pdf.setFont("helvetica","bold");
+pdf.setFontSize(18);
+
+const trackLines = pdf.splitTextToSize(`${track} Internship`,150);
+pdf.text(trackLines,pageWidth/2,149,{align:"center"});
+
+pdf.setTextColor(240,240,240);
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(10.5);
+pdf.text(
+"with dedication, active participation, and successful completion of assigned learning tasks.",
+pageWidth/2,
+158,
+{align:"center"}
+);
+
+pdf.setTextColor(255,255,255);
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(9);
+pdf.text(`Certificate ID: ${certId}`,36,175);
+pdf.text(`Issue Date: ${issueDate}`,36,183);
+
+pdf.setDrawColor(212,175,55);
+pdf.line(218,177,264,177);
+
+pdf.setTextColor(255,255,255);
+pdf.setFont("times","italic");
+pdf.setFontSize(14);
+pdf.text("Tamanna Mittal",241,171,{align:"center"});
+
+pdf.setFont("helvetica","normal");
+pdf.setFontSize(9);
+pdf.text("Authorized Signature",241,183,{align:"center"});
+pdf.text("TechEdge Internship Portal",241,190,{align:"center"});
 
 const qrDiv = document.createElement("div");
 qrDiv.style.display = "none";
 document.body.appendChild(qrDiv);
 
-new QRCode(qrDiv, {
+new QRCode(qrDiv,{
 text: verifyLink,
-width: 120,
-height: 120,
+width: 180,
+height: 180,
 correctLevel: QRCode.CorrectLevel.H
 });
 
@@ -536,19 +554,20 @@ setTimeout(()=>{
 const qrCanvas = qrDiv.querySelector("canvas");
 const qrImage = qrCanvas.toDataURL("image/png");
 
-pdf.addImage(qrImage, "PNG", 137, 173, 24, 24);
+pdf.setFillColor(255,255,255);
+pdf.roundedRect(138,174,22,22,2,2,"F");
 
-pdf.setTextColor(255, 255, 255);
+pdf.addImage(qrImage,"PNG",140,176,18,18);
+
+pdf.setTextColor(255,255,255);
 pdf.setFontSize(7);
-pdf.text("Scan to Verify", pageWidth / 2, 201, { align: "center" });
-
-pdf.setFontSize(8);
-pdf.text("Verified Digital Certificate", pageWidth / 2, 205, { align: "center" });
+pdf.text("Scan to Verify",pageWidth/2,201,{align:"center"});
 
 document.body.removeChild(qrDiv);
 
 pdf.save(name + "_Professional_Certificate.pdf");
 },300);
+
 };
 
 window.logout = function(){

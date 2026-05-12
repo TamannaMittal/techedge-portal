@@ -11,9 +11,11 @@
 <meta property="og:type" content="website">
 
 <title>TechEdge Internship Portal</title>
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
 
 *{
@@ -25,11 +27,14 @@ scroll-behavior:smooth;
 }
 
 body{
-min-height:100vh;
-color:white;
-background:linear-gradient(135deg,#07070f,#120a24,#08111f);
+margin:0;
+padding:0;
 overflow-x:hidden;
+background:linear-gradient(135deg,#07070f,#120a24,#08111f);
+color:white;
 }
+
+/* LOADER */
 
 #loader{
 position:fixed;
@@ -42,13 +47,14 @@ z-index:99999;
 transition:1s;
 }
 
-.loader-content{text-align:center;}
+.loader-content{
+text-align:center;
+}
 
 .loader-logo{
 font-size:58px;
 font-weight:800;
 margin-bottom:30px;
-color:white;
 }
 
 .loader-logo span,
@@ -74,52 +80,56 @@ background:linear-gradient(90deg,#7c3aed,#22d3ee,#00ffaa);
 animation:loadbar 2.5s linear forwards;
 }
 
+@keyframes loadbar{
+0%{width:0%;}
+100%{width:100%;}
+}
+
 .loader-content p{
 color:rgba(255,255,255,0.7);
 font-size:15px;
 letter-spacing:1px;
 }
 
-@keyframes loadbar{
-0%{width:0%;}
-100%{width:100%;}
-}
+/* MAIN PAGE */
 
 .page{
-width:92%;
-margin:28px auto;
+width:100%;
 min-height:100vh;
-border-radius:34px;
+
 background:
 linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.65)),
 url('https://www.transportation.gov/sites/dot.gov/files/images/Student%20Interns%20adobe.jpg')
 no-repeat center center;
+
 background-size:cover;
-border:1px solid rgba(255,255,255,0.16);
-box-shadow:0 30px 90px rgba(0,0,0,0.45);
 overflow:hidden;
 position:relative;
 }
+
+/* NAVBAR */
 
 nav{
 display:flex;
 justify-content:space-between;
 align-items:center;
-padding:18px 45px;
+padding:20px 60px;
+
 background:rgba(255,255,255,0.07);
 backdrop-filter:blur(18px);
+
 border-bottom:1px solid rgba(255,255,255,0.12);
 }
 
 .logo{
-font-size:26px;
+font-size:28px;
 font-weight:800;
 }
 
 .nav-links{
 display:flex;
 align-items:center;
-gap:28px;
+gap:25px;
 }
 
 .nav-links a{
@@ -140,22 +150,17 @@ border-radius:999px;
 background:linear-gradient(135deg,#7c3aed,#d946ef);
 }
 
-.menu-btn{
-display:none;
-font-size:30px;
-background:none;
-border:none;
-color:white;
-cursor:pointer;
-}
+/* HERO */
 
 .hero{
 position:relative;
 min-height:520px;
+
 display:flex;
 flex-direction:column;
 justify-content:center;
 align-items:center;
+
 text-align:center;
 padding:80px 20px;
 overflow:hidden;
@@ -187,10 +192,12 @@ font-size:14px;
 }
 
 .hero h1{
-font-size:44px;
+font-size:48px;
 font-weight:800;
 margin-bottom:18px;
+
 background:linear-gradient(90deg,#a855f7,#60a5fa,#22d3ee);
+
 -webkit-background-clip:text;
 -webkit-text-fill-color:transparent;
 }
@@ -220,7 +227,9 @@ justify-content:center;
 padding:14px 34px;
 border:none;
 border-radius:999px;
+
 background:linear-gradient(135deg,#7c3aed,#d946ef,#22d3ee);
+
 color:white;
 font-weight:700;
 text-decoration:none;
@@ -237,9 +246,12 @@ background:rgba(255,255,255,0.12);
 border:1px solid rgba(255,255,255,0.2);
 }
 
+/* STATS */
+
 .stats{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+
 gap:22px;
 width:82%;
 margin:-45px auto 35px;
@@ -250,9 +262,12 @@ z-index:2;
 .stat-box{
 padding:28px;
 border-radius:24px;
+
 background:rgba(255,255,255,0.08);
 border:1px solid rgba(255,255,255,0.18);
+
 backdrop-filter:blur(18px);
+
 text-align:center;
 transition:0.4s;
 }
@@ -270,9 +285,12 @@ color:#22d3ee;
 color:rgba(255,255,255,0.82);
 }
 
+/* FEATURES */
+
 .features{
 display:grid;
 grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
+
 gap:25px;
 width:82%;
 margin:20px auto 70px;
@@ -281,9 +299,12 @@ margin:20px auto 70px;
 .card{
 padding:32px;
 border-radius:28px;
+
 background:rgba(255,255,255,0.10);
 border:1px solid rgba(255,255,255,0.18);
+
 backdrop-filter:blur(18px);
+
 transition:0.35s;
 }
 
@@ -306,7 +327,7 @@ color:rgba(255,255,255,0.78);
 line-height:1.6;
 }
 
-/* AI RESUME ANALYZER */
+/* RESUME ANALYZER */
 
 .resume-section{
 width:82%;
@@ -322,19 +343,12 @@ background:linear-gradient(90deg,#a855f7,#22d3ee);
 -webkit-text-fill-color:transparent;
 }
 
-.resume-section p{
-color:rgba(255,255,255,0.78);
-margin-bottom:28px;
-line-height:1.6;
-}
-
 .resume-box{
 padding:35px;
 border-radius:28px;
 background:rgba(255,255,255,0.09);
 border:1px solid rgba(255,255,255,0.18);
 backdrop-filter:blur(18px);
-box-shadow:0 20px 50px rgba(0,0,0,0.25);
 }
 
 .resume-box input{
@@ -349,10 +363,8 @@ margin-bottom:18px;
 }
 
 #resumeResult{
-margin-top:30px;
-font-size:17px;
+margin-top:25px;
 line-height:1.8;
-color:white;
 }
 
 /* CHATBOT */
@@ -371,11 +383,6 @@ font-size:28px;
 cursor:pointer;
 z-index:9999;
 box-shadow:0 0 25px rgba(34,211,238,0.55);
-transition:0.3s;
-}
-
-.chatbot-button:hover{
-transform:scale(1.1);
 }
 
 .chatbot-box{
@@ -384,28 +391,33 @@ right:25px;
 bottom:100px;
 width:340px;
 height:460px;
+
 background:rgba(8,12,25,0.95);
+
 border:1px solid rgba(255,255,255,0.18);
 border-radius:25px;
+
 backdrop-filter:blur(18px);
-box-shadow:0 25px 70px rgba(0,0,0,0.5);
-z-index:9999;
+
 display:none;
 flex-direction:column;
 overflow:hidden;
+z-index:9999;
 }
 
 .chatbot-header{
 padding:18px;
 background:linear-gradient(135deg,#7c3aed,#22d3ee);
+
 display:flex;
 justify-content:space-between;
 align-items:center;
+
 font-weight:700;
 }
 
 .chatbot-header button{
-background:transparent;
+background:none;
 border:none;
 color:white;
 font-size:22px;
@@ -416,6 +428,7 @@ cursor:pointer;
 flex:1;
 padding:15px;
 overflow-y:auto;
+
 display:flex;
 flex-direction:column;
 gap:12px;
@@ -474,10 +487,6 @@ background:rgba(255,255,255,0.12);
 color:white;
 }
 
-.chatbot-input input::placeholder{
-color:rgba(255,255,255,0.55);
-}
-
 .chatbot-input button{
 padding:10px 16px;
 border:none;
@@ -487,6 +496,8 @@ font-weight:700;
 cursor:pointer;
 }
 
+/* FOOTER */
+
 footer{
 text-align:center;
 padding:30px;
@@ -495,46 +506,20 @@ color:rgba(255,255,255,0.75);
 border-top:1px solid rgba(255,255,255,0.12);
 }
 
+/* MOBILE */
+
 @media(max-width:900px){
 
-.page{
-width:96%;
-margin:14px auto;
-border-radius:24px;
-}
-
 nav{
-padding:18px 22px;
-}
-
-.menu-btn{
-display:block;
+padding:18px 20px;
+flex-direction:column;
+gap:18px;
 }
 
 .nav-links{
-position:absolute;
-top:70px;
-right:20px;
-width:230px;
-padding:18px;
-display:none;
-flex-direction:column;
-align-items:flex-start;
-gap:16px;
-border-radius:22px;
-background:rgba(8,12,25,0.96);
-border:1px solid rgba(255,255,255,0.18);
-backdrop-filter:blur(18px);
-z-index:99;
-}
-
-.nav-links.active{
-display:flex;
-}
-
-.hero{
-min-height:520px;
-padding:70px 20px;
+flex-wrap:wrap;
+justify-content:center;
+gap:14px;
 }
 
 .hero h1{
@@ -548,7 +533,7 @@ font-size:15px;
 .stats,
 .features,
 .resume-section{
-width:90%;
+width:95%;
 }
 
 .chatbot-box{
@@ -558,6 +543,7 @@ height:430px;
 }
 
 }
+
 </style>
 
 </head>
@@ -565,39 +551,59 @@ height:430px;
 <body>
 
 <div id="loader">
+
 <div class="loader-content">
-<h1 class="loader-logo">Tech<span>Edge</span></h1>
-<div class="loader-bar"><div class="loader-fill"></div></div>
-<p>Launching Future Careers...</p>
+
+<h1 class="loader-logo">
+Tech<span>Edge</span>
+</h1>
+
+<div class="loader-bar">
+<div class="loader-fill"></div>
 </div>
+
+<p>Launching Future Careers...</p>
+
+</div>
+
 </div>
 
 <div class="page">
 
 <nav>
-<div class="logo">Tech<span>Edge</span></div>
 
-<button class="menu-btn" onclick="toggleMenu()">☰</button>
+<div class="logo">
+Tech<span>Edge</span>
+</div>
 
-<div class="nav-links" id="navLinks">
+<div class="nav-links">
+
 <a href="index.html">Home</a>
 <a href="about.html">About</a>
 <a href="internship.html">Internship</a>
 <a href="apply.html">Apply</a>
 <a href="contact.html">Contact</a>
 <a href="admin-login.html" class="nav-btn">Admin</a>
+
 </div>
+
 </nav>
 
 <section class="hero">
 
 <video autoplay muted loop playsinline class="hero-video">
-<source src="https://cdn.coverr.co/videos/coverr-working-on-a-laptop-5635/1080p.mp4" type="video/mp4">
+
+<source
+src="https://cdn.coverr.co/videos/coverr-working-on-a-laptop-5635/1080p.mp4"
+type="video/mp4">
+
 </video>
 
 <div class="hero-overlay"></div>
 
-<div class="badge">🚀 Internship Portal for Future Professionals</div>
+<div class="badge">
+🚀 Internship Portal for Future Professionals
+</div>
 
 <h1 id="typing"></h1>
 
@@ -607,13 +613,21 @@ get certified, gain experience, and build your future with confidence.
 </p>
 
 <div class="buttons">
-<a href="apply.html" class="btn">Apply Now</a>
-<a href="internship.html" class="btn btn-outline">Explore Internships</a>
+
+<a href="apply.html" class="btn">
+Apply Now
+</a>
+
+<a href="internship.html" class="btn btn-outline">
+Explore Internships
+</a>
+
 </div>
 
 </section>
 
 <section class="stats">
+
 <div class="stat-box">
 <h2 class="counter" data-target="13">0</h2>
 <p>Students Applied</p>
@@ -633,43 +647,61 @@ get certified, gain experience, and build your future with confidence.
 <h2 class="counter" data-target="6">0</h2>
 <p>Career Domains</p>
 </div>
+
 </section>
 
 <section class="features">
 
 <div class="card">
 <div class="icon">💻</div>
+
 <h3>Real Projects</h3>
-<p>Work on live projects and build practical skills that help you grow professionally.</p>
+
+<p>
+Work on live projects and build practical skills that help you grow professionally.
+</p>
 </div>
 
 <div class="card">
 <div class="icon">🏆</div>
+
 <h3>Verified Certificate</h3>
-<p>Receive a verified internship completion certificate to strengthen your resume.</p>
+
+<p>
+Receive a verified internship completion certificate to strengthen your resume.
+</p>
 </div>
 
 <div class="card">
 <div class="icon">📈</div>
+
 <h3>Career Growth</h3>
-<p>Boost your confidence with industry-level mentorship and hands-on experience.</p>
+
+<p>
+Boost your confidence with industry-level mentorship and hands-on experience.
+</p>
 </div>
 
 </section>
 
 <section class="resume-section">
+
 <h2>🤖 AI Resume Analyzer</h2>
-<p>
-Upload your resume and get instant AI-based feedback, resume score,
-and skill suggestions for internship applications.
-</p>
 
 <div class="resume-box">
+
 <input type="file" id="resumeInput" accept=".pdf,.doc,.docx">
+
 <br>
-<button class="btn" onclick="analyzeResume()">Analyze Resume</button>
+
+<button class="btn" onclick="analyzeResume()">
+Analyze Resume
+</button>
+
 <div id="resumeResult"></div>
+
 </div>
+
 </section>
 
 <footer>
@@ -678,186 +710,265 @@ and skill suggestions for internship applications.
 
 </div>
 
-<button class="chatbot-button" onclick="toggleChatbot()">🤖</button>
+<!-- CHATBOT -->
+
+<button class="chatbot-button" onclick="toggleChatbot()">
+🤖
+</button>
 
 <div class="chatbot-box" id="chatbotBox">
 
 <div class="chatbot-header">
+
 <span>TechEdge AI Assistant</span>
+
 <button onclick="toggleChatbot()">×</button>
+
 </div>
 
 <div class="chatbot-messages" id="chatMessages">
+
 <div class="bot-message">
-Hi! I am TechEdge AI Assistant 🤖<br>
-Ask me about internships, application process, certificate, resume, or contact.
+Hi! I am TechEdge AI Assistant 🤖
 </div>
+
 </div>
 
 <div class="quick-questions">
-<button onclick="quickAsk('How to apply?')">How to apply?</button>
-<button onclick="quickAsk('Do I get certificate?')">Certificate?</button>
-<button onclick="quickAsk('What internships are available?')">Internships?</button>
-<button onclick="quickAsk('How to contact?')">Contact?</button>
+
+<button onclick="quickAsk('How to apply?')">
+Apply?
+</button>
+
+<button onclick="quickAsk('Certificate?')">
+Certificate?
+</button>
+
+<button onclick="quickAsk('Internships?')">
+Internships?
+</button>
+
 </div>
 
 <div class="chatbot-input">
-<input type="text" id="userInput" placeholder="Type your question..." onkeydown="handleEnter(event)">
-<button onclick="sendMessage()">Send</button>
+
+<input type="text" id="userInput"
+placeholder="Ask something..."
+onkeydown="handleEnter(event)">
+
+<button onclick="sendMessage()">
+Send
+</button>
+
 </div>
 
 </div>
 
 <script>
 
+/* LOADER */
+
 window.addEventListener("load",()=>{
+
 setTimeout(()=>{
+
 document.getElementById("loader").style.opacity="0";
 document.getElementById("loader").style.visibility="hidden";
+
 },2600);
+
 });
 
-function toggleMenu(){
-document.getElementById("navLinks").classList.toggle("active");
-}
+/* HERO TEXT */
 
 const text = "Launch Your Career With TechEdge";
+
 let i = 0;
 
 function typeEffect(){
+
 if(i < text.length){
+
 document.getElementById("typing").innerHTML += text.charAt(i);
+
 i++;
+
 setTimeout(typeEffect,65);
+
 }else{
+
 document.getElementById("typing").innerHTML =
 "Launch Your Career With <span>TechEdge</span>";
+
 }
+
 }
+
 typeEffect();
 
+/* COUNTERS */
+
 function animateCounters(){
+
 const counters = document.querySelectorAll(".counter");
 
 counters.forEach(counter=>{
+
 counter.innerText="0";
 
 const updateCounter=()=>{
+
 const target=+counter.getAttribute("data-target");
+
 const current=+counter.innerText;
+
 const increment=target/80;
 
 if(current<target){
+
 counter.innerText=`${Math.ceil(current+increment)}`;
+
 setTimeout(updateCounter,20);
+
 }else{
+
 counter.innerText=target;
+
 }
+
 };
 
 updateCounter();
+
 });
+
 }
+
 animateCounters();
 
+/* RESUME ANALYZER */
+
 function analyzeResume(){
+
 const file = document.getElementById("resumeInput").files[0];
+
 const result = document.getElementById("resumeResult");
 
 if(!file){
-result.innerHTML = "❌ Please upload your resume first.";
+
+result.innerHTML =
+"❌ Please upload your resume first.";
+
 return;
+
 }
 
-const fileName = file.name.toLowerCase();
-
-if(!(fileName.endsWith(".pdf") || fileName.endsWith(".doc") || fileName.endsWith(".docx"))){
-result.innerHTML = "❌ Please upload a PDF, DOC, or DOCX resume.";
-return;
-}
-
-const randomScore = Math.floor(Math.random() * 16) + 82;
+const randomScore =
+Math.floor(Math.random() * 16) + 82;
 
 result.innerHTML = `
 ✅ Resume Uploaded Successfully<br><br>
-📄 File Name: <b>${file.name}</b><br><br>
-🤖 AI Resume Score: <b>${randomScore}/100</b><br><br>
-💡 Suggested Skills: <b>HTML, CSS, JavaScript, React, Communication</b><br><br>
-🚀 Recommendation: Your resume looks strong for internship applications. Add more project links and measurable achievements for a better impact.
+
+📄 File Name:
+<b>${file.name}</b><br><br>
+
+🤖 AI Resume Score:
+<b>${randomScore}/100</b><br><br>
+
+💡 Suggested Skills:
+<b>HTML, CSS, JavaScript, React</b>
 `;
+
 }
 
+/* CHATBOT */
+
 function toggleChatbot(){
-const box = document.getElementById("chatbotBox");
-box.style.display = box.style.display === "flex" ? "none" : "flex";
+
+const box =
+document.getElementById("chatbotBox");
+
+box.style.display =
+box.style.display === "flex"
+? "none"
+: "flex";
+
 }
 
 function quickAsk(question){
-document.getElementById("userInput").value = question;
+
+document.getElementById("userInput").value =
+question;
+
 sendMessage();
+
 }
 
 function handleEnter(event){
+
 if(event.key === "Enter"){
 sendMessage();
 }
+
 }
 
 function sendMessage(){
-const input = document.getElementById("userInput");
+
+const input =
+document.getElementById("userInput");
+
 const message = input.value.trim();
 
 if(message === "") return;
 
 addMessage(message,"user-message");
-input.value = "";
+
+input.value="";
 
 setTimeout(()=>{
+
 addMessage(getBotReply(message),"bot-message");
+
 },500);
+
 }
 
 function addMessage(text,className){
-const chatMessages = document.getElementById("chatMessages");
+
+const chatMessages =
+document.getElementById("chatMessages");
+
 const div = document.createElement("div");
+
 div.className = className;
+
 div.innerHTML = text;
+
 chatMessages.appendChild(div);
-chatMessages.scrollTop = chatMessages.scrollHeight;
+
+chatMessages.scrollTop =
+chatMessages.scrollHeight;
+
 }
 
 function getBotReply(message){
+
 const msg = message.toLowerCase();
 
-if(msg.includes("apply") || msg.includes("application") || msg.includes("form")){
-return "You can apply by clicking the <b>Apply Now</b> button and filling the internship application form.";
-}
-
-if(msg.includes("internship") || msg.includes("available") || msg.includes("track")){
-return "TechEdge offers internships in Web Development, Python Development, Data Science, UI/UX Design, Digital Marketing, and Java Development.";
+if(msg.includes("apply")){
+return "Click Apply Now and fill the form.";
 }
 
 if(msg.includes("certificate")){
-return "Yes ✅ Selected interns receive a verified internship completion certificate after successful completion.";
+return "Yes ✅ verified certificate available.";
 }
 
-if(msg.includes("resume") || msg.includes("cv")){
-return "You can upload or paste your resume link in the application form. PDF resume is preferred.";
+if(msg.includes("internship")){
+return "We offer Web Development, UI/UX, AI and more.";
 }
 
-if(msg.includes("contact") || msg.includes("email")){
-return "You can contact TechEdge through the Contact page. Our team will respond soon.";
-}
+return "I can help with internships, resume and certificates.";
 
-if(msg.includes("admin") || msg.includes("dashboard")){
-return "Admin dashboard is only for authorized TechEdge team members.";
-}
-
-if(msg.includes("hello") || msg.includes("hi")){
-return "Hello! 👋 How can I help you with TechEdge internships?";
-}
-
-return "I can help you with internships, apply process, certificates, resume upload, contact, and application status.";
 }
 
 </script>

@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Application Status | TechEdge</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Poppins',sans-serif;
+}
+
+body{
+min-height:100vh;
+color:white;
+background:
+linear-gradient(rgba(0,0,0,0.72),rgba(0,0,0,0.78)),
+url('https://images.unsplash.com/photo-1497366754035-f200968a6e72')
+no-repeat center center fixed;
+background-size:cover;
+display:flex;
+align-items:center;
+justify-content:center;
+padding:25px;
+}
+
+.status-card{
+width:100%;
+max-width:650px;
+padding:38px;
+border-radius:28px;
+background:rgba(255,255,255,0.10);
+border:1px solid rgba(255,255,255,0.18);
+backdrop-filter:blur(18px);
+box-shadow:0 25px 70px rgba(0,0,0,0.5);
+text-align:center;
+}
+
+.logo{
+font-size:34px;
+font-weight:800;
+margin-bottom:18px;
+}
+
+.logo span{
+background:linear-gradient(135deg,#a855f7,#22d3ee,#00ffaa);
+-webkit-background-clip:text;
+color:transparent;
+}
+
+h1{
+font-size:34px;
+margin-bottom:12px;
+color:#00ffaa;
+}
+
+.subtitle{
+color:rgba(255,255,255,0.78);
+margin-bottom:28px;
+line-height:1.6;
+}
+
+input{
+width:100%;
+padding:15px;
+border:none;
+outline:none;
+border-radius:16px;
+background:rgba(255,255,255,0.14);
+color:white;
+font-size:15px;
+margin-bottom:18px;
+}
+
+input::placeholder{
+color:rgba(255,255,255,0.6);
+}
+
+button{
+padding:14px 35px;
+border:none;
+border-radius:999px;
+background:linear-gradient(135deg,#7c3aed,#22d3ee,#00ffaa);
+color:white;
+font-weight:700;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:translateY(-4px);
+}
+
+.result{
+margin-top:28px;
+text-align:left;
+display:none;
+padding:25px;
+border-radius:22px;
+background:rgba(0,255,170,0.08);
+border:1px solid rgba(0,255,170,0.25);
+}
+
+.result p{
+margin:13px 0;
+font-size:16px;
+line-height:1.6;
+}
+
+.result strong{
+color:#00ffaa;
+}
+
+.status-badge{
+display:inline-block;
+padding:9px 18px;
+border-radius:999px;
+font-weight:700;
+margin-top:6px;
+}
+
+.pending{
+background:#ffb703;
+color:#111;
+}
+
+.accepted{
+background:#00ffaa;
+color:#111;
+}
+
+.rejected{
+background:#ff4d6d;
+color:white;
+}
+
+.shortlisted{
+background:#22d3ee;
+color:#111;
+}
+
+.error{
+margin-top:22px;
+color:#ff6b6b;
+font-weight:600;
+display:none;
+}
+
+.back{
+display:inline-block;
+margin-top:25px;
+color:#00ffaa;
+text-decoration:none;
+font-weight:600;
+}
+</style>
+</head>
+
+<body>
+
+<div class="status-card">
+
+<div class="logo">Tech<span>Edge</span></div>
+
+<h1>Check Application Status</h1>
+
+<p class="subtitle">
+Enter your registered email address to check your internship application status and admin note.
+</p>
+
+<input type="email" id="emailInput" placeholder="Enter registered email address">
+
+<button onclick="checkStatus()">Check Status</button>
+
+<div class="error" id="errorBox"></div>
+
+<div class="result" id="resultBox">
+
+<p><strong>Name:</strong> <span id="studentName"></span></p>
+<p><strong>Email:</strong> <span id="studentEmail"></span></p>
+<p><strong>Internship Track:</strong> <span id="studentTrack"></span></p>
+
+<p>
+<strong>Application Status:</strong><br>
+<span id="studentStatus" class="status-badge"></span>
+</p>
+
+<p><strong>Admin Note:</strong> <span id="adminNote"></span></p>
+
+</div>
+
+<a href="index.html" class="back">← Back to Home</a>
+
+</div>
+
+<script type="module">
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
+projectId: "internship-portal-pro-7cbb1",
+storageBucket: "internship-portal-pro-7cbb1.appspot.com",
+messagingSenderId: "149057403895",
+appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+window.checkStatus = async function(){
+
+const email = document.getElementById("emailInput").value.trim().toLowerCase();
+
+const errorBox = document.getElementById("errorBox");
+const resultBox = document.getElementById("resultBox");
+
+errorBox.style.display = "none";
+resultBox.style.display = "none";
+
+if(email === ""){
+errorBox.innerText = "Please enter your registered email address.";
+errorBox.style.display = "block";
+return;
+}
+
+let found = false;
+
+const querySnapshot = await getDocs(collection(db,"applications"));
+
+querySnapshot.forEach((doc)=>{
+
+const data = doc.data();
+
+if(data.email && data.email.toLowerCase() === email){
+
+found = true;
+
+document.getElementById("studentName").innerText = data.name || "Not Available";
+document.getElementById("studentEmail").innerText = data.email || "Not Available";
+document.getElementById("studentTrack").innerText = data.track || data.internship || "Not Available";
+
+const statusText = data.status || "Pending";
+const statusBadge = document.getElementById("studentStatus");
+
+statusBadge.innerText = statusText;
+statusBadge.className = "status-badge";
+
+if(statusText.toLowerCase().includes("accepted")){
+statusBadge.classList.add("accepted");
+}
+else if(statusText.toLowerCase().includes("rejected")){
+statusBadge.classList.add("rejected");
+}
+else if(statusText.toLowerCase().includes("shortlisted")){
+statusBadge.classList.add("shortlisted");
+}
+else{
+statusBadge.classList.add("pending");
+}
+
+document.getElementById("adminNote").innerText =
+data.adminNote || data.note || "No admin note added yet.";
+
+resultBox.style.display = "block";
+
+}
+
+});
+
+if(!found){
+errorBox.innerText = "No application found with this email.";
+errorBox.style.display = "block";
+}
+
+}
+
+</script>
+
+</body>
+</html>

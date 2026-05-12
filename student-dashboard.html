@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,39 +20,227 @@ color:white;
 padding:20px;
 
 background:
-linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
+linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.75)),
 url('https://images.unsplash.com/photo-1498050108023-c5249f4df085')
 no-repeat center center fixed;
 
 background-size:cover;
 }
 
-h1{
-text-align:center;
-margin-bottom:30px;
-}
+/* NAVBAR */
 
-/* Card */
-
-.card{
-max-width:600px;
-margin:auto;
-background:rgba(255,255,255,0.1);
-padding:30px;
+nav{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:18px 35px;
 border-radius:20px;
-backdrop-filter:blur(10px);
+background:rgba(255,255,255,0.1);
+backdrop-filter:blur(12px);
+margin-bottom:35px;
+}
+
+nav h2{
+color:#00ffae;
+font-size:32px;
+}
+
+.nav-actions{
+display:flex;
+align-items:center;
+gap:18px;
+}
+
+nav button{
+padding:12px 25px;
+border:none;
+border-radius:25px;
+background:#ff4d4d;
+color:white;
+font-weight:bold;
+cursor:pointer;
+font-size:15px;
+}
+
+/* BELL */
+
+.bell{
+position:relative;
+font-size:25px;
+cursor:pointer;
+background:rgba(255,255,255,0.12);
+padding:12px 15px;
+border-radius:50%;
+transition:0.3s;
+}
+
+.bell:hover{
+transform:scale(1.08);
+box-shadow:0 0 18px rgba(0,255,174,0.4);
+}
+
+.bell span{
+position:absolute;
+top:-6px;
+right:-6px;
+background:#ff4d4d;
+color:white;
+font-size:12px;
+width:22px;
+height:22px;
+display:flex;
+align-items:center;
+justify-content:center;
+border-radius:50%;
+font-weight:bold;
+}
+
+/* NOTIFICATION PANEL */
+
+.notification-panel{
+position:absolute;
+top:100px;
+right:40px;
+width:340px;
+background:rgba(15,15,15,0.95);
+backdrop-filter:blur(15px);
+border:1px solid rgba(255,255,255,0.15);
+border-radius:18px;
+padding:20px;
+display:none;
+z-index:999;
+box-shadow:0 0 25px rgba(0,255,174,0.18);
+}
+
+.notification-panel h3{
+color:#00ffae;
+margin-bottom:15px;
+}
+
+.notify-item{
+background:rgba(255,255,255,0.08);
+padding:14px;
+border-radius:12px;
+margin-bottom:12px;
+font-size:14px;
+line-height:1.5;
+}
+
+.notify-item strong{
+color:#00ffae;
+}
+
+/* HEADER */
+
+.header{
+text-align:center;
+margin-bottom:35px;
+}
+
+.header h1{
+font-size:60px;
+margin-bottom:10px;
+}
+
+.header p{
+font-size:20px;
+color:#ddd;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1.3fr;
+gap:25px;
+}
+
+/* CARDS */
+
+.profile-card,
+.status-card,
+.timeline-card,
+.actions-card,
+.interview-card{
+
+background:rgba(255,255,255,0.1);
+padding:28px;
+border-radius:24px;
+backdrop-filter:blur(14px);
+border:1px solid rgba(255,255,255,0.15);
+box-shadow:0 0 25px rgba(0,0,0,0.3);
+transition:0.3s;
+
+}
+
+.profile-card:hover,
+.status-card:hover,
+.timeline-card:hover,
+.actions-card:hover,
+.interview-card:hover{
+
+transform:translateY(-5px);
+box-shadow:0 0 30px rgba(0,255,174,0.25);
+
+}
+
+.profile-card{
 text-align:center;
 }
 
-.status{
-margin-top:20px;
-padding:15px;
-border-radius:10px;
+/* AVATAR */
+
+.avatar{
+width:110px;
+height:110px;
+margin:auto;
+border-radius:50%;
+background:linear-gradient(135deg,#00ffae,#4dabff);
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:42px;
 font-weight:bold;
+color:#071224;
+margin-bottom:20px;
+}
+
+.profile-card h2{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.profile-card p{
+color:#ddd;
+margin:10px 0;
+font-size:20px;
+}
+
+/* WELCOME */
+
+.welcome{
+margin-top:18px;
+font-size:22px;
+color:#00ffae;
+font-weight:bold;
+}
+
+/* STATUS */
+
+.status-badge{
+display:inline-block;
+margin-top:22px;
+padding:14px 28px;
+border-radius:30px;
+font-weight:bold;
+font-size:20px;
 }
 
 .pending{
 background:#ffaa00;
+color:black;
 }
 
 .accepted{
@@ -62,53 +249,558 @@ color:black;
 }
 
 .rejected{
-background:#00ff95;
+background:#ff4d4d;
+color:white;
+}
+
+.shortlisted{
+background:#ffd43b;
 color:black;
 }
 
-</style>
+/* GLOW */
 
+.glow{
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+
+from{
+box-shadow:0 0 10px #00ffae;
+}
+
+to{
+box-shadow:0 0 25px #00ffae;
+}
+
+}
+
+/* TITLES */
+
+.status-card h2,
+.timeline-card h2,
+.actions-card h2,
+.interview-card h2{
+
+color:#00ffae;
+margin-bottom:20px;
+font-size:38px;
+
+}
+
+/* INFO */
+
+.info-row{
+display:flex;
+justify-content:space-between;
+gap:15px;
+padding:16px 0;
+border-bottom:1px solid rgba(255,255,255,0.12);
+font-size:20px;
+}
+
+.info-row span:first-child{
+color:#ccc;
+}
+
+.info-row span:last-child{
+font-weight:bold;
+text-align:right;
+}
+
+/* TIMELINE */
+
+.timeline{
+margin-top:15px;
+}
+
+.step{
+display:flex;
+align-items:center;
+gap:14px;
+margin:22px 0;
+}
+
+.circle{
+width:40px;
+height:40px;
+border-radius:50%;
+display:flex;
+align-items:center;
+justify-content:center;
+background:rgba(255,255,255,0.18);
+font-weight:bold;
+font-size:18px;
+}
+
+.step p{
+font-size:20px;
+}
+
+.step.active .circle{
+background:#00ffae;
+color:black;
+}
+
+.step.active p{
+color:#00ffae;
+font-weight:bold;
+}
+
+/* BUTTONS */
+
+.actions{
+display:flex;
+gap:15px;
+flex-wrap:wrap;
+}
+
+.actions a,
+.actions button{
+
+padding:14px 24px;
+border:none;
+border-radius:25px;
+text-decoration:none;
+background:#00ffae;
+color:black;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+font-size:18px;
+
+}
+
+.actions a:hover,
+.actions button:hover{
+transform:scale(1.05);
+}
+
+.actions .secondary{
+background:rgba(255,255,255,0.15);
+color:white;
+}
+
+/* INTERVIEW */
+
+.interview-box p{
+margin:12px 0;
+font-size:18px;
+color:#eee;
+}
+
+.interview-box strong{
+color:#00ffae;
+}
+
+.interview-box a{
+color:#00ffae;
+font-weight:bold;
+text-decoration:none;
+}
+
+.admin-note{
+margin-top:25px;
+padding:20px;
+background:rgba(0,255,174,0.08);
+border-left:4px solid #00ffae;
+border-radius:14px;
+}
+
+.admin-note h3{
+margin-bottom:10px;
+color:#00ffae;
+font-size:24px;
+}
+
+.admin-note p{
+font-size:18px;
+line-height:1.7;
+}
+
+/* FOOTER */
+
+.footer{
+text-align:center;
+margin-top:35px;
+color:#ccc;
+font-size:18px;
+}
+
+/* MOBILE */
+
+@media(max-width:850px){
+
+.dashboard{
+grid-template-columns:1fr;
+}
+
+nav{
+flex-direction:column;
+gap:15px;
+}
+
+.header h1{
+font-size:38px;
+}
+
+.notification-panel{
+width:90%;
+right:5%;
+top:120px;
+}
+
+.profile-card h2{
+font-size:30px;
+}
+
+.status-card h2,
+.timeline-card h2,
+.actions-card h2,
+.interview-card h2{
+font-size:28px;
+}
+
+}
+
+</style>
 </head>
 
 <body>
 
+<!-- NAVBAR -->
+
+<nav>
+
+<h2>TechEdge Student Portal</h2>
+
+<div class="nav-actions">
+
+<div class="bell" onclick="toggleNotifications()">
+
+🔔
+
+<span id="notifyCount">0</span>
+
+</div>
+
+<button onclick="logout()">Logout</button>
+
+</div>
+
+</nav>
+
+<!-- NOTIFICATIONS -->
+
+<div class="notification-panel" id="notificationPanel">
+
+<h3>Notifications</h3>
+
+<div id="notificationList"></div>
+
+</div>
+
+<!-- HEADER -->
+
+<div class="header">
+
 <h1>Student Dashboard</h1>
 
-<div class="card">
+<p>Track your internship application and certificate status</p>
 
-<h2>Application Status</h2>
+</div>
 
-<p id="name"></p>
-<p id="track"></p>
+<!-- LOADING -->
 
-<div id="status" class="status">Loading...</div>
+<div id="loading" class="loading">
+
+Loading your application...
+
+</div>
+
+<!-- DASHBOARD -->
+
+<div class="dashboard" id="dashboard" style="display:none;">
+
+<!-- LEFT -->
+
+<div class="profile-card">
+
+<div class="avatar" id="avatar">S</div>
+
+<h2 id="studentName">Student Name</h2>
+
+<p id="studentEmail">student@email.com</p>
+
+<p id="studentTrack">Internship Track</p>
+
+<div class="welcome">
+Welcome back to TechEdge 🚀
+</div>
+
+<div id="statusBadge" class="status-badge pending">
+Pending
+</div>
+
+</div>
+
+<!-- RIGHT -->
+
+<div>
+
+<!-- DETAILS -->
+
+<div class="status-card">
+
+<h2>Application Details</h2>
+
+<div class="info-row">
+<span>Name</span>
+<span id="detailName">-</span>
+</div>
+
+<div class="info-row">
+<span>Email</span>
+<span id="detailEmail">-</span>
+</div>
+
+<div class="info-row">
+<span>Internship Track</span>
+<span id="detailTrack">-</span>
+</div>
+
+<div class="info-row">
+<span>Application Status</span>
+<span id="detailStatus">-</span>
+</div>
+
+<div class="info-row">
+<span>Resume</span>
+<span id="detailResume">-</span>
+</div>
+
+</div>
+
+<br>
+
+<!-- TIMELINE -->
+
+<div class="timeline-card">
+
+<h2>Application Progress</h2>
+
+<div class="timeline">
+
+<div class="step active" id="stepApplied">
+<div class="circle">1</div>
+<p>Application Submitted</p>
+</div>
+
+<div class="step" id="stepReviewed">
+<div class="circle">2</div>
+<p>Application Reviewed</p>
+</div>
+
+<div class="step" id="stepShortlisted">
+<div class="circle">3</div>
+<p>Shortlisted</p>
+</div>
+
+<div class="step" id="stepAccepted">
+<div class="circle">4</div>
+<p>Final Decision</p>
+</div>
+
+</div>
+
+</div>
+
+<br>
+
+<!-- INTERVIEW -->
+
+<div class="interview-card">
+
+<h2>Interview Schedule</h2>
+
+<div class="interview-box">
+
+<p><strong>Status:</strong> Pending</p>
+
+<p><strong>Date:</strong> 18 May 2026</p>
+
+<p><strong>Time:</strong> 2:00 PM</p>
+
+<p><strong>Mode:</strong> Online Interview</p>
+
+<p>
+<strong>Meeting Link:</strong>
+<a href="#" target="_blank">Join Meeting</a>
+</p>
+
+</div>
+
+<div class="admin-note">
+
+<h3>Admin Note</h3>
+
+<p>
+Your resume has been shortlisted.
+Please prepare for the technical interview round.
+</p>
+
+</div>
+
+</div>
+
+<br>
+
+<!-- ACTIONS -->
+
+<div class="actions-card">
+
+<h2>Quick Actions</h2>
+
+<div class="actions">
+
+<a href="internship.html">Explore Internships</a>
+
+<a href="apply.html" class="secondary">
+Apply Again
+</a>
+
+<a id="resumeBtn"
+href="#"
+target="_blank"
+class="secondary"
+style="display:none;">
+
+View Resume
+
+</a>
+
+<a id="verifyBtn"
+href="#"
+target="_blank"
+class="secondary"
+style="display:none;">
+
+Verify Certificate
+
+</a>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- FOOTER -->
+
+<div class="footer">
+
+© 2026 TechEdge Internship Portal • All Rights Reserved
 
 </div>
 
 <script type="module">
 
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+import { initializeApp }
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
+
+import {
+getFirestore,
+collection,
+getDocs
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
+
+import {
+getAuth,
+onAuthStateChanged,
+signOut
+}
+from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
+
+/* FIREBASE */
 
 const firebaseConfig = {
-  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
-  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
-  projectId: "internship-portal-pro-7cbb1",
-  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
-  messagingSenderId: "149057403895",
-  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
+
+apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
+
+authDomain:
+"internship-portal-pro-7cbb1.firebaseapp.com",
+
+projectId:
+"internship-portal-pro-7cbb1",
+
+storageBucket:
+"internship-portal-pro-7cbb1.appspot.com",
+
+messagingSenderId:
+"149057403895",
+
+appId:
+"1:149057403895:web:8b9bdd770e7475c2a38cf2"
+
 };
 
 const app = initializeApp(firebaseConfig);
+
 const db = getFirestore(app);
+
 const auth = getAuth(app);
+
+/* LOGOUT */
+
+window.logout = function(){
+
+signOut(auth).then(()=>{
+
+window.location.href="student-login.html";
+
+});
+
+};
+
+/* NOTIFICATIONS */
+
+window.toggleNotifications = function(){
+
+const panel =
+document.getElementById("notificationPanel");
+
+if(panel.style.display==="block"){
+
+panel.style.display="none";
+
+}else{
+
+panel.style.display="block";
+
+}
+
+};
+
+/* AUTH */
 
 onAuthStateChanged(auth, async(user)=>{
 
-if(user){
+if(!user){
 
-const querySnapshot = await getDocs(collection(db,"applications"));
+window.location.href="student-login.html";
+
+return;
+
+}
+
+const querySnapshot =
+await getDocs(collection(db,"applications"));
+
+let found=false;
 
 querySnapshot.forEach((doc)=>{
 
@@ -116,229 +808,263 @@ const data=doc.data();
 
 if(data.email===user.email){
 
-document.getElementById("name").innerText="Name: "+data.name;
-document.getElementById("track").innerText="Track: "+data.track;
+found=true;
 
-const status=document.getElementById("status");
+loadDashboard(data);
 
-status.innerText=data.status;
-
-if(data.status==="Accepted"){
-status.classList.add("accepted");
 }
-else if(data.status==="Rejected"){
-status.classList.add("rejected");
+
+});
+
+if(!found){
+
+document.getElementById("loading").innerHTML=
+"No application found for this email.";
+
 }
+
+});
+
+/* LOAD */
+
+function loadDashboard(data){
+
+document.getElementById("loading").style.display="none";
+
+document.getElementById("dashboard").style.display="grid";
+
+const name=data.name || "Student";
+
+const email=data.email || "N/A";
+
+const track=data.track || "N/A";
+
+const status=data.status || "Pending";
+
+const resume=data.resume || "";
+
+/* PROFILE */
+
+document.getElementById("avatar").innerText=
+name.charAt(0).toUpperCase();
+
+document.getElementById("studentName").innerText=name;
+
+document.getElementById("studentEmail").innerText=email;
+
+document.getElementById("studentTrack").innerText=track;
+
+/* DETAILS */
+
+document.getElementById("detailName").innerText=name;
+
+document.getElementById("detailEmail").innerText=email;
+
+document.getElementById("detailTrack").innerText=track;
+
+document.getElementById("detailStatus").innerText=status;
+
+/* STATUS */
+
+const badge=document.getElementById("statusBadge");
+
+badge.innerText=status;
+
+badge.className="status-badge";
+
+if(status==="Accepted"){
+
+badge.classList.add("accepted");
+badge.classList.add("glow");
+
+document.getElementById("stepReviewed")
+.classList.add("active");
+
+document.getElementById("stepShortlisted")
+.classList.add("active");
+
+document.getElementById("stepAccepted")
+.classList.add("active");
+
+const certId=
+"TE-"+new Date().getFullYear()+"-STUDENT";
+
+const verifyLink=
+`verify.html?certificate=${certId}`;
+
+document.getElementById("verifyBtn").href=
+verifyLink;
+
+document.getElementById("verifyBtn").style.display=
+"inline-block";
+
+}
+
+else if(status==="Shortlisted"){
+
+badge.classList.add("shortlisted");
+
+document.getElementById("stepReviewed")
+.classList.add("active");
+
+document.getElementById("stepShortlisted")
+.classList.add("active");
+
+}
+
+else if(status==="Rejected"){
+
+badge.classList.add("rejected");
+
+document.getElementById("stepReviewed")
+.classList.add("active");
+
+document.getElementById("stepAccepted")
+.classList.add("active");
+
+}
+
 else{
-status.classList.add("pending");
-}
+
+badge.classList.add("pending");
+
+document.getElementById("stepReviewed")
+.classList.add("active");
 
 }
 
-});
+/* RESUME */
 
-}else{
+if(resume){
 
-window.location.href="student-login.html";
+document.getElementById("detailResume").innerHTML=
+
+`<a href="${resume}"
+target="_blank"
+style="color:#00ffae;">
+
+View Resume
+
+</a>`;
+
+document.getElementById("resumeBtn").href=
+resume;
+
+document.getElementById("resumeBtn").style.display=
+"inline-block";
 
 }
 
-});
+else{
+
+document.getElementById("detailResume").innerText=
+"Not uploaded";
+
+}
+
+/* NOTIFY */
+
+createNotifications(status,track);
+
+}
+
+/* CREATE NOTIFY */
+
+function createNotifications(status,track){
+
+const list=
+document.getElementById("notificationList");
+
+const count=
+document.getElementById("notifyCount");
+
+let notifications=[];
+
+notifications.push(
+
+`<div class="notify-item">
+
+<strong>Application Submitted</strong><br>
+
+Your application for ${track}
+has been received successfully.
+
+</div>`
+
+);
+
+if(status==="Pending"){
+
+notifications.push(
+
+`<div class="notify-item">
+
+<strong>Under Review</strong><br>
+
+Your application is currently
+being reviewed by TechEdge.
+
+</div>`
+
+);
+
+}
+
+if(status==="Shortlisted"){
+
+notifications.push(
+
+`<div class="notify-item">
+
+<strong>Shortlisted</strong><br>
+
+Congratulations! You have been shortlisted.
+
+</div>`
+
+);
+
+}
+
+if(status==="Accepted"){
+
+notifications.push(
+
+`<div class="notify-item">
+
+<strong>Accepted</strong><br>
+
+Congratulations! You are selected.
+
+</div>`
+
+);
+
+}
+
+if(status==="Rejected"){
+
+notifications.push(
+
+`<div class="notify-item">
+
+<strong>Application Update</strong><br>
+
+Your application was not selected.
+
+</div>`
+
+);
+
+}
+
+list.innerHTML=notifications.join("");
+
+count.innerText=notifications.length;
+
+}
 
 </script>
 
 </body>
-=======
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>Student Dashboard | TechEdge</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<style>
-body{
-  font-family:'Segoe UI',sans-serif;
-  min-height:100vh;
-  padding:20px;
-  color:white;
-
-  /* 🔥 IMAGE + OVERLAY BACKGROUND */
-  background:
-    linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=1950&q=80')
-    no-repeat center center fixed;
-
-  background-size:cover;
-}
-
-/* Heading */
-h1{
-  text-align:center;
-  margin-bottom:20px;
-}
-
-/* Top bar */
-.top-bar{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  flex-wrap:wrap;
-  margin-bottom:20px;
-}
-
-.user{
-  font-size:16px;
-  opacity:0.9;
-}
-
-/* Logout button */
-button.logout{
-  padding:8px 15px;
-  background:#ff4b4b;
-  border:none;
-  border-radius:20px;
-  color:white;
-  cursor:pointer;
-  transition:0.3s;
-}
-
-button.logout:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 10px #ff4b4b;
-}
-
-/* Table */
-table{
-  width:100%;
-  border-collapse:collapse;
-  background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(15px);
-  border-radius:15px;
-  overflow:hidden;
-}
-
-th, td{
-  padding:12px;
-  border-bottom:1px solid rgba(255,255,255,0.2);
-  text-align:left;
-}
-
-th{
-  background:rgba(255,255,255,0.2);
-}
-
-/* Status */
-.status{
-  font-weight:bold;
-  padding:6px 12px;
-  border-radius:20px;
-  color:black;
-}
-
-.pending{ background:#ffaa00; }
-.approved{ background:#00ffae; }
-.rejected{ background:#ff4b4b; }
-
-/* Empty */
-.empty{
-  text-align:center;
-  margin-top:30px;
-  opacity:0.8;
-}
-</style>
-</head>
-
-<body>
-
-<h1>My Internship Applications</h1>
-
-<div class="top-bar">
-  <div class="user" id="userEmail"></div>
-  <button class="logout" onclick="logout()">Logout</button>
-</div>
-
-<table>
-<thead>
-<tr>
-<th>Track</th>
-<th>Message</th>
-<th>Status</th>
-</tr>
-</thead>
-<tbody id="data"></tbody>
-</table>
-
-<p class="empty" id="emptyMsg" style="display:none;">
-No applications found 🚫
-</p>
-
-<script type="module">
-import { initializeApp } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-app.js";
-import { getFirestore, collection, onSnapshot, query, where } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-firestore.js";
-import { getAuth, onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/12.10.0/firebase-auth.js";
-
-const firebaseConfig = {
-  apiKey: "AIzaSyC4ljjtXHs_GNtK_uJi9fke0dgbWNw76qk",
-  authDomain: "internship-portal-pro-7cbb1.firebaseapp.com",
-  projectId: "internship-portal-pro-7cbb1",
-  storageBucket: "internship-portal-pro-7cbb1.appspot.com",
-  messagingSenderId: "149057403895",
-  appId: "1:149057403895:web:8b9bdd770e7475c2a38cf2"
-};
-
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
-const auth = getAuth(app);
-
-const dataEl = document.getElementById("data");
-const emptyMsg = document.getElementById("emptyMsg");
-const userEmailEl = document.getElementById("userEmail");
-
-onAuthStateChanged(auth, user => {
-  if(!user){
-    window.location.href = "student-login.html";
-    return;
-  }
-
-  userEmailEl.innerText = "Logged in as: " + user.email;
-
-  const q = query(collection(db,"applications"), where("email","==",user.email));
-
-  onSnapshot(q, snapshot => {
-    dataEl.innerHTML = "";
-
-    if(snapshot.empty){
-      emptyMsg.style.display = "block";
-      return;
-    } else {
-      emptyMsg.style.display = "none";
-    }
-
-    snapshot.forEach(docSnap=>{
-      const d = docSnap.data();
-      const status = d.status || "Pending";
-
-      let statusClass = "pending";
-      if(status === "Approved") statusClass = "approved";
-      if(status === "Rejected") statusClass = "rejected";
-
-      dataEl.innerHTML += `
-        <tr>
-          <td>${d.track}</td>
-          <td>${d.message || ""}</td>
-          <td><span class="status ${statusClass}">${status}</span></td>
-        </tr>`;
-    });
-  });
-});
-
-window.logout = async function(){
-  await signOut(auth);
-  window.location.href = "student-login.html";
-}
-</script>
-
-</body>
->>>>>>> c3bc0c9cfe8ff2a95c5a7073dde6c781cc07d305
 </html>

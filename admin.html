@@ -438,8 +438,7 @@ const pageHeight = 210;
 
 const issueDate = new Date().toLocaleDateString("en-IN");
 const certId = "TE-" + new Date().getFullYear() + "-" + Math.floor(100000 + Math.random() * 900000);
-const verifyLink =
-`https://tamannamittal.github.io/techedge-portal/verify.html?certificate=${certId}&student=${encodeURIComponent(name)}&track=${encodeURIComponent(track)}&date=${encodeURIComponent(issueDate)}`;
+const verifyLink = `https://tamannamittal.github.io/techedge-portal/?certificate=${certId}`;
 
 pdf.setFillColor(4,14,34);
 pdf.rect(0,0,pageWidth,pageHeight,"F");

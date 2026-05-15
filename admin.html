@@ -225,6 +225,7 @@ input{width:100%;}
 
 <div class="controls">
 <input type="text" id="search" placeholder="Search by name, email or track..." onkeyup="search()">
+<button class="download" onclick="manualRefresh()">Refresh Data</button>
 <button class="download" onclick="download()">Download CSV</button>
 </div>
 
@@ -706,9 +707,9 @@ window.location.href = "admin-login.html";
 
 loadData();
 
-setInterval(()=>{
+window.manualRefresh = function(){
 loadData();
-},5000);
+};
 </script>
 
 </body>
